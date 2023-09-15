@@ -366,7 +366,7 @@ compression.</p>
 <p>When you’re ready to access RStudio, you can click the Launch RStudio
 button. If you ever navigate away from this screen, you can always
 return to it by clicking the My Interactive Sessions button in the
-OnDemand navigation bar. On less wide screens, this button shrinks down
+OnDemand navigation bar. On narrower screens, this button shrinks down
 to a graphic of a pair of overlapping cards next to the Tools
 dropdown.</p>
 </section><section id="rstudio"><h2 class="section-heading">RStudio<a class="anchor" aria-label="anchor" href="#rstudio"></a>
@@ -581,6 +581,7 @@ console:</p>
 </div>
 <p>We see two directories. The first is created for you in your home
 directory, and the second (or one like it, starting with
+<code>/cvmfs/pub_software.icer.msu.edu/software</code> or
 <code>/opt/software</code>) points to all of the packages that are
 pre-installed on the HPCC. When you use <code>install.packages()</code>
 in the future, by default, it will install to the first entry in your
@@ -590,7 +591,7 @@ directory is labeled with <code>4.0</code> for version 4.0(.3) of R. If
 you ever use different versions of R, it is important that the packages
 you use are consistent with those versions. So, for example, if you
 choose to use R/3.6.2, you should make sure that the library in your
-home directory returned by <code>.libPaths()</code> ends in 3.0. Mixing
+home directory returned by <code>.libPaths()</code> ends in 3.6. Mixing
 versions will likely cause your packages to stop working!</p>
 <div id="whats-the-difference-between-a-library-and-a-package" class="callout discussion">
 <div class="callout-square">
@@ -709,7 +710,7 @@ This is not possible (yet) in RStudio on the HPCC. You will have to <a href="r-c
 <code>sudo apt-get ...</code> or <code>sudo dnf install ...</code> under
 the Linux instructions, this is a sign that it needs external
 dependencies. These methods won’t work for installation on the HPCC;
-instead, look for and load HPCC modules for similar names.</li>
+instead, look for and load HPCC modules with similar names.</li>
 <li>Sometimes you’ll need to load more than one module, but they will
 have dependencies that conflict with each other (or even R itself!). In
 this case, <a href="https://contact.icer.msu.edu" class="external-link">contact the research
@@ -780,7 +781,7 @@ of Michigan CRAN mirror install our packages. The R command</p>
 start R, we’ll put it in the <code>.Rprofile</code> file.</p>
 <p>Use RStudio to open a new Text File and type</p>
 <pre class="text"><code><span><span class="fu">local</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span></span>
+<span><span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN<span class="op">=</span><span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre>
 <p>The <code>local</code> part ensures that no output from code we write
 is available to us in the R session: just the options get set. It’s good
@@ -819,7 +820,7 @@ Before R starts up (no matter if it’s from the command line or Rstudio),
 it will look at all the environment variables in this file and set
 them.</p>
 <p>In RStudio, open a new Text File and type</p>
-<pre class="text"><code><span><span class="va">R_LIBS_USER</span><span class="op">=</span><span class="st">"./"</span></span></code></pre>
+<pre class="text"><code><span><span class="va">R_LIBS_USER</span><span class="op">=</span><span class="st">"./library"</span></span></code></pre>
 <p>Then save this file in your <code>r_workshop</code> directory with
 the name <code>.Renviron</code>. Now, restart R using the Session menu,
 and check your <code>.libPaths()</code> in the R console:</p>
@@ -901,7 +902,7 @@ project library:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Double checking our library paths</p>
 <div class="codewrapper sourceCode" id="cb17">
@@ -964,7 +965,7 @@ environment variable to say hello and goodbye to whoever is using the
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1203,7 +1204,7 @@ your code.</p>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu">rep</span><span class="op">(</span><span class="cn">NA</span>, <span class="fu">length</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Preallocate the result vector</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu">seq_along</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span><span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">sqrt</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">sqrt</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu">print</span><span class="op">(</span><span class="fu">proc.time</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">t</span><span class="op">)</span></span></code></pre>
@@ -2335,7 +2336,7 @@ compare the time it took to run with the single core job.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p><code>slurm/multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb7">
@@ -2419,7 +2420,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p><code>multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb9">
