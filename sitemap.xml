@@ -10,12 +10,6 @@
     <loc>https://MSU-ICER.github.io/r-for-hpcc/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://MSU-ICER.github.io/r-for-hpcc/aio.html</loc>
-  </url>
-  <url>
-    <loc>https://MSU-ICER.github.io/r-for-hpcc/images.html</loc>
-  </url>
-  <url>
     <loc>https://MSU-ICER.github.io/r-for-hpcc/index.html</loc>
   </url>
   <url>
@@ -28,19 +22,7 @@
     <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/aio.html</loc>
-  </url>
-  <url>
-    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/images.html</loc>
-  </url>
-  <url>
     <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/index.html</loc>
-  </url>
-  <url>
-    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/instructor-notes.html</loc>
-  </url>
-  <url>
-    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/key-points.html</loc>
   </url>
   <url>
     <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/managing-r-env-packages.html</loc>
@@ -62,12 +44,6 @@
   </url>
   <url>
     <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/rstudio-ondemand.html</loc>
-  </url>
-  <url>
-    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor-notes.html</loc>
-  </url>
-  <url>
-    <loc>https://MSU-ICER.github.io/r-for-hpcc/key-points.html</loc>
   </url>
   <url>
     <loc>https://MSU-ICER.github.io/r-for-hpcc/managing-r-env-packages.html</loc>
