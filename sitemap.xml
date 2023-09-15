@@ -1,69 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/404.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/404.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/CODE_OF_CONDUCT.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/LICENSE.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/index.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/aio.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/404.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/images.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/CODE_OF_CONDUCT.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/index.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/LICENSE.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/404.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/index.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/managing-r-env-packages.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/parallelizing-r-code.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/aio.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/profiles.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/images.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/r-command-line.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/index.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/r-slurm-jobs.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/instructor-notes.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/reference.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/key-points.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/instructor/rstudio-ondemand.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/managing-r-env-packages.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/managing-r-env-packages.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/parallelizing-r-code.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/parallelizing-r-code.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/profiles.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/profiles.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/r-command-line.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/r-command-line.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/r-slurm-jobs.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/r-slurm-jobs.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/reference.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/reference.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/rstudio-ondemand.html</loc>
   </url>
   <url>
-    <loc>https://cgross95.github.io/r-for-hpcc/rstudio-ondemand.html</loc>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/managing-r-env-packages.html</loc>
+  </url>
+  <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/parallelizing-r-code.html</loc>
+  </url>
+  <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/r-command-line.html</loc>
+  </url>
+  <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/r-slurm-jobs.html</loc>
+  </url>
+  <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/rstudio-ondemand.html</loc>
   </url>
 </urlset>

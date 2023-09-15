@@ -27,7 +27,7 @@ life_cycle: 'stable'
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/cgross95/r-for-hpcc'
+source: 'https://github.com/MSU-ICER/r-for-hpcc'
 
 # Default branch of your lesson
 branch: 'main'
@@ -79,4 +79,4 @@ profiles:
 # This space below is where custom yaml items (e.g. pinning
 # sandpaper and varnish versions) should live
 
-varnish: cgross95/varnish@icer
+varnish: MSU-ICER/varnish@icer
