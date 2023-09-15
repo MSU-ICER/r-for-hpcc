@@ -80,7 +80,7 @@ t <- proc.time()
 x <- 1:10
 z <- rep(NA, length(x))  # Preallocate the result vector
 for(i in seq_along(x)) {
-z[i] <- sqrt(x[i])
+  z[i] <- sqrt(x[i])
 }
 
 print(proc.time() - t)

@@ -56,7 +56,7 @@ Select the Launch button and wait for your job to start. When your job is ready,
 
 You can move the Compression and Image Quality sliders to change the quality and responsiveness of the RStudio session. Generally, moving the sliders somewhere between 5 to 7 works well, but for slower internet connections, you might prefer a lower quality and higher compression.
 
-When you're ready to access RStudio, you can click the Launch RStudio button. If you ever navigate away from this screen, you can always return to it by clicking the My Interactive Sessions button in the OnDemand navigation bar. On less wide screens, this button shrinks down to a graphic of a pair of overlapping cards next to the Tools dropdown.
+When you're ready to access RStudio, you can click the Launch RStudio button. If you ever navigate away from this screen, you can always return to it by clicking the My Interactive Sessions button in the OnDemand navigation bar. On narrower screens, this button shrinks down to a graphic of a pair of overlapping cards next to the Tools dropdown.
 
 ## RStudio
 

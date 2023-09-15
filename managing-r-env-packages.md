@@ -36,12 +36,12 @@ We can do this by typing `.libPaths()` into the R console:
 ```
 
 We see two directories.
-The first is created for you in your home directory, and the second (or one like it, starting with `/opt/software`) points to all of the packages that are pre-installed on the HPCC.
+The first is created for you in your home directory, and the second (or one like it, starting with `/cvmfs/pub_software.icer.msu.edu/software` or `/opt/software`) points to all of the packages that are pre-installed on the HPCC.
 When you use `install.packages()` in the future, by default, it will install to the first entry in your `.libPaths()`.
 
 One important point to note is that the library in your home directory is labeled with `4.0` for version 4.0(.3) of R.
 If you ever use different versions of R, it is important that the packages you use are consistent with those versions.
-So, for example, if you choose to use R/3.6.2, you should make sure that the library in your home directory returned by `.libPaths()` ends in 3.0.
+So, for example, if you choose to use R/3.6.2, you should make sure that the library in your home directory returned by `.libPaths()` ends in 3.6.
 Mixing versions will likely cause your packages to stop working!
 
 :::::::::::::::::::::::::::::::::: discussion
@@ -125,7 +125,7 @@ Here are some general tips:
     - Loading it through the HPCC module system. **Note**: This is not possible (yet) in RStudio on the HPCC. You will have to [use R through the command line](r-command-line.Rmd).
     - Installing it yourself in a way that R can find it.
 3. If a package's setup instructions suggest something like `sudo apt-get ...` or `sudo dnf install ...` under the Linux instructions, this is a sign that it needs external dependencies.
-These methods won't work for installation on the HPCC; instead, look for and load HPCC modules for similar names.
+These methods won't work for installation on the HPCC; instead, look for and load HPCC modules with similar names.
 4. Sometimes you'll need to load more than one module, but they will have dependencies that conflict with each other (or even R itself!).
 In this case, [contact the research consultants at ICER](https://contact.icer.msu.edu) and we will do our best to help you out.
 
@@ -188,7 +188,7 @@ Use RStudio to open a new Text File and type
 
 ```text
 local({
-  options(repos = "https://repo.miserver.it.umich.edu/cran/")
+options(repos = c(CRAN="https://repo.miserver.it.umich.edu/cran/"))
 })
 ```
 
@@ -218,7 +218,7 @@ Before R starts up (no matter if it's from the command line or Rstudio), it will
 In RStudio, open a new Text File and type
 
 ```text
-R_LIBS_USER="./"
+R_LIBS_USER="./library"
 ```
 
 Then save this file in your `r_workshop` directory with the name `.Renviron`.
