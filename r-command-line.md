@@ -338,6 +338,38 @@ for(i in 1:n) {
 
 ::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::: challenge
+
+Copy `test_sqrt_multisession.R` into a new R script and modify it to take an integer as a command line argument. Use the command line argument to set the number of iterations in the `foreach` loop. Additionally, make sure that the script handles the case when no command line argument is passed (you can choose the desired behavior).
+
+:::::::::::::::::::::::: solution
+
+```r
+library(foreach)
+library(doFuture)
+plan(multisession, workers = 5)
+
+args <- commandArgs(trailingOnly = TRUE)
+
+num_runs = 10  # default to 10 runs
+if (length(args) > 0) {
+  num_runs <- strtoi(args[1])
+}
+
+t <- proc.time()
+
+x <- 1:num_runs
+z <- foreach(xi = x) %dofuture% {
+  Sys.sleep(0.5)
+  sqrt(xi)
+}
+
+print(proc.time() - t)
+```
+:::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::
+
 ## Plotting with the command line
 
 You may wonder how you might run a plot using the terminal interface?   For most terminals, if you plot with the command line version of R, either nothing happens or there is an error message.  It may work on some terminals, if X11 Linux graphical interface is installed and the terminal is an X11-capable (for example on MacOS is 'Quartz' is installed, a new windows will appear).  However when running in 'batch' mode using the cluster (described in the next session), there is no interface at all. 
