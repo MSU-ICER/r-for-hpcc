@@ -166,6 +166,51 @@ If you're asked to save the workspace image, it's best practice to say no since 
 In fact, you can use the `--vanilla` option when starting R to ensure it ignores things like your `.Renviron` and `.Rprofile` changes.
 We will use this option below to make sure we run our code in the cleanest environment possible.
 
+::::::::::::::::::::::::::::::: callout
+
+## Loading external dependencies
+
+[As mentioned when we were installing packages](managing-r-env-packages.Rmd#do-your-packages-require-external-dependencies), sometimes R packages need external dependencies to install and run.
+When you load the R module using the `module load` commands above (before you actually run `R`), this is also the time to load those external dependencies.
+
+Note that these dependencies and R will all need to be be compatible (e.g., use the same version of GCC and MPI).
+For example, a spatial ecology workflow might require the use of GDAL and UDUNITS as dependencies for R packages.
+After loading R and its dependencies with
+
+```bash
+module purge
+module load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3
+```
+
+you can try loading a compatible GDAL and UDUNITS without specifying a version:
+
+```bash
+module load GDAL UDUNITS
+```
+
+Then check which versions got loaded:
+
+```bash
+module list
+```
+```output
+Currently Loaded Modules:
+  1) GCCcore/10.2.0      27) zstd/1.4.5           53) FLAC/1.3.3
+  2) zlib/1.2.11         28) libdrm/2.4.102       54) libvorbis/1.3.7
+ ...
+ 24) X11/20201008        50) GMP/6.2.0            76) GDAL/3.3.2
+ 25) gzip/1.10           51) NLopt/2.6.2          77) UDUNITS/2.2.26
+ 26) lz4/1.9.2           52) libogg/1.3.4
+```
+
+If these versions will work, then great! 
+If not, then you might try using a different version of R.
+Usually, newer versions of dependencies for popular R packages get installed with newer versions of R.
+
+For more on finding and loading modules, checkout [ICER's module documentation](https://docs.icer.msu.edu/Intro_to_modules/).
+
+:::::::::::::::::::::::::::::::::::::::
+
 ## Running one-liners and scripts with `RScript`
 
 The R console is great for interactive work. But sometimes we might want to just send some code to R to run and give us back the answer. For this, we use the `Rscript` command.
@@ -311,7 +356,9 @@ A sample script that uses the `pdf` function to capture plots looks like this:
 plotfile = 'testplots.pdf'
 pdf(plotfile)
 
-plot(iris$Petal.Length, iris$Petal.Width, pch=21, bg=c("red","green3","blue")[unclass(iris$Species)], main="Edgar Anderson's Iris Data")
+plot(iris$Petal.Length, iris$Petal.Width, pch=21,
+     bg=c("red","green3","blue")[unclass(iris$Species)],
+     main="Edgar Anderson's Iris Data")
 
 dev.off()
 ```
@@ -348,8 +395,10 @@ if length(args) >= 1 {
 
 # if not argument is sent, PDF capture is not enabled and the plot will display
 
-plot(iris$Petal.Length, iris$Petal.Width, pch=21, bg=c("red","green3","blue")[unclass(iris$Species)], main="Edgar Anderson's Iris Data")
-
+plot(iris$Petal.Length, iris$Petal.Width, pch=21,
+     bg=c("red","green3","blue")[unclass(iris$Species)],
+     main="Edgar Anderson's Iris Data")
+     
 dev.off()
 
 ```
