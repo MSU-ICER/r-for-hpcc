@@ -253,7 +253,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Submitting R code to SLURM</h1>
-        <p> Last updated on 2023-09-15 | 
+        <p> Last updated on 2023-09-18 | 
         
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-slurm-jobs.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -507,13 +507,13 @@ SLURM job specifications</a>.</p>
 <ol style="list-style-type: decimal"><li>Create the directory <code>results</code> in your project
 directory.</li>
 <li>For the previous job script, change the name for the job allocation
-to <code>multicore-&lt;jobid&gt;</code> where <code>&lt;jobid&gt;</code>
-is the number that SLURM assigns your job.</li>
+to <code>multicore-sqrt</code>.</li>
 <li>Change it so the output and error files are stored in your project
-directory under <code>results/&lt;jobname&gt;.out</code> and
-<code>results/&lt;jobname&gt;.err</code> where
-<code>&lt;jobname&gt;</code> is the name you set in the previous
-step.</li>
+directory under <code>results/&lt;jobname&gt;-&lt;jobid&gt;.out</code>
+and <code>results/&lt;jobname&gt;-&lt;jobid&gt;.err</code> where
+<code>&lt;jobname&gt;</code> is the name you set in the previous step
+and <code>&lt;jobid&gt;</code> is the number that SLURM assigns your
+job.</li>
 </ol><p><em>Hint</em>: you can reference the job ID in <code>#SBATCH</code>
 lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 </div>
@@ -538,9 +538,9 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=5  # Use 5 cores</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=multicore-%j</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=~/r_workshop/results/%x.out</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=~/r_workshop/results/%x.err</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=multicore</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=~/r_workshop/results/%x-%j.out</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=~/r_workshop/results/%x-%j.err</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
@@ -571,18 +571,19 @@ discussed, you may need to write a template script).</p>
 <p>In the former case of using the <code>cluster</code> backend, we had
 to tell <code>future</code> which nodes we want it to run on. Luckily
 <code>future</code> has SLURM in mind and can query the nodes available
-in your SLURM job with <code>parallelly:availableWorkers()</code>. It
-automatically uses these as the <code>workers</code> when specifying the
-plan, so you can leave that argument out, specifying your plan like</p>
+in your SLURM job with
+<code>parallelly:availableWorkers(methods = "Slurm")</code>. You can
+then use these as the <code>workers</code> when specifying the plan
+like</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wd</span> <span class="op">&lt;-</span> <span class="fu">getwd</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">setwd_cmd</span> <span class="op">&lt;-</span> <span class="fu">cat</span><span class="op">(</span><span class="st">"setwd('"</span>, <span class="va">wd</span>, <span class="st">"')"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
-<span><span class="fu">plan</span><span class="op">(</span><span class="va">cluster</span>,</span>
-<span>     rscript_libs <span class="op">=</span> <span class="fu">.libPaths</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>     rscript_startup <span class="op">=</span> <span class="va">setwd_cmd</span><span class="op">)</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="fu">getwd</span>()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>setwd_cmd <span class="ot">&lt;-</span> <span class="fu">cat</span>(<span class="st">"setwd('"</span>, wd, <span class="st">"')"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(cluster,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">workers =</span> parallelly<span class="sc">::</span><span class="fu">availableWorkers</span>(<span class="at">methods =</span> <span class="st">"Slurm"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">rscript_libs =</span> <span class="fu">.libPaths</span>(),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">rscript_startup =</span> setwd_cmd)</span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -710,8 +711,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/r-slurm-jobs.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/r-slurm-jobs.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2023-09-15",
-  "datePublished": "2023-09-15"
+  "dateModified": "2023-09-18",
+  "datePublished": "2023-09-18"
 }
 
   </script><script>

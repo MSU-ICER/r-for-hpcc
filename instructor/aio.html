@@ -518,7 +518,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-managing-r-env-packages"><p>Content from <a href="managing-r-env-packages.html">Managing R package installation and environment</a></p>
 <hr>
-<p> Last updated on 2023-09-15 | 
+<p> Last updated on 2023-09-18 | 
         
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
@@ -702,7 +702,8 @@ included under SystemRequirements on a package’s <a href="https://cran.r-proje
 the R package. This could involve:
 <ul>
 <li>Loading it through the HPCC module system. <strong>Note</strong>:
-This is not possible (yet) in RStudio on the HPCC. You will have to <a href="r-command-line.html">use R through the command line</a>.</li>
+This is not possible (yet) in RStudio on the HPCC. You will have to <a href="r-command-line.html#loading-external-dependencies">use R through
+the command line</a>.</li>
 <li>Installing it yourself in a way that R can find it.</li>
 </ul>
 </li>
@@ -902,7 +903,7 @@ project library:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Double checking our library paths</p>
 <div class="codewrapper sourceCode" id="cb17">
@@ -965,7 +966,7 @@ environment variable to say hello and goodbye to whoever is using the
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1599,7 +1600,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-r-command-line"><p>Content from <a href="r-command-line.html">Using R on the command line</a></p>
 <hr>
-<p> Last updated on 2023-09-15 | 
+<p> Last updated on 2023-09-18 | 
         
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-command-line.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
@@ -1809,6 +1810,63 @@ option when starting R to ensure it ignores things like your
 <code>.Renviron</code> and <code>.Rprofile</code> changes. We will use
 this option below to make sure we run our code in the cleanest
 environment possible.</p>
+<div id="loading-external-dependencies" class="callout callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="loading-external-dependencies" class="callout-inner">
+<h3 class="callout-title">Loading external dependencies<a class="anchor" aria-label="anchor" href="#loading-external-dependencies"></a>
+</h3>
+<div class="callout-content">
+<p><a href="managing-r-env-packages.html#do-your-packages-require-external-dependencies">As
+mentioned when we were installing packages</a>, sometimes R packages
+need external dependencies to install and run. When you load the R
+module using the <code>module load</code> commands above (before you
+actually run <code>R</code>), this is also the time to load those
+external dependencies.</p>
+<p>Note that these dependencies and R will all need to be be compatible
+(e.g., use the same version of GCC and MPI). For example, a spatial
+ecology workflow might require the use of GDAL and UDUNITS as
+dependencies for R packages. After loading R and its dependencies
+with</p>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3</span></code></pre>
+</div>
+<p>you can try loading a compatible GDAL and UDUNITS without specifying
+a version:</p>
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GDAL UDUNITS</span></code></pre>
+</div>
+<p>Then check which versions got loaded:</p>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> list</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Currently Loaded Modules:
+  1) GCCcore/10.2.0      27) zstd/1.4.5           53) FLAC/1.3.3
+  2) zlib/1.2.11         28) libdrm/2.4.102       54) libvorbis/1.3.7
+ ...
+ 24) X11/20201008        50) GMP/6.2.0            76) GDAL/3.3.2
+ 25) gzip/1.10           51) NLopt/2.6.2          77) UDUNITS/2.2.26
+ 26) lz4/1.9.2           52) libogg/1.3.4</code></pre>
+</div>
+<p>If these versions will work, then great! If not, then you might try
+using a different version of R. Usually, newer versions of dependencies
+for popular R packages get installed with newer versions of R.</p>
+<p>For more on finding and loading modules, checkout <a href="https://docs.icer.msu.edu/Intro_to_modules/" class="external-link">ICER’s module
+documentation</a>.</p>
+</div>
+</div>
+</div>
 </section><section id="running-one-liners-and-scripts-with-rscript"><h2 class="section-heading">Running one-liners and scripts with <code>RScript</code><a class="anchor" aria-label="anchor" href="#running-one-liners-and-scripts-with-rscript"></a>
 </h2>
 <hr class="half-width">
@@ -1817,10 +1875,10 @@ want to just send some code to R to run and give us back the answer. For
 this, we use the <code>Rscript</code> command.</p>
 <p>First, let’s start by sending <code>Rscript</code> a single command
 using the <code>-e</code> flag (which stands for “expression”):</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'date()'</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'date()'</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1832,10 +1890,10 @@ console or in a script! Note that we have to wrap the expression we want
 to run in single quotes.</p>
 <p>We can run multiple expressions at once. For example, let’s get the
 quotient and remainder of 128 divided by 11:</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'128 %/% 11'</span> <span class="at">-e</span> <span class="st">'128 %% 11'</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'128 %/% 11'</span> <span class="at">-e</span> <span class="st">'128 %% 11'</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1848,11 +1906,11 @@ an actual script to run! Let’s run our previous one.
 <code>Rscript</code> takes the path to the script as argument. We’ll
 first change directory to the location of our script so we don’t need to
 specify the entire path name.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> src/test_sqrt_multisession.R</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> src/test_sqrt_multisession.R</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1876,13 +1934,13 @@ of the command line arguments as a character vector.</p>
 <p>From the command line, open a new R script called
 <code>src/command_args.R</code> in a text editor of your choice. If you
 aren’t familiar with any, a good option is <code>nano</code>.</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> src/command_args.R</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> src/command_args.R</span></code></pre>
 </div>
 <p>Our script will print out all of our command line arguments:</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1901,10 +1959,10 @@ the name of the script.</p>
 <code>ctrl+x</code> to exit.</p>
 <p>We can now run our script through <code>Rscript</code> with some
 arguments:</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> src/command_args.R a b c</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> src/command_args.R a b c</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1937,10 +1995,10 @@ check out <a href="https://cran.r-project.org/web/packages/optparse/" class="ext
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'for(i in 1:10) print(i)'</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'for(i in 1:10) print(i)'</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1968,10 +2026,10 @@ function <code>strtoi</code> (press “q” to exit).</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'help(strtoi)'</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'help(strtoi)'</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1999,7 +2057,7 @@ prints the numbers from 1 to that integer.</p>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2041,14 +2099,16 @@ command in Rmarkdown to PDF or other format to be review later</li>
 <p>We’ll describe the method to capture output into a PDF here.</p>
 <p>A sample script that uses the <code>pdf</code> function to capture
 plots looks like this:</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plotfile</span> <span class="op">=</span> <span class="st">'testplots.pdf'</span></span>
 <span><span class="fu">pdf</span><span class="op">(</span><span class="va">plotfile</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span>, pch<span class="op">=</span><span class="fl">21</span>, bg<span class="op">=</span><span class="fu">c</span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"green3"</span>,<span class="st">"blue"</span><span class="op">)</span><span class="op">[</span><span class="fu">unclass</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">]</span>, main<span class="op">=</span><span class="st">"Edgar Anderson's Iris Data"</span><span class="op">)</span></span>
+<span><span class="fu">plot</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span>, pch<span class="op">=</span><span class="fl">21</span>,</span>
+<span>     bg<span class="op">=</span><span class="fu">c</span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"green3"</span>,<span class="st">"blue"</span><span class="op">)</span><span class="op">[</span><span class="fu">unclass</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>     main<span class="op">=</span><span class="st">"Edgar Anderson's Iris Data"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">dev.off</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
@@ -2089,25 +2149,27 @@ line argument sent?</p>
 </button>
 <div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># check if there was at least 1 arg</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="fu">length</span>(args) <span class="sc">&gt;=</span> <span class="dv">1</span> {</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>   <span class="co">#assume the arg is a PDF file name, and use that to capture plots</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>   plotfile <span class="ot">=</span> args[<span class="dv">1</span>]</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">pdf</span>(plotfile)</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co"># if not argument is sent, PDF capture is not enabled and the plot will display</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Length, iris<span class="sc">$</span>Petal.Width, <span class="at">pch=</span><span class="dv">21</span>, <span class="at">bg=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"green3"</span>,<span class="st">"blue"</span>)[<span class="fu">unclass</span>(iris<span class="sc">$</span>Species)], <span class="at">main=</span><span class="st">"Edgar Anderson's Iris Data"</span>)</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># check if there was at least 1 arg</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="fu">length</span>(args) <span class="sc">&gt;=</span> <span class="dv">1</span> {</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>   <span class="co">#assume the arg is a PDF file name, and use that to capture plots</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>   plotfile <span class="ot">=</span> args[<span class="dv">1</span>]</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">pdf</span>(plotfile)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co"># if not argument is sent, PDF capture is not enabled and the plot will display</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Length, iris<span class="sc">$</span>Petal.Width, <span class="at">pch=</span><span class="dv">21</span>,</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"green3"</span>,<span class="st">"blue"</span>)[<span class="fu">unclass</span>(iris<span class="sc">$</span>Species)],</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Edgar Anderson's Iris Data"</span>)</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre>
 </div>
 </div>
 </div>
@@ -2142,7 +2204,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-r-slurm-jobs"><p>Content from <a href="r-slurm-jobs.html">Submitting R code to SLURM</a></p>
 <hr>
-<p> Last updated on 2023-09-15 | 
+<p> Last updated on 2023-09-18 | 
         
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-slurm-jobs.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
@@ -2403,13 +2465,13 @@ SLURM job specifications</a>.</p>
 <li>Create the directory <code>results</code> in your project
 directory.</li>
 <li>For the previous job script, change the name for the job allocation
-to <code>multicore-&lt;jobid&gt;</code> where <code>&lt;jobid&gt;</code>
-is the number that SLURM assigns your job.</li>
+to <code>multicore-sqrt</code>.</li>
 <li>Change it so the output and error files are stored in your project
-directory under <code>results/&lt;jobname&gt;.out</code> and
-<code>results/&lt;jobname&gt;.err</code> where
-<code>&lt;jobname&gt;</code> is the name you set in the previous
-step.</li>
+directory under <code>results/&lt;jobname&gt;-&lt;jobid&gt;.out</code>
+and <code>results/&lt;jobname&gt;-&lt;jobid&gt;.err</code> where
+<code>&lt;jobname&gt;</code> is the name you set in the previous step
+and <code>&lt;jobid&gt;</code> is the number that SLURM assigns your
+job.</li>
 </ol>
 <p><em>Hint</em>: you can reference the job ID in <code>#SBATCH</code>
 lines with <code>%j</code> and the job name with <code>%x</code>.</p>
@@ -2435,9 +2497,9 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=5  # Use 5 cores</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=multicore-%j</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=~/r_workshop/results/%x.out</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=~/r_workshop/results/%x.err</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=multicore</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=~/r_workshop/results/%x-%j.out</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=~/r_workshop/results/%x-%j.err</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
@@ -2470,18 +2532,19 @@ discussed, you may need to write a template script).</p>
 <p>In the former case of using the <code>cluster</code> backend, we had
 to tell <code>future</code> which nodes we want it to run on. Luckily
 <code>future</code> has SLURM in mind and can query the nodes available
-in your SLURM job with <code>parallelly:availableWorkers()</code>. It
-automatically uses these as the <code>workers</code> when specifying the
-plan, so you can leave that argument out, specifying your plan like</p>
+in your SLURM job with
+<code>parallelly:availableWorkers(methods = "Slurm")</code>. You can
+then use these as the <code>workers</code> when specifying the plan
+like</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wd</span> <span class="op">&lt;-</span> <span class="fu">getwd</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">setwd_cmd</span> <span class="op">&lt;-</span> <span class="fu">cat</span><span class="op">(</span><span class="st">"setwd('"</span>, <span class="va">wd</span>, <span class="st">"')"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
-<span><span class="fu">plan</span><span class="op">(</span><span class="va">cluster</span>,</span>
-<span>     rscript_libs <span class="op">=</span> <span class="fu">.libPaths</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>     rscript_startup <span class="op">=</span> <span class="va">setwd_cmd</span><span class="op">)</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="fu">getwd</span>()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>setwd_cmd <span class="ot">&lt;-</span> <span class="fu">cat</span>(<span class="st">"setwd('"</span>, wd, <span class="st">"')"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(cluster,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">workers =</span> parallelly<span class="sc">::</span><span class="fu">availableWorkers</span>(<span class="at">methods =</span> <span class="st">"Slurm"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">rscript_libs =</span> <span class="fu">.libPaths</span>(),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">rscript_startup =</span> setwd_cmd)</span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -2602,8 +2665,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/instructor/aio.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/instructor/aio.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2023-09-15",
-  "datePublished": "2023-09-15"
+  "dateModified": "2023-09-18",
+  "datePublished": "2023-09-18"
 }
 
   </script><script>
