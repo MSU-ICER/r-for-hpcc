@@ -31,8 +31,8 @@ our way back to using R on the command line.
 ## Starting an RStudio job
 
 We'll begin by logging in on OnDemand. Go to
-[https://ondemand.hpcc.msu.edu](https://ondemand.hpcc.msu.edu), If you are prompted, choose Michigan State University as the Identity Provider, and log in using
-your MSU NetID and password. Before we get into any other OnDemand specifics,
+[https://ondemand.hpcc.msu.edu](https://ondemand.hpcc.msu.edu).
+If you are prompted, choose Michigan State University as the Identity Provider, and log in using your MSU NetID and password. Before we get into any other OnDemand specifics,
 we'll submit an RStudio job to get you up and running.
 
 Go to the Interactive Apps tab and select RStudio.
