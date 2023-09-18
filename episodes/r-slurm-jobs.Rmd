@@ -198,8 +198,8 @@ Leaving the output in the directory we run the script in will get messy.
 For the steps below, you will need the [list of SLURM job specifications](https://docs.icer.msu.edu/List_of_Job_Specifications/).
 
 1. Create the directory `results` in your project directory.
-2. For the previous job script, change the name for the job allocation to `multicore-<jobid>` where `<jobid>` is the number that SLURM assigns your job.
-3. Change it so the output and error files are stored in your project directory under `results/<jobname>.out` and `results/<jobname>.err` where `<jobname>` is the name you set in the previous step.
+2. For the previous job script, change the name for the job allocation to `multicore-sqrt`.
+3. Change it so the output and error files are stored in your project directory under `results/<jobname>-<jobid>.out` and `results/<jobname>-<jobid>.err` where `<jobname>` is the name you set in the previous step and `<jobid>` is the number that SLURM assigns your job.
 
 *Hint*: you can reference the job ID in `#SBATCH` lines with `%j` and the job name with `%x`.
 
@@ -214,9 +214,9 @@ For the steps below, you will need the [list of SLURM job specifications](https:
 #SBATCH --cpus-per-task=5  # Use 5 cores
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
-#SBATCH --job-name=multicore-%j
-#SBATCH --output=~/r_workshop/results/%x.out
-#SBATCH --error=~/r_workshop/results/%x.err
+#SBATCH --job-name=multicore
+#SBATCH --output=~/r_workshop/results/%x-%j.out
+#SBATCH --error=~/r_workshop/results/%x-%j.err
 
 # Load the R module
 module purge
@@ -242,13 +242,14 @@ In the latter case, you would only need to submit your controller script to SLUR
 The `batchtools_slurm` backend will submit SLURM jobs for the hard work that you want parallelized (though, as discussed, you may need to write a template script).
 
 In the former case of using the `cluster` backend, we had to tell `future` which nodes we want it to run on.
-Luckily `future` has SLURM in mind and can query the nodes available in your SLURM job with `parallelly:availableWorkers()`.
-It automatically uses these as the `workers` when specifying the plan, so you can leave that argument out, specifying your plan like
+Luckily `future` has SLURM in mind and can query the nodes available in your SLURM job with `parallelly:availableWorkers(methods = "Slurm")`.
+You can then use these as the `workers` when specifying the plan like
 
 ``` r
 wd <- getwd()
 setwd_cmd <- cat("setwd('", wd, "')", sep = "")
 plan(cluster,
+     workers = parallelly::availableWorkers(methods = "Slurm")
      rscript_libs = .libPaths(),
      rscript_startup = setwd_cmd)
 ```

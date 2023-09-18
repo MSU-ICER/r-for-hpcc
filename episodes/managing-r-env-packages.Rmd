@@ -122,7 +122,7 @@ Here are some general tips:
 
 1. Read the documentation for the package you're using and take note of any dependencies you need and their versions. This information is also included under SystemRequirements on a package's [CRAN](https://cran.r-project.org/) page.
 2. Make sure that software is available before you try to install/use the R package. This could involve:
-    - Loading it through the HPCC module system. **Note**: This is not possible (yet) in RStudio on the HPCC. You will have to [use R through the command line](r-command-line.Rmd).
+    - Loading it through the HPCC module system. **Note**: This is not possible (yet) in RStudio on the HPCC. You will have to [use R through the command line](r-command-line.Rmd#loading-external-dependencies).
     - Installing it yourself in a way that R can find it.
 3. If a package's setup instructions suggest something like `sudo apt-get ...` or `sudo dnf install ...` under the Linux instructions, this is a sign that it needs external dependencies.
 These methods won't work for installation on the HPCC; instead, look for and load HPCC modules with similar names.
