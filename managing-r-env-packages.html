@@ -255,7 +255,7 @@ rules)</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Managing R package installation and environment</h1>
-        <p> Last updated on 2023-09-18 | 
+        <p> Last updated on 2023-09-19 | 
         
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -504,7 +504,7 @@ of Michigan CRAN mirror install our packages. The R command</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN<span class="op">=</span><span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <p>will take care of this for us. To make sure this runs every time we
 start R, we’ll put it in the <code>.Rprofile</code> file.</p>
@@ -865,7 +865,7 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/managing-r-env-packages.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/managing-r-env-packages.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2023-09-18",
+  "dateModified": "2023-09-19",
   "datePublished": "2023-09-19"
 }
 
