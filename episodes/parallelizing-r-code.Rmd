@@ -265,7 +265,7 @@ This allows us to submit SLURM jobs for each iteration of our for loop.
 The HPCC scheduler will then control where and when these jobs run, rather than you needing to provide that information ahead of time.
 
 The simplest way to do this, is to use the `future.batchtools` package.
-Copy `src/test_sqrt_multisession.R` to `src/test_sqrt_slurm.R`, load the `future.batchtool` package, and replace the `plan` section with the `batchtools_slurm` plan:
+Copy `src/test_sqrt_multisession.R` to `src/test_sqrt_slurm.R`, load the `future.batchtools` package, and replace the `plan` section with the `batchtools_slurm` plan:
 
 ``` r
 library(foreach)
