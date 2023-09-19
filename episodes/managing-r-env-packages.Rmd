@@ -178,7 +178,7 @@ First, let's suppose that we want to make sure we use the University of Michigan
 The R command 
 
 ```r
-options(repos = "https://repo.miserver.it.umich.edu/cran/")
+options(repos = c(CRAN="https://repo.miserver.it.umich.edu/cran/"))
 ```
 
 will take care of this for us.
