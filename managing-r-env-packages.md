@@ -132,7 +132,7 @@ In this case, [contact the research consultants at ICER](https://contact.icer.ms
 ::::::::::::::::::::::::::::::::::::::::::
 
 
-## Manging your projects
+## Managing your projects
 
 Now that we know how to install and use external packages, let's talk about managing your code.
 When you use R, it helps to organize your code into separate directories that you can think of as projects.
