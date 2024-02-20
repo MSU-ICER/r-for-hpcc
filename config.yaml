@@ -59,7 +59,7 @@ contact: 'grosscra@msu.edu'
 
 # Order of episodes in your lesson
 episodes:
-- rstudio-ondemand.Rmd
+- rstudio-server-ondemand.Rmd
 - managing-r-env-packages.Rmd
 - parallelizing-r-code.Rmd
 - r-command-line.Rmd
@@ -67,6 +67,7 @@ episodes:
 
 # Information for Learners
 learners:
+- rstudio-ondemand.Rmd
 
 # Information for Instructors
 instructors:

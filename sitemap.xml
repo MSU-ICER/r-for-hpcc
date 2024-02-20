@@ -64,6 +64,9 @@
     <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/rstudio-ondemand.html</loc>
   </url>
   <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor/rstudio-server-ondemand.html</loc>
+  </url>
+  <url>
     <loc>https://MSU-ICER.github.io/r-for-hpcc/instructor-notes.html</loc>
   </url>
   <url>
@@ -89,5 +92,8 @@
   </url>
   <url>
     <loc>https://MSU-ICER.github.io/r-for-hpcc/rstudio-ondemand.html</loc>
+  </url>
+  <url>
+    <loc>https://MSU-ICER.github.io/r-for-hpcc/rstudio-server-ondemand.html</loc>
   </url>
 </urlset>

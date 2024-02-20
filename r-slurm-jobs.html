@@ -65,7 +65,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="rstudio-ondemand.html">Accessing RStudio through OnDemand</a></li>
           </ul></li>
       </ul></div>
     <form class="d-flex col-md-2 search-form">
@@ -139,7 +139,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="rstudio-ondemand.html">1. Accessing RStudio through OnDemand</a>
+        <a href="rstudio-server-ondemand.html">1. Accessing RStudio Server through OnDemand</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -217,7 +217,7 @@
                       <li>
                         <a href="profiles.html">Learner Profiles</a>
                       </li>
-                      <li><a href="reference.html">Reference</a></li>
+                      <li><a href="rstudio-ondemand.html">Accessing RStudio through OnDemand</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -253,7 +253,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Submitting R code to SLURM</h1>
-        <p> Last updated on 2023-11-21 | 
+        <p> Last updated on 2024-02-20 | 
         
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-slurm-jobs.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -345,7 +345,7 @@ your R scripts as we showed in the <a href="r-command-line.html">previous epsiod
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
@@ -411,12 +411,12 @@ JobId=17815750 JobName=single_core.sh
    MinCPUsNode=1 MinMemoryCPU=500M MinTmpDiskNode=0
    Features=[intel14|intel16|intel18|(amr|acm)|nvf|nal|nif] DelayBoot=00:00:00
    OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
-   Command=/mnt/ufs18/home-045/grosscra/r_workshop/slurm/single_core.sh
-   WorkDir=/mnt/ufs18/home-045/grosscra/r_workshop
-   Comment=stdout=/mnt/ufs18/home-045/grosscra/r_workshop/slurm-17815750.out 
-   StdErr=/mnt/ufs18/home-045/grosscra/r_workshop/slurm-17815750.out
+   Command=/mnt/ufs18/home-237/k0068027/r_workshop/slurm/single_core.sh
+   WorkDir=/mnt/ufs18/home-237/k0068027/r_workshop
+   Comment=stdout=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out 
+   StdErr=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out
    StdIn=/dev/null
-   StdOut=/mnt/ufs18/home-045/grosscra/r_workshop/slurm-17815750.out
+   StdOut=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out
    Power=</code></pre>
 </div>
 <p>Congratulations! We’ve just completed the workflow for submitting any
@@ -442,7 +442,7 @@ compare the time it took to run with the single core job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p><code>slurm/multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb7">
@@ -457,7 +457,7 @@ compare the time it took to run with the single core job.</p>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
@@ -522,7 +522,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p><code>multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -540,7 +540,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
@@ -609,7 +609,7 @@ knows how many CPUs it can use per task.</p>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
@@ -708,7 +708,7 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/r-slurm-jobs.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/r-slurm-jobs.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2023-11-21",
+  "dateModified": "2024-02-20",
   "datePublished": "2024-02-20"
 }
 
