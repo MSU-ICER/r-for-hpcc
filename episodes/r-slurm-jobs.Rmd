@@ -65,7 +65,7 @@ This code is exactly what you would enter on the command line to run your R scri
 
 # Load the R module
 module purge
-module load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3
+module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
 
 # Get to our project directory
 cd ~/r_workshop
@@ -125,12 +125,12 @@ JobId=17815750 JobName=single_core.sh
    MinCPUsNode=1 MinMemoryCPU=500M MinTmpDiskNode=0
    Features=[intel14|intel16|intel18|(amr|acm)|nvf|nal|nif] DelayBoot=00:00:00
    OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
-   Command=/mnt/ufs18/home-045/grosscra/r_workshop/slurm/single_core.sh
-   WorkDir=/mnt/ufs18/home-045/grosscra/r_workshop
-   Comment=stdout=/mnt/ufs18/home-045/grosscra/r_workshop/slurm-17815750.out 
-   StdErr=/mnt/ufs18/home-045/grosscra/r_workshop/slurm-17815750.out
+   Command=/mnt/ufs18/home-237/k0068027/r_workshop/slurm/single_core.sh
+   WorkDir=/mnt/ufs18/home-237/k0068027/r_workshop
+   Comment=stdout=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out 
+   StdErr=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out
    StdIn=/dev/null
-   StdOut=/mnt/ufs18/home-045/grosscra/r_workshop/slurm-17815750.out
+   StdOut=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out
    Power=
 ```
 
@@ -159,7 +159,7 @@ Submit the job and compare the time it took to run with the single core job.
 
 # Load the R module
 module purge
-module load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3
+module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
 
 # Get to our project directory
 cd ~/r_workshop
@@ -220,7 +220,7 @@ For the steps below, you will need the [list of SLURM job specifications](https:
 
 # Load the R module
 module purge
-module load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3
+module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
 
 # Get to our project directory
 cd ~/r_workshop
@@ -275,7 +275,7 @@ Here is an example script:
 
 # Load the R module
 module purge
-module load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3
+module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
 
 # Get to our project directory
 cd ~/r_workshop

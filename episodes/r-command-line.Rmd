@@ -77,30 +77,30 @@ module spider R
       $ module -r spider '.*R.*'
 ```
 
-We've abbreviated the output, but we can see that there are lots of different versions of R available! We'll try loading 4.0.3 since that version on the HPCC has a large number of packages pre-installed.
+We've abbreviated the output, but we can see that there are lots of different versions of R available! We'll try loading 4.2.1 since that version matches the one used in the RStudio Server OnDemand app.
 
 If you're familiar with the module system, you might try to load the module right away with `module load`:
 
 ```bash
-module load R/4.0.3
+module load R/4.2.1
 ```
 
 ```output
 Lmod has detected the following error:  These module(s) or extension(s) exist
-but cannot be loaded as requested: "R/4.0.3"
-   Try: "module spider R/4.0.3" to see how to load the module(s).
+but cannot be loaded as requested: "R/4.2.1"
+   Try: "module spider R/4.2.1" to see how to load the module(s).
 ```
 
 But we get an error! Let's try the suggested fix to see what's going on:
 
 
 ```bash
-module spider R/4.0.3
+module spider R/4.2.1
 ```
 
 ```output
 ----------------------------------------------------------------------------
-  R: R/4.0.3
+  R: R/4.2.1
 ----------------------------------------------------------------------------
     Description:
       R is a free software environment for statistical computing and
@@ -108,11 +108,9 @@ module spider R/4.0.3
 
 
     You will need to load all module(s) on any one of the lines below before the
-    "R/4.0.3" module is available to load.
+    "R/4.2.1" module is available to load.
 
-      GCC/10.2.0  OpenMPI/4.0.5
-      GCC/9.3.0  OpenMPI/4.0.3
-      iccifort/2020.1.217  impi/2019.7.217
+      GCC/11.3.0  OpenMPI/4.1.4
  
     Help:
       Description
@@ -129,7 +127,7 @@ Before we do that, it's good practice to purge any other modules that might be l
 
 ```bash
 module purge
-module load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3
+module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
 ```
 
 No error! Let's check that we can access R:
@@ -139,8 +137,8 @@ R
 ```
 
 ```output
-R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out"
-Copyright (C) 2020 The R Foundation for Statistical Computing
+R version 4.2.1 (2022-06-23) -- "Funny-Looking Kid"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -158,6 +156,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > 
+
 ```
 
 Great! We now have an R console where we can run short lines of code, just like from RStudio. As the output from `R` shows, type `q()` to quit and return back to the command line. 
@@ -174,36 +173,37 @@ We will use this option below to make sure we run our code in the cleanest envir
 When you load the R module using the `module load` commands above (before you actually run `R`), this is also the time to load those external dependencies.
 
 Note that these dependencies and R will all need to be be compatible (e.g., use the same version of GCC and MPI).
-For example, a spatial ecology workflow might require the use of GDAL and UDUNITS as dependencies for R packages.
+For example, a Bayesian modeling workflow might require the use of JAGS as dependencies for R packages.
 After loading R and its dependencies with
 
 ```bash
 module purge
-module load GCC/10.2.0 OpenMPI/4.0.5 R/4.0.3
+module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
 ```
 
 you can try loading a compatible GDAL and UDUNITS without specifying a version:
 
 ```bash
-module load GDAL UDUNITS
+module load JAGS
 ```
 
-Then check which versions got loaded:
+Then check which version gets loaded:
 
 ```bash
 module list
 ```
 ```output
 Currently Loaded Modules:
-  1) GCCcore/10.2.0      27) zstd/1.4.5           53) FLAC/1.3.3
-  2) zlib/1.2.11         28) libdrm/2.4.102       54) libvorbis/1.3.7
+  1) GCCcore/11.3.0      34) zstd/1.5.2           67) ICU/71.1
+  2) zlib/1.2.12         35) libdrm/2.4.110       68) Szip/2.1.1
+  3) binutils/2.38       36) libglvnd/1.4.0       69) HDF5/1.12.2
  ...
- 24) X11/20201008        50) GMP/6.2.0            76) GDAL/3.3.2
- 25) gzip/1.10           51) NLopt/2.6.2          77) UDUNITS/2.2.26
- 26) lz4/1.9.2           52) libogg/1.3.4
+ 31) X11/20220504        64) libopus/1.3.1        97) PROJ/9.0.0
+ 32) gzip/1.12           65) LAME/3.100           98) JAGS/4.3.1
+ 33) lz4/1.9.3           66) libsndfile/1.1.0
 ```
 
-If these versions will work, then great! 
+If this version will work, then great! 
 If not, then you might try using a different version of R.
 Usually, newer versions of dependencies for popular R packages get installed with newer versions of R.
 
