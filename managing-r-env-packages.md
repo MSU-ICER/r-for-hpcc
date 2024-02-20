@@ -31,15 +31,15 @@ We can do this by typing `.libPaths()` into the R console:
 .libPaths()
 ```
 ```output
-[1] "/mnt/ufs18/home-237/k0068027/R/x86_64-pc-linux-gnu-library/4.0"
-[2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.0.3-foss-2020a/lib64/R/library" 
+[1] "/mnt/ufs18/home-237/k0068027/R/x86_64-pc-linux-gnu-library/4.2"
+[2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library" 
 ```
 
 We see two directories.
 The first is created for you in your home directory, and the second (or one like it, starting with `/cvmfs/pub_software.icer.msu.edu/software` or `/opt/software`) points to all of the packages that are pre-installed on the HPCC.
 When you use `install.packages()` in the future, by default, it will install to the first entry in your `.libPaths()`.
 
-One important point to note is that the library in your home directory is labeled with `4.0` for version 4.0(.3) of R.
+One important point to note is that the library in your home directory is labeled with `4.2` for version 4.2(.1) of R, the default used by RStudio Server.
 If you ever use different versions of R, it is important that the packages you use are consistent with those versions.
 So, for example, if you choose to use R/3.6.2, you should make sure that the library in your home directory returned by `.libPaths()` ends in 3.6.
 Mixing versions will likely cause your packages to stop working!
@@ -65,7 +65,7 @@ Luckily, R knows this, and if you try to install a package, you will be offered 
 
 ``` output
 Warning in install.packages :
-  'lib = "/cvmfs/pub_software.icer.msu.edu/software/R/4.0.3-foss-2020a/lib64/R/library"' is not writable
+  'lib = "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library"' is not writable
 Would you like to use a personal library instead? (yes/No/cancel)
 ```
 
@@ -122,7 +122,7 @@ Here are some general tips:
 
 1. Read the documentation for the package you're using and take note of any dependencies you need and their versions. This information is also included under SystemRequirements on a package's [CRAN](https://cran.r-project.org/) page.
 2. Make sure that software is available before you try to install/use the R package. This could involve:
-    - Loading it through the HPCC module system. **Note**: This is not possible (yet) in RStudio on the HPCC. You will have to [use R through the command line](r-command-line.Rmd#loading-external-dependencies).
+    - Loading it through the HPCC module system. To do this in OnDemand, click the Advanced Options" checkbox when you start a new RStudio Server session. The first option will allow you to enter HPCC modules you'd like to load before RStudio starts. Otherwise, you can [load these packages and use R through the command line](r-command-line.Rmd#loading-external-dependencies).
     - Installing it yourself in a way that R can find it.
 3. If a package's setup instructions suggest something like `sudo apt-get ...` or `sudo dnf install ...` under the Linux instructions, this is a sign that it needs external dependencies.
 These methods won't work for installation on the HPCC; instead, look for and load HPCC modules with similar names.
@@ -186,9 +186,9 @@ To make sure this runs every time we start R, we'll put it in the `.Rprofile` fi
 
 Use RStudio to open a new Text File and type
 
-```text
+```r
 local({
-options(repos = c(CRAN="https://repo.miserver.it.umich.edu/cran/"))
+  options(repos = c(CRAN="https://repo.miserver.it.umich.edu/cran/"))
 })
 ```
 
@@ -197,7 +197,15 @@ It's good practice to put any code you write in your `.Rprofile` in a call to `l
 
 Save this in your `r_workshop` directory as `.Rprofile` (don't forget the leading `.`).
 Any time R starts, it will look for a `.Rprofile` file in the current directory, and execute all of the code before doing anything else.
-To make this take effect in RStudio, you can restart R by going to the Session menu, and select Restart R.
+To make this take effect in RStudio, you can restart R by going to the Session menu, and select Restart R. To check our work, run
+
+```r
+options()$repos
+```
+```output
+                                      CRAN 
+"https://repo.miserver.it.umich.edu/cran/"
+```
 
 Now suppose that this project we're working on uses some very special packages that we don't want in the library in our home directory.
 The right way to do this is with a package manager like [`packrat`](https://rstudio.github.io/packrat/) or the newer [`renv`](https://rstudio.github.io/renv/articles/renv.html).
@@ -229,7 +237,7 @@ Now, restart R using the Session menu, and check your `.libPaths()` in the R con
 ```
 ```output
 [1] "/mnt/ufs18/home-237/k0068027/r_workshop/library" 
-[2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.0.3-foss-2020a/lib64/R/library"
+[2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library"
 ```
 
 Great! We can even check that we've isolated ourselves from the default home directory library by trying to load `cowsay`:
@@ -283,7 +291,7 @@ Double checking our library paths
 ```
 ```output
 [1] "/mnt/ufs18/home-237/k0068027/r_workshop/library" 
-[2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.0.3-foss-2020a/lib64/R/library"
+[2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library"
 ```
 
 we see that our `r_workshop/library` directory is first.
