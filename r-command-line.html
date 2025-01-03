@@ -21,8 +21,8 @@
         <img alt="ICER" src="assets/images/icer-rectangle.png"></div>
     </div>
     <div class="selector-container">
-      
-      
+
+
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Learner View <i data-feather="chevron-down"></i>
@@ -113,7 +113,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -132,7 +132,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Setup</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -141,7 +141,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="rstudio-server-ondemand.html">1. Accessing RStudio Server through OnDemand</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -150,7 +150,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="managing-r-env-packages.html">2. Managing R package installation and environment</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -159,7 +159,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="parallelizing-r-code.html">3. Parallelizing your R code with <code>future</code></a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -173,7 +173,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#accessing-the-hpcc-through-the-terminal">Accessing the HPCC through the terminal</a></li>
@@ -183,7 +183,7 @@
 <li><a href="#plotting-with-the-command-line">Plotting with the command line</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -192,7 +192,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="r-slurm-jobs.html">5. Submitting R code to SLURM</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -224,10 +224,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -248,18 +248,18 @@
           Previous: Parallelizing your R
         </a>
         <a class="chapter-link float-end" href="r-slurm-jobs.html" rel="next">
-          Next: Submitting R code to... 
+          Next: Submitting R code to...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Using R on the command line</h1>
-        <p> Last updated on 2024-03-12 | 
-        
+        <p> Last updated on 2025-01-03 |
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-command-line.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -293,8 +293,7 @@ command</li>
 </div>
 </div>
 </div>
-<section id="accessing-the-hpcc-through-the-terminal"><h2 class="section-heading">Accessing the HPCC through the terminal<a class="anchor" aria-label="anchor" href="#accessing-the-hpcc-through-the-terminal"></a>
-</h2>
+<section><h2 class="section-heading" id="accessing-the-hpcc-through-the-terminal">Accessing the HPCC through the terminal<a class="anchor" aria-label="anchor" href="#accessing-the-hpcc-through-the-terminal"></a></h2>
 <hr class="half-width"><p>Up to now, we’ve been using RStudio through OnDemand to write and run
 R code on the HPCC. Now, we’ll do the same things we’ve been doing, but
 solely through the command line. This will allow us to eventually <a href="r-slurm-jobs.html">submit SLURM batch scripts</a> to run our code
@@ -311,8 +310,7 @@ something like</p>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>dev-node<span class="op">&gt;</span></span></code></pre>
 </div>
 <p>For best results, choose a development node with low usage.</p>
-</section><section id="loading-r"><h2 class="section-heading">Loading R<a class="anchor" aria-label="anchor" href="#loading-r"></a>
-</h2>
+</section><section><h2 class="section-heading" id="loading-r">Loading R<a class="anchor" aria-label="anchor" href="#loading-r"></a></h2>
 <hr class="half-width"><p>The command to run an R console from the command line is just
 <code>R</code>! But if we try it out right away, we get an error</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -355,7 +353,7 @@ the modules for the ones we want:</p>
         R/4.1.2
         R/4.2.2
      Other possible modules matches:
-        ADMIXTURE  AMDuProf  APR  APR-util  Abaqus_parallel  AdapterRemoval  
+        ADMIXTURE  AMDuProf  APR  APR-util  Abaqus_parallel  AdapterRemoval
         Advisor  Amber  AmrPlusPlus  Archive-Zip  Armadillo  Arrow  ...
 
 ------------------------------------------------------------------------------
@@ -402,7 +400,7 @@ on:</p>
     "R/4.2.1" module is available to load.
 
       GCC/11.3.0  OpenMPI/4.1.4
- 
+
     Help:
       Description
       ===========
@@ -449,7 +447,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-&gt; 
+&gt;
 </code></pre>
 </div>
 <p>Great! We now have an R console where we can run short lines of code,
@@ -467,8 +465,7 @@ environment possible.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="loading-external-dependencies" class="callout-inner">
-<h3 class="callout-title">Loading external dependencies<a class="anchor" aria-label="anchor" href="#loading-external-dependencies"></a>
-</h3>
+<h3 class="callout-title">Loading external dependencies</h3>
 <div class="callout-content">
 <p><a href="managing-r-env-packages.html#do-your-packages-require-external-dependencies">As
 mentioned when we were installing packages</a>, sometimes R packages
@@ -519,8 +516,8 @@ documentation</a>.</p>
 </div>
 </div>
 </div>
-</section><section id="running-one-liners-and-scripts-with-rscript"><h2 class="section-heading">Running one-liners and scripts with <code>RScript</code><a class="anchor" aria-label="anchor" href="#running-one-liners-and-scripts-with-rscript"></a>
-</h2>
+</section><section><h2 class="section-heading" id="running-one-liners-and-scripts-with-rscript">Running one-liners and scripts with <code>RScript</code>
+<a class="anchor" aria-label="anchor" href="#running-one-liners-and-scripts-with-rscript"></a></h2>
 <hr class="half-width"><p>The R console is great for interactive work. But sometimes we might
 want to just send some code to R to run and give us back the answer. For
 this, we use the <code>Rscript</code> command.</p>
@@ -566,7 +563,7 @@ specify the entire path name.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>   user  system elapsed 
+<pre class="output" tabindex="0"><code>   user  system elapsed
   0.238   0.003   1.698</code></pre>
 </div>
 <p>This is the equivalent of clicking the Source button while we have a
@@ -575,8 +572,7 @@ R script open in RStudio, or running
 R console. Notice that we didn’t use the <code>--vanilla</code> option
 here. This ensures that we use the local library setup in the project
 directory.</p>
-</section><section id="writing-scripts-that-take-command-line-arguments"><h2 class="section-heading">Writing scripts that take command line arguments<a class="anchor" aria-label="anchor" href="#writing-scripts-that-take-command-line-arguments"></a>
-</h2>
+</section><section><h2 class="section-heading" id="writing-scripts-that-take-command-line-arguments">Writing scripts that take command line arguments<a class="anchor" aria-label="anchor" href="#writing-scripts-that-take-command-line-arguments"></a></h2>
 <hr class="half-width"><p>Often, you will want to be able to pass extra arguments to your
 scripts when you run them from the command line. The simplest way is to
 use the <code>commandArgs</code> function in R which lets us access all
@@ -617,8 +613,8 @@ arguments:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>Argument 1 : a 
-Argument 2 : b 
+<pre class="output" tabindex="0"><code>Argument 1 : a
+Argument 2 : b
 Argument 3 : c </code></pre>
 </div>
 <p>For a more sophisticated way to handle command line arguments
@@ -629,8 +625,7 @@ check out <a href="https://cran.r-project.org/web/packages/optparse/" class="ext
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge1"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Write an Rscript one-liner to print the numbers from 1 to 10.</p>
 </div>
@@ -639,7 +634,7 @@ check out <a href="https://cran.r-project.org/web/packages/optparse/" class="ext
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
@@ -657,8 +652,7 @@ check out <a href="https://cran.r-project.org/web/packages/optparse/" class="ext
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge2"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Write an Rscript one-liner to display the <code>help</code> for the
 function <code>strtoi</code> (press “q” to exit).</p>
@@ -668,7 +662,7 @@ function <code>strtoi</code> (press “q” to exit).</p>
 <div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
@@ -686,8 +680,7 @@ function <code>strtoi</code> (press “q” to exit).</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge3"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Write an Rscript that takes an integer as a command line argument and
 prints the numbers from 1 to that integer.</p>
@@ -697,7 +690,7 @@ prints the numbers from 1 to that integer.</p>
 <div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
-  <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
@@ -721,8 +714,7 @@ prints the numbers from 1 to that integer.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge4"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Copy <code>test_sqrt_multisession.R</code> into a new R script and
 modify it to take an integer as a command line argument. Use the command
@@ -736,7 +728,7 @@ the desired behavior).</p>
 <div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
-  <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
 <div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
@@ -769,8 +761,7 @@ the desired behavior).</p>
 </div>
 </div>
 </div>
-</section><section id="plotting-with-the-command-line"><h2 class="section-heading">Plotting with the command line<a class="anchor" aria-label="anchor" href="#plotting-with-the-command-line"></a>
-</h2>
+</section><section><h2 class="section-heading" id="plotting-with-the-command-line">Plotting with the command line<a class="anchor" aria-label="anchor" href="#plotting-with-the-command-line"></a></h2>
 <hr class="half-width"><p>You may wonder how you might run a plot using the terminal interface?
 For most terminals, if you plot with the command line version of R,
 either nothing happens or there is an error message. It may work on some
@@ -821,8 +812,7 @@ file browser (or the MobaXterm client’s file browser)</li>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge5"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>One of the challenges with running scripts repeatedly is that it will
 overwrite the plot file with the same name. Modify the plotting script
@@ -835,7 +825,7 @@ line argument sent?</p>
 <div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
-  <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
 <div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
@@ -870,8 +860,7 @@ line argument sent?</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Use <code>module spider R/&lt;version&gt;</code> to learn how to
 load a version of R on the HPCC</li>
@@ -886,9 +875,9 @@ script</li>
 </ul></div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
@@ -902,7 +891,7 @@ any links that you are not going to use.
           Previous: Parallelizing your R
         </a>
         <a class="chapter-link float-end" href="r-slurm-jobs.html" rel="next">
-          Next: Submitting R code to... 
+          Next: Submitting R code to...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -913,21 +902,21 @@ any links that you are not going to use.
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
 				<p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-command-line.Rmd" class="external-link">Edit on GitHub</a>
-        
+
 	
-        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a> 
+        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/MSU-ICER/r-for-hpcc/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:grosscra@msu.edu">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.4" class="external-link">sandpaper (0.16.4)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.7.5" class="external-link">pegboard (0.7.5)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.10" class="external-link">sandpaper (0.16.10)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>,
       and <a href="https://github.com/MSU-ICER/varnish/tree/icer" class="external-link">varnish (0.3.0)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -950,8 +939,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/r-command-line.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/r-command-line.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2024-03-12",
-  "datePublished": "2024-05-14"
+  "dateModified": "2025-01-03",
+  "datePublished": "2025-01-03"
 }
 
   </script><script>

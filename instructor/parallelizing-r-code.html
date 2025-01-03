@@ -21,8 +21,8 @@
         <img alt="ICER" src="../assets/images/icer-rectangle.png"></div>
     </div>
     <div class="selector-container">
-      
-      
+
+
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -113,7 +113,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -132,7 +132,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -141,7 +141,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="rstudio-server-ondemand.html">1. Accessing RStudio Server through OnDemand</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -150,7 +150,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="managing-r-env-packages.html">2. Managing R package installation and environment</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -164,7 +164,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#basics-of-parallelization">Basics of parallelization</a></li>
@@ -173,7 +173,7 @@
 <li><a href="#other-ways-to-use-the-future-backends">Other ways to use the <code>future</code> backends</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -182,7 +182,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="r-command-line.html">4. Using R on the command line</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -191,7 +191,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="r-slurm-jobs.html">5. Submitting R code to SLURM</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -223,10 +223,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -247,20 +247,20 @@
           Previous: Managing R package
         </a>
         <a class="chapter-link float-end" href="../instructor/r-command-line.html" rel="next">
-          Next: Using R on the... 
+          Next: Using R on the...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parallelizing your R code with <code>future</code></h1>
-        <p> Last updated on 2024-03-12 | 
-        
+        <p> Last updated on 2025-01-03 |
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/parallelizing-r-code.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -293,8 +293,7 @@
 </div>
 </div>
 </div>
-<section id="basics-of-parallelization"><h2 class="section-heading">Basics of parallelization<a class="anchor" aria-label="anchor" href="#basics-of-parallelization"></a>
-</h2>
+<section><h2 class="section-heading" id="basics-of-parallelization">Basics of parallelization<a class="anchor" aria-label="anchor" href="#basics-of-parallelization"></a></h2>
 <hr class="half-width"><p>The HPCC is made up of lots of computers that have processors with
 lots of cores. Your laptop probably has a processor with 4-8 cores while
 the largest nodes on the HPCC have 128 cores.</p>
@@ -310,8 +309,7 @@ speedup isn’t automatic! You will need to make some changes to your code
 so it knows what resources to use and how to split up its execution
 across those resources. We’ll use the “<a href="https://www.futureverse.org/" class="external-link">Futureverse</a>” of R packages to
 help us do this quickly.</p>
-</section><section id="writing-code-that-runs-on-multiple-cores"><h2 class="section-heading">Writing code that runs on multiple cores<a class="anchor" aria-label="anchor" href="#writing-code-that-runs-on-multiple-cores"></a>
-</h2>
+</section><section><h2 class="section-heading" id="writing-code-that-runs-on-multiple-cores">Writing code that runs on multiple cores<a class="anchor" aria-label="anchor" href="#writing-code-that-runs-on-multiple-cores"></a></h2>
 <hr class="half-width"><p>Let’s start with a small example of some code that can be sped up by
 running in parallel. In RStudio, create a new R Script and enter the
 following code:</p>
@@ -338,7 +336,7 @@ output:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>   user  system elapsed 
+<pre class="output" tabindex="0"><code>   user  system elapsed
   0.016   0.009   5.006</code></pre>
 </div>
 <p>This means that it took about 5 seconds for the code to run. Of
@@ -350,8 +348,7 @@ code that we might want to parallelize.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="a-digression-on-vectorization" class="callout-inner">
-<h3 class="callout-title">A digression on vectorization<a class="anchor" aria-label="anchor" href="#a-digression-on-vectorization"></a>
-</h3>
+<h3 class="callout-title">A digression on vectorization</h3>
 <div class="callout-content">
 <p>Ignoring the <code>Sys.sleep(0.5)</code> part of our loop, if we just
 wanted the square root of all of the elements in <code>x</code>, we
@@ -377,7 +374,7 @@ your code.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>   user  system elapsed 
+<pre class="output" tabindex="0"><code>   user  system elapsed
   0.004   0.000   0.005 </code></pre>
 </div>
 <p>to</p>
@@ -395,7 +392,7 @@ your code.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>   user  system elapsed 
+<pre class="output" tabindex="0"><code>   user  system elapsed
       0       0       0 </code></pre>
 </div>
 <p>Not only is the vectorized code much cleaner, it’s much faster
@@ -445,7 +442,7 @@ block for each input <code>xi</code>.</li>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>   user  system elapsed 
+<pre class="output" tabindex="0"><code>   user  system elapsed
   0.050   0.012   5.051</code></pre>
 </div>
 <p>Huh? It’s slower! Well, we forgot one thing. We changed our code to
@@ -465,7 +462,7 @@ again:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>   user  system elapsed 
+<pre class="output" tabindex="0"><code>   user  system elapsed
   0.646   0.019   2.642</code></pre>
 </div>
 <p>Much better! What future did behind the scenes is check how many
@@ -479,7 +476,7 @@ cores we have allotted to our RStudio session with</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code><span><span class="va">cgroups.cpuset</span> </span>
+<pre class="output" tabindex="0"><code><span><span class="va">cgroups.cpuset</span></span>
 <span>             <span class="fl">8</span></span></code></pre>
 </div>
 <p>and make that many R sessions in the background. Each of these
@@ -498,7 +495,7 @@ the <code>plan</code>, which will override the number of cores. Add the
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>   user  system elapsed 
+<pre class="output" tabindex="0"><code>   user  system elapsed
   0.327   0.010   1.923 </code></pre>
 </div>
 <p>It’s even faster! With five workers, each worker has exactly two
@@ -521,8 +518,7 @@ writable.</p>
 environments like RStudio. Thus, it can only be used in scripts <a href="r-command-line.html">running from the command line</a>, so we will
 ignore it for now.</p>
 </div>
-</section><section id="writing-code-that-runs-on-multiple-nodes"><h2 class="section-heading">Writing code that runs on multiple nodes<a class="anchor" aria-label="anchor" href="#writing-code-that-runs-on-multiple-nodes"></a>
-</h2>
+</section><section><h2 class="section-heading" id="writing-code-that-runs-on-multiple-nodes">Writing code that runs on multiple nodes<a class="anchor" aria-label="anchor" href="#writing-code-that-runs-on-multiple-nodes"></a></h2>
 <hr class="half-width"><p>Now that we know how to make the most of the cores we reserved, how
 can we scale up further? One of the major benefits of the HPCC is the
 fact that there are plenty of different nodes for you to run your code
@@ -570,7 +566,7 @@ directory.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>setwd('/mnt/ufs18/home-237/k0068027/r_workshop')   user  system elapsed 
+<pre class="output" tabindex="0"><code>setwd('/mnt/ufs18/home-237/k0068027/r_workshop')   user  system elapsed
   0.233   0.044   2.769 </code></pre>
 </div>
 <p>The output is a little wonky because it runs the
@@ -605,7 +601,7 @@ plan:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>   user  system elapsed 
+<pre class="output" tabindex="0"><code>   user  system elapsed
   6.916   2.083  39.614</code></pre>
 </div>
 <p>So we experience a much longer wait… But this make sense! We just
@@ -678,8 +674,7 @@ above to your working directory as <code>batchtools.slurm.tmpl</code>,
 it will be used instead. For more information, see the <a href="https://future.batchtools.futureverse.org/" class="external-link"><code>future.batchtools</code>
 documentation</a>.</p>
 </div>
-</section><section id="other-ways-to-use-the-future-backends"><h2 class="section-heading">Other ways to use the <code>future</code> backends<a class="anchor" aria-label="anchor" href="#other-ways-to-use-the-future-backends"></a>
-</h2>
+</section><section><h2 class="section-heading" id="other-ways-to-use-the-future-backends">Other ways to use the <code>future</code> backends<a class="anchor" aria-label="anchor" href="#other-ways-to-use-the-future-backends"></a></h2>
 <hr class="half-width"><p>We decided to setup our parallelization in a for loop using the
 <code>foreach</code> package. But there are a few other ways to do this
 as well. Most fit the paradigm of defining a function to “map” over the
@@ -732,8 +727,7 @@ employing an adapter to the <code>future</code> backend.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Setup code you want to parallelize as “mapping” a function over an
 array</li>
@@ -746,9 +740,9 @@ backend</li>
 </ul></div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
@@ -762,7 +756,7 @@ any links that you are not going to use.
           Previous: Managing R package
         </a>
         <a class="chapter-link float-end" href="../instructor/r-command-line.html" rel="next">
-          Next: Using R on the... 
+          Next: Using R on the...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -773,21 +767,21 @@ any links that you are not going to use.
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
 				<p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/parallelizing-r-code.Rmd" class="external-link">Edit on GitHub</a>
-        
+
 	
-        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a> 
+        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/MSU-ICER/r-for-hpcc/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:grosscra@msu.edu">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.4" class="external-link">sandpaper (0.16.4)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.7.5" class="external-link">pegboard (0.7.5)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.10" class="external-link">sandpaper (0.16.10)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>,
       and <a href="https://github.com/MSU-ICER/varnish/tree/icer" class="external-link">varnish (0.3.0)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -810,8 +804,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/instructor/parallelizing-r-code.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/instructor/parallelizing-r-code.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2024-03-12",
-  "datePublished": "2024-05-14"
+  "dateModified": "2025-01-03",
+  "datePublished": "2025-01-03"
 }
 
   </script><script>

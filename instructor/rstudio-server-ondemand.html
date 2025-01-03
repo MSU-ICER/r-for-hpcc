@@ -21,8 +21,8 @@
         <img alt="ICER" src="../assets/images/icer-rectangle.png"></div>
     </div>
     <div class="selector-container">
-      
-      
+
+
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -113,7 +113,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -132,7 +132,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -146,7 +146,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#ondemand">OnDemand</a></li>
@@ -155,7 +155,7 @@
 <li><a href="#connect-to-your-rstudio-node-from-the-command-line">Connect to your RStudio node from the command line</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -164,7 +164,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="managing-r-env-packages.html">2. Managing R package installation and environment</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -173,7 +173,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="parallelizing-r-code.html">3. Parallelizing your R code with <code>future</code></a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -182,7 +182,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="r-command-line.html">4. Using R on the command line</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -191,7 +191,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="r-slurm-jobs.html">5. Submitting R code to SLURM</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -223,10 +223,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -247,20 +247,20 @@
           Home
         </a>
         <a class="chapter-link float-end" href="../instructor/managing-r-env-packages.html" rel="next">
-          Next: Managing R package... 
+          Next: Managing R package...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Accessing RStudio Server through OnDemand</h1>
-        <p> Last updated on 2024-03-12 | 
-        
+        <p> Last updated on 2025-01-03 |
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/rstudio-server-ondemand.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -290,8 +290,7 @@
 </div>
 </div>
 </div>
-<section id="ondemand"><h2 class="section-heading">OnDemand<a class="anchor" aria-label="anchor" href="#ondemand"></a>
-</h2>
+<section><h2 class="section-heading" id="ondemand">OnDemand<a class="anchor" aria-label="anchor" href="#ondemand"></a></h2>
 <hr class="half-width"><p>HPCC resources have traditionally been accessed solely through a
 terminal. Though the terminal is still the best way to accomplish many
 tasks on the HPCC, launching graphical user interfaces (GUIs) like
@@ -300,8 +299,7 @@ the use of OnDemand to run graphical applications through your web
 browser.</p>
 <p>This is where we will start our journey with R on the HPCC,
 eventually making our way back to using R on the command line.</p>
-</section><section id="starting-an-rstudio-job"><h2 class="section-heading">Starting an RStudio job<a class="anchor" aria-label="anchor" href="#starting-an-rstudio-job"></a>
-</h2>
+</section><section><h2 class="section-heading" id="starting-an-rstudio-job">Starting an RStudio job<a class="anchor" aria-label="anchor" href="#starting-an-rstudio-job"></a></h2>
 <hr class="half-width"><p>We’ll begin by logging in on OnDemand. Go to <a href="https://ondemand.hpcc.msu.edu" class="external-link">https://ondemand.hpcc.msu.edu</a>.
 If you are prompted, choose Michigan State University as the Identity
 Provider, and log in using your MSU NetID and password. Before we get
@@ -313,8 +311,7 @@ you up and running.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="rstudio-server-vs-rstudio" class="callout-inner">
-<h3 class="callout-title">RStudio Server vs RStudio<a class="anchor" aria-label="anchor" href="#rstudio-server-vs-rstudio"></a>
-</h3>
+<h3 class="callout-title">RStudio Server vs RStudio</h3>
 <div class="callout-content">
 <p>At the time of writing, the RStudio Server is newer and is still
 considered a “beta” application, meaning that it may have some bugs that
@@ -353,8 +350,7 @@ always return to it by clicking the My Interactive Sessions button in
 the OnDemand navigation bar. On narrower screens, this button shrinks
 down to a graphic of a pair of overlapping cards next to the Tools
 dropdown.</p>
-</section><section id="rstudio"><h2 class="section-heading">RStudio<a class="anchor" aria-label="anchor" href="#rstudio"></a>
-</h2>
+</section><section><h2 class="section-heading" id="rstudio">RStudio<a class="anchor" aria-label="anchor" href="#rstudio"></a></h2>
 <hr class="half-width"><p>After Launching your RStudio session, a new tab in your browser will
 show an RStudio interface.</p>
 <figure><img src="../fig/rstudio-server-interface.png" alt="An RStudio Server session. An R console takes up the left half of RStudio, and the right half is split between an environment section on top and a file browser on bottom." class="figure mx-auto d-block"></figure><p>On startup, there are three main sections to RStudio: an R console,
@@ -365,8 +361,7 @@ starts in your HPCC home directory.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="open-a-file" class="callout-inner">
-<h3 class="callout-title">Open a file<a class="anchor" aria-label="anchor" href="#open-a-file"></a>
-</h3>
+<h3 class="callout-title">Open a file</h3>
 <div class="callout-content">
 <p>Use the RStudio interface to create a new R Script file.</p>
 </div>
@@ -375,7 +370,7 @@ starts in your HPCC home directory.</p>
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
@@ -387,8 +382,7 @@ editor.</p>
 </div>
 </div>
 </div>
-</section><section id="connect-to-your-rstudio-node-from-the-command-line"><h2 class="section-heading">Connect to your RStudio node from the command line<a class="anchor" aria-label="anchor" href="#connect-to-your-rstudio-node-from-the-command-line"></a>
-</h2>
+</section><section><h2 class="section-heading" id="connect-to-your-rstudio-node-from-the-command-line">Connect to your RStudio node from the command line<a class="anchor" aria-label="anchor" href="#connect-to-your-rstudio-node-from-the-command-line"></a></h2>
 <hr class="half-width"><p>As discussed earlier, OnDemand tells you the Host that your RStudio
 job is running on. From time to time, you may need to run commands on
 this host from a command line. You have two options.</p>
@@ -412,8 +406,7 @@ on that node.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="ssh-outside-of-ondemand" class="callout-inner">
-<h3 class="callout-title">SSH outside of OnDemand<a class="anchor" aria-label="anchor" href="#ssh-outside-of-ondemand"></a>
-</h3>
+<h3 class="callout-title">SSH outside of OnDemand</h3>
 <div class="callout-content">
 <p>If you are not using an OnDemand terminal, you first need to manually
 SSH into a development node. From your terminal (e.g., the built in
@@ -438,8 +431,7 @@ is running on.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge2"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Run the <code>top</code> command via command line on the node your
 RStudio session is running on and verify that indeed RStudio is running
@@ -453,7 +445,7 @@ with your username) to see just your running processes.</p>
 <div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
@@ -471,8 +463,7 @@ scroll to the right and see the <code>COMMAND</code> column.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Start an RStudio Server session from <a href="https://ondemand.hpcc.msu.edu" class="external-link">OnDemand</a>
 </li>
@@ -482,9 +473,9 @@ you.</li>
 </ul></div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </div>
 </section></div> <!-- / div.lesson-content -->
@@ -499,7 +490,7 @@ any links that you are not going to use.
           Home
         </a>
         <a class="chapter-link float-end" href="../instructor/managing-r-env-packages.html" rel="next">
-          Next: Managing R package... 
+          Next: Managing R package...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -510,21 +501,21 @@ any links that you are not going to use.
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
 				<p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/rstudio-server-ondemand.Rmd" class="external-link">Edit on GitHub</a>
-        
+
 	
-        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a> 
+        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/MSU-ICER/r-for-hpcc/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:grosscra@msu.edu">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.4" class="external-link">sandpaper (0.16.4)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.7.5" class="external-link">pegboard (0.7.5)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.10" class="external-link">sandpaper (0.16.10)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>,
       and <a href="https://github.com/MSU-ICER/varnish/tree/icer" class="external-link">varnish (0.3.0)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -547,8 +538,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/instructor/rstudio-server-ondemand.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/instructor/rstudio-server-ondemand.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2024-03-12",
-  "datePublished": "2024-05-14"
+  "dateModified": "2025-01-03",
+  "datePublished": "2025-01-03"
 }
 
   </script><script>

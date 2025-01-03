@@ -21,8 +21,8 @@
         <img alt="ICER" src="assets/images/icer-rectangle.png"></div>
     </div>
     <div class="selector-container">
-      
-      
+
+
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Learner View <i data-feather="chevron-down"></i>
@@ -113,7 +113,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -132,7 +132,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Setup</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -141,7 +141,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="rstudio-server-ondemand.html">1. Accessing RStudio Server through OnDemand</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -150,7 +150,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="managing-r-env-packages.html">2. Managing R package installation and environment</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -159,7 +159,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="parallelizing-r-code.html">3. Parallelizing your R code with <code>future</code></a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -168,7 +168,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="r-command-line.html">4. Using R on the command line</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -182,7 +182,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#slurm-scripts">SLURM scripts</a></li>
@@ -191,7 +191,7 @@
 <li><a href="#submitting-slurm-scripts-for-code-that-runs-on-multiple-nodes">Submitting SLURM scripts for code that runs on multiple nodes</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -223,10 +223,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -253,12 +253,12 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Submitting R code to SLURM</h1>
-        <p> Last updated on 2024-03-12 | 
-        
+        <p> Last updated on 2025-01-03 |
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-slurm-jobs.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -288,8 +288,7 @@
 </div>
 </div>
 </div>
-<section id="slurm-scripts"><h2 class="section-heading">SLURM scripts<a class="anchor" aria-label="anchor" href="#slurm-scripts"></a>
-</h2>
+<section><h2 class="section-heading" id="slurm-scripts">SLURM scripts<a class="anchor" aria-label="anchor" href="#slurm-scripts"></a></h2>
 <hr class="half-width"><p>Now that we understand how to parallelize R code and run it on the
 command line, let’s put it all together. We’ll write a SLURM script to
 submit our code to run on compute nodes on the HPCC.</p>
@@ -331,8 +330,7 @@ associated to the <code>my_buyin</code> account</li>
 </ul><p>Finally, you will add your code below these <code>#SBATCH</code>.
 This code is exactly what you would enter on the command line to run
 your R scripts as we showed in the <a href="r-command-line.html">previous epsiode</a>.</p>
-</section><section id="a-slurm-script-template"><h2 class="section-heading">A SLURM script template<a class="anchor" aria-label="anchor" href="#a-slurm-script-template"></a>
-</h2>
+</section><section><h2 class="section-heading" id="a-slurm-script-template">A SLURM script template<a class="anchor" aria-label="anchor" href="#a-slurm-script-template"></a></h2>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -359,8 +357,7 @@ your R scripts as we showed in the <a href="r-command-line.html">previous epsiod
 <p>A template like this will work for you 90% of the time, where all you
 need to do is set your resources correctly, load the right version of R,
 set the directory you want to work in, and choose your script.</p>
-</section><section id="slurm-script-submission"><h2 class="section-heading">SLURM script submission<a class="anchor" aria-label="anchor" href="#slurm-script-submission"></a>
-</h2>
+</section><section><h2 class="section-heading" id="slurm-script-submission">SLURM script submission<a class="anchor" aria-label="anchor" href="#slurm-script-submission"></a></h2>
 <hr class="half-width"><p>Create a new directory in our R project directory called
 <code>slurm</code>, and save the above file there as
 <code>single_core.sh</code>. Then submit the script with
@@ -388,8 +385,8 @@ directory.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>   user  system elapsed 
-  0.027   0.010   5.042 
+<pre class="output" tabindex="0"><code>   user  system elapsed
+  0.027   0.010   5.042
 JobId=17815750 JobName=single_core.sh
    UserId=grosscra(919141) GroupId=helpdesk(2103) MCS_label=N/A
    Priority=57661 Nice=0 Account=general QOS=grosscra
@@ -413,7 +410,7 @@ JobId=17815750 JobName=single_core.sh
    OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
    Command=/mnt/ufs18/home-237/k0068027/r_workshop/slurm/single_core.sh
    WorkDir=/mnt/ufs18/home-237/k0068027/r_workshop
-   Comment=stdout=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out 
+   Comment=stdout=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out
    StdErr=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out
    StdIn=/dev/null
    StdOut=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out
@@ -426,8 +423,7 @@ job on the HPCC.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="submitting-a-multicore-job" class="callout-inner">
-<h3 class="callout-title">Submitting a multicore job<a class="anchor" aria-label="anchor" href="#submitting-a-multicore-job"></a>
-</h3>
+<h3 class="callout-title">Submitting a multicore job</h3>
 <div class="callout-content">
 <p>Copy your submission script to <code>slurm/multi_core.sh</code>.
 Adjust it to request five cores and change it so that you run a copy of
@@ -440,7 +436,7 @@ compare the time it took to run with the single core job.</p>
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
@@ -496,8 +492,7 @@ compare the time it took to run with the single core job.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="cleaning-up-the-output" class="callout-inner">
-<h3 class="callout-title">Cleaning up the output<a class="anchor" aria-label="anchor" href="#cleaning-up-the-output"></a>
-</h3>
+<h3 class="callout-title">Cleaning up the output</h3>
 <div class="callout-content">
 <p>Leaving the output in the directory we run the script in will get
 messy. For the steps below, you will need the <a href="https://docs.icer.msu.edu/List_of_Job_Specifications/" class="external-link">list of
@@ -520,7 +515,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
@@ -552,8 +547,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 </div>
 </div>
 </div>
-</section><section id="submitting-slurm-scripts-for-code-that-runs-on-multiple-nodes"><h2 class="section-heading">Submitting SLURM scripts for code that runs on multiple nodes<a class="anchor" aria-label="anchor" href="#submitting-slurm-scripts-for-code-that-runs-on-multiple-nodes"></a>
-</h2>
+</section><section><h2 class="section-heading" id="submitting-slurm-scripts-for-code-that-runs-on-multiple-nodes">Submitting SLURM scripts for code that runs on multiple nodes<a class="anchor" aria-label="anchor" href="#submitting-slurm-scripts-for-code-that-runs-on-multiple-nodes"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="using-the-future-package">Using the <code>future</code> package<a class="anchor" aria-label="anchor" href="#using-the-future-package"></a></h3>
 <p>In the section on writing parallel code across multiple nodes using
@@ -630,8 +624,7 @@ used by <code>srun</code>.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>A SLURM script requests resources</li>
 <li>Generally, the only code you need in a SLURM script is loading the R
@@ -643,9 +636,9 @@ module, changing to the right directory and running your R code with
 </ul></div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </div>
 </section></div> <!-- / div.lesson-content -->
@@ -671,21 +664,21 @@ any links that you are not going to use.
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
 				<p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-slurm-jobs.Rmd" class="external-link">Edit on GitHub</a>
-        
+
 	
-        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a> 
+        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/MSU-ICER/r-for-hpcc/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:grosscra@msu.edu">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.4" class="external-link">sandpaper (0.16.4)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.7.5" class="external-link">pegboard (0.7.5)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.10" class="external-link">sandpaper (0.16.10)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>,
       and <a href="https://github.com/MSU-ICER/varnish/tree/icer" class="external-link">varnish (0.3.0)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -708,8 +701,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/r-slurm-jobs.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/r-slurm-jobs.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2024-03-12",
-  "datePublished": "2024-05-14"
+  "dateModified": "2025-01-03",
+  "datePublished": "2025-01-03"
 }
 
   </script><script>

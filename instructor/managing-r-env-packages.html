@@ -21,8 +21,8 @@
         <img alt="ICER" src="../assets/images/icer-rectangle.png"></div>
     </div>
     <div class="selector-container">
-      
-      
+
+
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -113,7 +113,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -132,7 +132,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -141,7 +141,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="rstudio-server-ondemand.html">1. Accessing RStudio Server through OnDemand</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -155,7 +155,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#libraries">Libraries</a></li>
@@ -166,7 +166,7 @@
 rules)</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -175,7 +175,7 @@ rules)</a></li>
     <div class="accordion-header" id="flush-heading4">
         <a href="parallelizing-r-code.html">3. Parallelizing your R code with <code>future</code></a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -184,7 +184,7 @@ rules)</a></li>
     <div class="accordion-header" id="flush-heading5">
         <a href="r-command-line.html">4. Using R on the command line</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -193,7 +193,7 @@ rules)</a></li>
     <div class="accordion-header" id="flush-heading6">
         <a href="r-slurm-jobs.html">5. Submitting R code to SLURM</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -225,10 +225,10 @@ rules)</a></li>
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -249,20 +249,20 @@ rules)</a></li>
           Previous: Accessing RStudio
         </a>
         <a class="chapter-link float-end" href="../instructor/parallelizing-r-code.html" rel="next">
-          Next: Parallelizing your R... 
+          Next: Parallelizing your R...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Managing R package installation and environment</h1>
-        <p> Last updated on 2024-03-12 | 
-        
+        <p> Last updated on 2025-01-03 |
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -296,8 +296,7 @@ collaboration</li>
 </div>
 </div>
 </div>
-<section id="libraries"><h2 class="section-heading">Libraries<a class="anchor" aria-label="anchor" href="#libraries"></a>
-</h2>
+<section><h2 class="section-heading" id="libraries">Libraries<a class="anchor" aria-label="anchor" href="#libraries"></a></h2>
 <hr class="half-width"><p>The HPCC has multiple versions of R installed, and many of those
 versions have a large number of R packages pre-installed. But there will
 come a time when your workflow requires a new package that isn’t already
@@ -338,9 +337,7 @@ your packages to stop working!</p>
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="whats-the-difference-between-a-library-and-a-package" class="callout-inner">
-<h3 class="callout-title">What’s the difference between a library and a
-package?<a class="anchor" aria-label="anchor" href="#whats-the-difference-between-a-library-and-a-package"></a>
-</h3>
+<h3 class="callout-title">What’s the difference between a library and a package?</h3>
 <div class="callout-content">
 <p>A library is just a collection of packages. When you use
 <code>library(&lt;package&gt;)</code>, you are telling R to look in your
@@ -356,9 +353,7 @@ install the desired package into the first library on your
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="what-if-you-dont-have-a-user-writable-library" class="callout-inner">
-<h3 class="callout-title">What if you don’t have a user-writable
-library?<a class="anchor" aria-label="anchor" href="#what-if-you-dont-have-a-user-writable-library"></a>
-</h3>
+<h3 class="callout-title">What if you don’t have a user-writable library?</h3>
 <div class="callout-content">
 <p>Sometimes, when starting R for the first time, it may happen that the
 <code>.libPaths()</code> command won’t show you a library in your home
@@ -377,8 +372,7 @@ Would you like to use a personal library instead? (yes/No/cancel)</code></pre>
 </div>
 </div>
 </div>
-</section><section id="installing-packages"><h2 class="section-heading">Installing packages<a class="anchor" aria-label="anchor" href="#installing-packages"></a>
-</h2>
+</section><section><h2 class="section-heading" id="installing-packages">Installing packages<a class="anchor" aria-label="anchor" href="#installing-packages"></a></h2>
 <hr class="half-width"><p>Now, let’s try to install a package:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -403,8 +397,8 @@ normally would! From the R console:</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
- -------------- 
-Hello world! 
+ --------------
+Hello world!
  --------------
     \
       \
@@ -426,9 +420,7 @@ Hello world!
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="do-your-packages-require-external-dependencies" class="callout-inner">
-<h3 class="callout-title">Do your packages require external
-dependencies?<a class="anchor" aria-label="anchor" href="#do-your-packages-require-external-dependencies"></a>
-</h3>
+<h3 class="callout-title">Do your packages require external dependencies?</h3>
 <div class="callout-content">
 <p>Often, packages will require some extra software to install, run, or
 both. Getting external dependencies lined up correctly can be a big
@@ -457,8 +449,7 @@ consultants at ICER</a> and we will do our best to help you out.</li>
 </ol></div>
 </div>
 </div>
-</section><section id="managing-your-projects"><h2 class="section-heading">Managing your projects<a class="anchor" aria-label="anchor" href="#managing-your-projects"></a>
-</h2>
+</section><section><h2 class="section-heading" id="managing-your-projects">Managing your projects<a class="anchor" aria-label="anchor" href="#managing-your-projects"></a></h2>
 <hr class="half-width"><p>Now that we know how to install and use external packages, let’s talk
 about managing your code. When you use R, it helps to organize your code
 into separate directories that you can think of as projects. As we’ll
@@ -498,8 +489,7 @@ file saves some options for how you edit your project in RStudio.</li>
 </ol><p>At any time, you can navigate to your project directory in the
 RStudio file browser and click the <code>.Rproj</code> file to load up
 this project or any other.</p>
-</section><section id="configuring-your-projects"><h2 class="section-heading">Configuring your projects<a class="anchor" aria-label="anchor" href="#configuring-your-projects"></a>
-</h2>
+</section><section><h2 class="section-heading" id="configuring-your-projects">Configuring your projects<a class="anchor" aria-label="anchor" href="#configuring-your-projects"></a></h2>
 <hr class="half-width"><p>What if we wanted to make some changes to the way that R operates?
 There are two files that we can create to help us do that:
 <code>.Rprofile</code> and <code>.Renviron</code>.</p>
@@ -542,7 +532,7 @@ the Session menu, and select Restart R. To check our work, run</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code><span>                                      <span class="va">CRAN</span> </span>
+<pre class="output" tabindex="0"><code><span>                                      <span class="va">CRAN</span></span>
 <span><span class="st">"https://repo.miserver.it.umich.edu/cran/"</span></span></code></pre>
 </div>
 <p>Now suppose that this project we’re working on uses some very special
@@ -584,7 +574,7 @@ and check your <code>.libPaths()</code> in the R console:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "/mnt/ufs18/home-237/k0068027/r_workshop/library" 
+<pre class="output" tabindex="0"><code>[1] "/mnt/ufs18/home-237/k0068027/r_workshop/library"
 [2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library"</code></pre>
 </div>
 <p>Great! We can even check that we’ve isolated ourselves from the
@@ -602,8 +592,7 @@ default home directory library by trying to load
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="other-configuration-locations" class="callout-inner">
-<h3 class="callout-title">Other configuration locations<a class="anchor" aria-label="anchor" href="#other-configuration-locations"></a>
-</h3>
+<h3 class="callout-title">Other configuration locations</h3>
 <div class="callout-content">
 <p>The <code>.Rprofile</code> and <code>.Renviron</code> files don’t
 have to live in the directory you start R from. In fact, R checks for
@@ -629,8 +618,7 @@ these home directory files sparingly to preserve portability.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="packages-for-later" class="callout-inner">
-<h3 class="callout-title">Packages for later<a class="anchor" aria-label="anchor" href="#packages-for-later"></a>
-</h3>
+<h3 class="callout-title">Packages for later</h3>
 <div class="callout-content">
 <p>Install the following packages in your <code>r_workshop</code>
 project library:</p>
@@ -645,7 +633,7 @@ project library:</p>
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
@@ -659,7 +647,7 @@ project library:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "/mnt/ufs18/home-237/k0068027/r_workshop/library" 
+<pre class="output" tabindex="0"><code>[1] "/mnt/ufs18/home-237/k0068027/r_workshop/library"
 [2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library"</code></pre>
 </div>
 <p>we see that our <code>r_workshop/library</code> directory is
@@ -686,8 +674,7 @@ first.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="startup-and-shutdown-code" class="callout-inner">
-<h3 class="callout-title">Startup and shutdown code<a class="anchor" aria-label="anchor" href="#startup-and-shutdown-code"></a>
-</h3>
+<h3 class="callout-title">Startup and shutdown code</h3>
 <div class="callout-content">
 <p>The functions <code>.First</code> and <code>.Last</code> (that don’t
 take any arguments) can be defined in the <code>.Rprofile</code> file to
@@ -706,7 +693,7 @@ environment variable to say hello and goodbye to whoever is using the
 <div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
@@ -721,9 +708,8 @@ environment variable to say hello and goodbye to whoever is using the
 </div>
 </div>
 </div>
-</section><section id="best-practices-for-a-portable-project-and-when-and-how-to-break-the-rules"><h2 class="section-heading">Best practices for a portable project (and when and how to break the
-rules)<a class="anchor" aria-label="anchor" href="#best-practices-for-a-portable-project-and-when-and-how-to-break-the-rules"></a>
-</h2>
+</section><section><h2 class="section-heading" id="best-practices-for-a-portable-project-and-when-and-how-to-break-the-rules">Best practices for a portable project (and when and how to break the
+rules)<a class="anchor" aria-label="anchor" href="#best-practices-for-a-portable-project-and-when-and-how-to-break-the-rules"></a></h2>
 <hr class="half-width"><p>It is very likely that you are not the only person working with your
 code: there are other people in your lab or outside that you should be
 ready to share your analyses with. There are a few ways to setup your R
@@ -807,8 +793,7 @@ configurations like usernames, secrets, or API keys.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>The <code>.libPaths()</code> function shows you where R looks for
 and installs packages</li>
@@ -820,9 +805,9 @@ customize your R session</li>
 </ul></div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
@@ -836,7 +821,7 @@ any links that you are not going to use.
           Previous: Accessing RStudio
         </a>
         <a class="chapter-link float-end" href="../instructor/parallelizing-r-code.html" rel="next">
-          Next: Parallelizing your R... 
+          Next: Parallelizing your R...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -847,21 +832,21 @@ any links that you are not going to use.
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
 				<p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit on GitHub</a>
-        
+
 	
-        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a> 
+        | <a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/MSU-ICER/r-for-hpcc/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/MSU-ICER/r-for-hpcc/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:grosscra@msu.edu">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.4" class="external-link">sandpaper (0.16.4)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.7.5" class="external-link">pegboard (0.7.5)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.10" class="external-link">sandpaper (0.16.10)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>,
       and <a href="https://github.com/MSU-ICER/varnish/tree/icer" class="external-link">varnish (0.3.0)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -884,8 +869,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/instructor/managing-r-env-packages.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/instructor/managing-r-env-packages.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2024-03-12",
-  "datePublished": "2024-05-14"
+  "dateModified": "2025-01-03",
+  "datePublished": "2025-01-03"
 }
 
   </script><script>
