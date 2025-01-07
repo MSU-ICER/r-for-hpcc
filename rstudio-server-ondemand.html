@@ -253,7 +253,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Accessing RStudio Server through OnDemand</h1>
-        <p> Last updated on 2025-01-03 |
+        <p> Last updated on 2025-01-07 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/rstudio-server-ondemand.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -304,24 +304,18 @@ Provider, and log in using your MSU NetID and password. Before we get
 into any other OnDemand specifics, we’ll submit an RStudio job to get
 you up and running.</p>
 <p>Go to the Interactive Apps tab and select RStudio Server (beta).</p>
-<figure><img src="fig/select-rstudio-server.png" alt="The OnDemand home screen with the Interactive Apps tab expanded to show RStudio Server" class="figure mx-auto d-block"></figure><div id="rstudio-server-vs-rstudio" class="callout">
+<figure><img src="fig/select-r-studio.png" alt="The OnDemand home screen with the Interactive Apps tab expanded to show RStudio Server" class="figure mx-auto d-block"></figure><div id="rstudio-server-vs-rstudio" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="rstudio-server-vs-rstudio" class="callout-inner">
 <h3 class="callout-title">RStudio Server vs RStudio</h3>
 <div class="callout-content">
-<p>At the time of writing, the RStudio Server is newer and is still
-considered a “beta” application, meaning that it may have some bugs that
-we haven’t yet found. If you have any problems, please let us know by
-using our <a href="https://contact.icer.msu.edu/contact" class="external-link">contact
-page</a>!</p>
-<p>As a backup, you can always use the RStudio OnDemand app (the one
-without the word “Server” in its name). It has been better tested and
-can support different versions of R. On the other hand, its user
-interface is rougher around the edges, and copy/pasting can be a chore.
-For more information, see <a href="rstudio-ondemand.html">these same
-instructions, adapted to RStudio</a>.</p>
+<p>In ICER’s OnDemand interface, we use RStudio Server instead of just
+RStudio. This is a version of RStudio that runs on compute nodes and
+opens in your browser. Though it is possible to run plain RStudio on the
+HPCC, the Server version is as it displays more clearly and is easier to
+copy and paste into.</p>
 <p>For the rest of this page, when we refer to “RStudio”, we really mean
 “RStudio Server”.</p>
 </div>
@@ -330,7 +324,8 @@ instructions, adapted to RStudio</a>.</p>
 <p>On the following screen you will be able to choose the options for
 your RStudio job. For this workshop, you should use the following
 options:</p>
-<ul><li>Number of hours: 3</li>
+<ul><li>R version: 4.3.2 (with additional CRAN packages, RECOMMENDED)</li>
+<li>Number of hours: 3</li>
 <li>Number of cores per task: 8</li>
 <li>Amount of memory: 5GB</li>
 </ul><figure><img src="fig/rstudio-server-ondemand-options.png" alt="The RStudio OnDemand setup screen with text boxes for the four options listed above filled in using the values specified." class="figure mx-auto d-block"></figure><p>If you need to specify any other options (for example, if you want to
@@ -342,7 +337,7 @@ job is ready, you will see a card with all of the information for your
 job. The most important fields for now are the Host which is the node on
 the HPCC where you job is running and the Time Remaining which counts
 down from the requested number of hours.</p>
-<figure><img src="fig/running-rstudio-server-job.png" alt="An OnDemand card with the information for a running RStudio job. The Host is lac-188, and the Time Remaining is 41 minutes." class="figure mx-auto d-block"></figure><p>When you’re ready to access RStudio, you can click the Launch RStudio
+<figure><img src="fig/running-rstudio-server-job.png" alt="An OnDemand card with the information for a running RStudio job. The Host is amr-186, and the Time Remaining is 2 hours and 59 minutes." class="figure mx-auto d-block"></figure><p>When you’re ready to access RStudio, you can click the Launch RStudio
 Server button. If you ever navigate away from this screen, you can
 always return to it by clicking the My Interactive Sessions button in
 the OnDemand navigation bar. On narrower screens, this button shrinks
@@ -370,11 +365,11 @@ starts in your HPCC home directory.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Click the button that looks like a page with a plus sign right below
 the file menu and choose R Script.</p>
-<figure><img src="fig/rstudio-new-rscript.png" alt="The new document button in RStudio expanded to show options like 'R Script' and 'R Markdown'." class="figure mx-auto d-block"></figure><p>Notice that the R console shrinks to make room for the text
+<figure><img src="fig/rstudio-new-rscript.png" alt="The new document button in RStudio expanded to show options like 'R Script' and 'R Markdown'. The 'R Script' button is highlighted." class="figure mx-auto d-block"></figure><p>Notice that the R console shrinks to make room for the text
 editor.</p>
 </div>
 </div>
@@ -389,7 +384,7 @@ this host from a command line. You have two options.</p>
 <p>Handily, RStudio provides a terminal for you to use! Right next to
 the R console, is a Terminal tab. Clicking this tab will start a
 terminal on the same node that RStudio is running on.</p>
-<figure><img src="fig/rstudio-terminal.png" alt="The terminal tab in RStudio showing a terminal connected to the host css-106" class="figure mx-auto d-block"></figure></div>
+<figure><img src="fig/rstudio-terminal.png" alt="The terminal tab in RStudio showing a terminal connected to the host amr-186." class="figure mx-auto d-block"></figure></div>
 <div class="section level3">
 <h3 id="ssh">SSH<a class="anchor" aria-label="anchor" href="#ssh"></a></h3>
 <p>This can be accomplished through any terminal that you can SSH to the
@@ -397,7 +392,7 @@ HPCC on. Since we’re already using OnDemand, we’ll use the built-in
 terminal.</p>
 <p>Returning to the OnDemand window, open the Development Nodes dropdown
 from the navigation bar.</p>
-<figure><img src="fig/ondemand-dev-nodes-dropdown.png" alt="The Development Nodes dropdown from the OnDemand navigation bar showing the development nodes accessible on the HPCC" class="figure mx-auto d-block"></figure><p>Choose any development node, and a new tab will open with a terminal
+<figure><img src="fig/ondemand-dev-nodes-dropdown.png" alt="The Development Nodes dropdown from the OnDemand navigation bar showing the development nodes accessible on the HPCC. The dev-amd20 options is highlighted." class="figure mx-auto d-block"></figure><p>Choose any development node, and a new tab will open with a terminal
 on that node.</p>
 <div id="ssh-outside-of-ondemand" class="callout">
 <div class="callout-square">
@@ -432,7 +427,7 @@ is running on.</p>
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Run the <code>top</code> command via command line on the node your
-RStudio session is running on and verify that indeed RStudio is running
+RStudio session is running on and verify that indeed R is running
 there.</p>
 <p><em>Hint</em>: If your node is busy, you can use
 <code>top -u &lt;netid&gt;</code> (replacing <code>&lt;netid&gt;</code>
@@ -445,12 +440,14 @@ with your username) to see just your running processes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Running <code>top -u k0068027</code> (my username) from the RStudio
-terminal shows the <code>rstudio</code> command in the
-<code>COMMAND</code> column.</p>
-<figure><img src="fig/rstudio-top.png" alt="The top command running through the RStudio terminal. In addition to some auxiliary processes, one row in the top output has 'rstudio' in the COMMAND column." class="figure mx-auto d-block"></figure><p>Depending on your screen width, you may have to use the arrow keys to
+terminal shows the <code>rsession</code> command in the
+<code>COMMAND</code> column representing the R session where we can
+execute code. Scrolling through the entries, <code>rserver</code> (i.e.,
+RStudio Server) also appears.</p>
+<figure><img src="fig/rstudio-top.png" alt="The top command running through the RStudio terminal. In addition to some auxiliary processes, one row in the top output has 'rsession' in the COMMAND column." class="figure mx-auto d-block"></figure><p>Depending on your screen width, you may have to use the arrow keys to
 scroll to the right and see the <code>COMMAND</code> column.</p>
 </div>
 </div>
@@ -536,7 +533,7 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/rstudio-server-ondemand.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/rstudio-server-ondemand.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2025-01-03",
+  "dateModified": "2025-01-07",
   "datePublished": "2025-01-07"
 }
 

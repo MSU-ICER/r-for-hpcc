@@ -255,7 +255,7 @@ rules)</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Managing R package installation and environment</h1>
-        <p> Last updated on 2025-01-03 |
+        <p> Last updated on 2025-01-07 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -312,23 +312,27 @@ console:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "/mnt/ufs18/home-237/k0068027/R/x86_64-pc-linux-gnu-library/4.2"
-[2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library" </code></pre>
+<pre class="output" tabindex="0"><code>[1] "/mnt/ufs18/home-237/k0068027/R/x86_64-pc-linux-gnu-library/4.3"
+[2] "/cvmfs/ubuntu_2204.icer.msu.edu/2023.06/x86_64/generic/software/R-bundle-CRAN/2023.12-foss-2023a"
+[3] "/cvmfs/ubuntu_2204.icer.msu.edu/2023.06/x86_64/amd/zen2/software/R/4.3.2-gfbf-2023a/lib/R/library"</code></pre>
 </div>
-<p>We see two directories. The first is created for you in your home
-directory, and the second (or one like it, starting with
-<code>/cvmfs/pub_software.icer.msu.edu/software</code> or
-<code>/opt/software</code>) points to all of the packages that are
-pre-installed on the HPCC. When you use <code>install.packages()</code>
-in the future, by default, it will install to the first entry in your
+<p>We see three directories. The first is created for you in your home
+directory. The third (or one like it, starting with
+<code>/cvmfs/ubuntu_2204.icer.msu.edu</code> or
+<code>/opt/software-current</code>) points to all of the packages that
+are pre-installed with the base version of R. The second contains a
+large set of additional packages from CRAN, forming a general base that
+most users will be happy with.</p>
+<p>When you use <code>install.packages()</code> in the future, by
+default, it will install to the first entry in your
 <code>.libPaths()</code>.</p>
 <p>One important point to note is that the library in your home
-directory is labeled with <code>4.2</code> for version 4.2(.1) of R, the
+directory is labeled with <code>4.3</code> for version 4.3(.2) of R, the
 default used by RStudio Server. If you ever use different versions of R,
 it is important that the packages you use are consistent with those
-versions. So, for example, if you choose to use R/3.6.2, you should make
+versions. So, for example, if you choose to use R/4.2.2, you should make
 sure that the library in your home directory returned by
-<code>.libPaths()</code> ends in 3.6. Mixing versions will likely cause
+<code>.libPaths()</code> ends in 3.2. Mixing versions will likely cause
 your packages to stop working!</p>
 <div id="whats-the-difference-between-a-library-and-a-package" class="callout discussion">
 <div class="callout-square">
@@ -363,7 +367,7 @@ be offered to create a new user-writable library:</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Warning in install.packages :
-  'lib = "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library"' is not writable
+  'lib = "/cvmfs/ubuntu_2204.icer.msu.edu/2023.06/x86_64/generic/software/R-bundle-CRAN/2023.12-foss-2023a"' is not writable
 Would you like to use a personal library instead? (yes/No/cancel)</code></pre>
 </div>
 <p>Answer <code>yes</code>, and you will be good to go!</p>
@@ -379,9 +383,10 @@ Would you like to use a personal library instead? (yes/No/cancel)</code></pre>
 <code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"cowsay"</span><span class="op">)</span></span></code></pre>
 </div>
 <p>You may then be asked to select a CRAN mirror. This is the location
-where the package is downloaded from. Usually, <code>71</code> is a good
-choice for us because it’s from the University of Michigan (closer means
-faster downloads).</p>
+where the package is downloaded from. Usually, <code>65</code> (or
+something close by depending on what’s available) is a good choice for
+us because it’s from the University of Michigan (closer means faster
+downloads).</p>
 <p>R will download and install the package. We can now use it like we
 normally would! From the R console:</p>
 <div class="codewrapper sourceCode" id="cb5">
@@ -396,22 +401,16 @@ normally would! From the R console:</p>
 </h3>
 <pre class="output" tabindex="0"><code>
  --------------
-Hello world!
+&lt; Hello world! &gt;
  --------------
-    \
       \
-        \
-            |\___/|
-          ==) ^Y^ (==
-            \  ^  /
-             )=*=(
-            /     \
-            |     |
-           /| | | |\
-           \| | |_|/\
-      jgs  //_// ___/
-               \_)
-  </code></pre>
+       \
+
+        ^__^
+        (oo)\ ________
+        (__)\         )\ /\
+             ||------w|
+             ||      ||</code></pre>
 </div>
 <div id="do-your-packages-require-external-dependencies" class="callout">
 <div class="callout-square">
@@ -428,11 +427,17 @@ any dependencies you need and their versions. This information is also
 included under SystemRequirements on a package’s <a href="https://cran.r-project.org/" class="external-link">CRAN</a> page.</li>
 <li>Make sure that software is available before you try to install/use
 the R package. This could involve:
-<ul><li>Loading it through the HPCC module system. To do this in OnDemand,
-click the Advanced Options” checkbox when you start a new RStudio Server
-session. The first option will allow you to enter HPCC modules you’d
-like to load before RStudio starts. Otherwise, you can <a href="r-command-line.html#loading-external-dependencies">load these
-packages and use R through the command line</a>.</li>
+<ul><li>Loading it through the HPCC module system. When using RStudio in
+OnDemand, you have two options:
+<ol style="list-style-type: decimal"><li>Click the “Advanced Options” checkbox when you start a new RStudio
+Server session. The first option will allow you to enter HPCC modules
+you’d like to load before RStudio starts.</li>
+<li>Use the <code>module</code> command in R, preloaded when you start
+RStudio. For example, you can run <code>module("load JAGS")</code> from
+the Console to have access to the <code>JAGS</code> software. Otherwise,
+you can <a href="r-command-line.html#loading-external-dependencies">load
+these packages and use R through the command line</a>.</li>
+</ol></li>
 <li>Installing it yourself in a way that R can find it.</li>
 </ul></li>
 <li>If a package’s setup instructions suggest something like
@@ -471,7 +476,7 @@ one to test this out. Find the button in RStudio that looks like a plus
 sign on top of a cube near the edit menu.</p>
 <p>Start by creating an RStudio Project with button that looks like a
 plus sign on top of a cube near the Edit menu.</p>
-<figure><img src="fig/rstudio-project-button.png" alt="The new RStudio Project button in RStudio" class="figure mx-auto d-block"></figure><p>Select New Directory, then New Project from the options. Under
+<figure><img src="fig/rstudio-project-button.png" alt="The new RStudio Project button in RStudio." class="figure mx-auto d-block"></figure><p>Select New Directory, then New Project from the options. Under
 Directory name, use <code>r_workshop</code>, and make sure that it’s a
 subdirectory of your home directory <code>~</code>. We’ll leave the
 other options alone for now, but note that RStudio will integrate nicely
@@ -497,7 +502,7 @@ of Michigan CRAN mirror install our packages. The R command</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN<span class="op">=</span><span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu">setRepositories</span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">0</span>, addURLs <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN <span class="op">=</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <p>will take care of this for us. To make sure this runs every time we
 start R, we’ll put it in the <code>.Rprofile</code> file.</p>
@@ -507,7 +512,7 @@ start R, we’ll put it in the <code>.Rprofile</code> file.</p>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">local</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN<span class="op">=</span><span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu">setRepositories</span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">0</span>, addURLs <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN <span class="op">=</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre>
 </div>
 <p>The <code>local</code> part ensures that no output from code we write
@@ -535,8 +540,7 @@ the Session menu, and select Restart R. To check our work, run</p>
 </div>
 <p>Now suppose that this project we’re working on uses some very special
 packages that we don’t want in the library in our home directory. The
-right way to do this is with a package manager like <a href="https://rstudio.github.io/packrat/" class="external-link"><code>packrat</code></a> or
-the newer <a href="https://rstudio.github.io/renv/articles/renv.html" class="external-link"><code>renv</code></a>.
+right way to do this is with a package manager like <a href="https://rstudio.github.io/renv/articles/renv.html" class="external-link"><code>renv</code></a>.
 But for example’s sake, we’ll create a quick approximation with the
 <code>R_LIBS_USER</code> environment variable and the
 <code>.Renviron</code> file.</p>
@@ -573,7 +577,8 @@ and check your <code>.libPaths()</code> in the R console:</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>[1] "/mnt/ufs18/home-237/k0068027/r_workshop/library"
-[2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library"</code></pre>
+[2] "/cvmfs/ubuntu_2204.icer.msu.edu/2023.06/x86_64/generic/software/R-bundle-CRAN/2023.12-foss-2023a"
+[3] "/cvmfs/ubuntu_2204.icer.msu.edu/2023.06/x86_64/amd/zen2/software/R/4.3.2-gfbf-2023a/lib/R/library"</code></pre>
 </div>
 <p>Great! We can even check that we’ve isolated ourselves from the
 default home directory library by trying to load
@@ -597,10 +602,9 @@ have to live in the directory you start R from. In fact, R checks for
 them in a set order:</p>
 <ol style="list-style-type: decimal"><li>In the directory where R is started.</li>
 <li>In your home directory.</li>
-<li>In a global directory where R is installed. On the HPCC, for version
-4.0.3, this is the file <code>$R_HOME/etc/Renviron</code> (you can check
-where <code>$R_HOME</code> is with
-<code>Sys.getenv("$R_HOME")</code>).</li>
+<li>In a global directory where R is installed. On the HPCC, this is the
+file <code>$R_HOME/etc/Renviron</code> (you can check where
+<code>$R_HOME</code> is with <code>Sys.getenv("$R_HOME")</code>).</li>
 </ol><p>and uses the values in the first one it finds.</p>
 <p>This means you can set a more global configuration by putting
 environment variables and startup scripts in the <code>.Renviron</code>
@@ -633,7 +637,7 @@ project library:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Double checking our library paths</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -646,7 +650,8 @@ project library:</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>[1] "/mnt/ufs18/home-237/k0068027/r_workshop/library"
-[2] "/cvmfs/pub_software.icer.msu.edu/software/R/4.2.1-foss-2022a/lib64/R/library"</code></pre>
+[2] "/cvmfs/ubuntu_2204.icer.msu.edu/2023.06/x86_64/generic/software/R-bundle-CRAN/2023.12-foss-2023a"
+[3] "/cvmfs/ubuntu_2204.icer.msu.edu/2023.06/x86_64/amd/zen2/software/R/4.3.2-gfbf-2023a/lib/R/library"</code></pre>
 </div>
 <p>we see that our <code>r_workshop/library</code> directory is
 first.</p>
@@ -662,6 +667,14 @@ first.</p>
 </h3>
 <pre class="output" tabindex="0"><code>Installing package into `/mnt/ufs18/home-237/k0068027/r_workshop/library`
 (as `lib` is unspecified)</code></pre>
+</div>
+<p>A quick way to see which packages are installed in which library is
+to run</p>
+<div class="codewrapper sourceCode" id="cb23">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">lapply</span><span class="op">(</span><span class="fu">.libPaths</span><span class="op">(</span><span class="op">)</span>, <span class="va">list.files</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -693,9 +706,12 @@ environment variable to say hello and goodbye to whoever is using the
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb23">
+<p>Note that since we are setting variables that we want to keep in our
+session, the following lines should <em>not</em> be included in the
+<code>local</code> block in the <code>.Rprofile</code> file.</p>
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -767,14 +783,14 @@ time! This is a great use for the <code>.Renviron</code> file. Instead
 of directly typing <code>/mnt/research/my_lab/big_experiment/</code>
 into your code, set this as an environment variable in your
 <code>.Renviron</code>:</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="va">DATA_DIR</span><span class="op">=</span><span class="st">"/mnt/research/my_lab/big_experiment"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="va">DATA_DIR</span><span class="op">=</span><span class="st">"/mnt/research/my_lab/big_experiment"</span></span></code></pre>
 </div>
 <p>When you need to access this directory from R, use
 <code>Sys.getenv()</code>:</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -867,7 +883,7 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/managing-r-env-packages.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/managing-r-env-packages.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2025-01-03",
+  "dateModified": "2025-01-07",
   "datePublished": "2025-01-07"
 }
 
