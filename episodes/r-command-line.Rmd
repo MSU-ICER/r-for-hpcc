@@ -21,9 +21,16 @@ exercises: 2
 
 ## Accessing the HPCC through the terminal
 
-Up to now, we've been using RStudio through OnDemand to write and run R code on the HPCC. Now, we'll do the same things we've been doing, but solely through the command line. This will allow us to eventually [submit SLURM batch scripts](r-slurm-jobs.Rmd) to run our code on compute nodes.
+Up to now, we've been using RStudio through OnDemand to write and run R code on
+the HPCC. Now, we'll do the same things we've been doing, but solely through the
+command line. This will allow us to eventually [submit SLURM batch
+scripts](r-slurm-jobs.Rmd) to run our code on compute nodes.
 
-For now, we'll start by running everything on a development node. Using our [previous instructions to SSH into a development node](rstudio-ondemand.Rmd#ssh), we can get a command line running on a development node. As a reminder, from a personal terminal, this looks something like
+For now, we'll start by running everything on a development node. Using our
+[previous instructions to SSH into a development
+node](rstudio-ondemand.Rmd#ssh), we can get a command line running on a
+development node. As a reminder, from a personal terminal, this looks something
+like
 
 ```bash
 ssh <netid>@hpcc.msu.edu
@@ -34,111 +41,120 @@ For best results, choose a development node with low usage.
 
 ## Loading R
 
-The command to run an R console from the command line is just `R`! But if we try it out right away, we get an error
+The command to run an R console from the command line is just `R`! 
 
 ```bash
 R
 ```
 
 ```output
--bash: R: command not found
+R version 4.3.2 (2023-10-31) -- "Eye Holes"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+  
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+>
 ```
 
-The HPCC packages up all of its available software into **modules** so that not every piece of software is available to everyone all of the time. To get access to R, we have to load its module.
+This started up R version 4.3.2 with no problems, but there's more going on
+behind the scenes. In particular, by default, this version will not have access
+to many additional packages pre-installed on the HPCC (run `.libPaths()` or
+`lapply(.libPaths(), list.files)` to check).
 
-Let's first start by finding the version we're interested in. We'll use the `module spider` command which searches through all the modules for the ones we want:
+The HPCC packages up all of its available software into **modules** so that not
+every piece of software is available to everyone all of the time. To get access
+to R, we have to load its module.
+
+Let's first start by finding the version we're interested in. We'll use the
+`module spider` command which searches through all the modules for the ones we
+want:
 
 ```bash
 module spider R
 ```
 
 ```output
-------------------------------------------------------------------------------
-  R:
-------------------------------------------------------------------------------
-    Description:
-      R is a free software environment for statistical computing and graphics.
-
-     Versions:
-        R/3.3.1
-        ...
-        R/4.0.2
-        R/4.0.3
-        R/4.1.0
-        R/4.1.2
-        R/4.2.2
-     Other possible modules matches:
-        ADMIXTURE  AMDuProf  APR  APR-util  Abaqus_parallel  AdapterRemoval  
-        Advisor  Amber  AmrPlusPlus  Archive-Zip  Armadillo  Arrow  ...
-
-------------------------------------------------------------------------------
-  To find other possible module matches execute:
-
-      $ module -r spider '.*R.*'
-```
-
-We've abbreviated the output, but we can see that there are lots of different versions of R available! We'll try loading 4.2.1 since that version matches the one used in the RStudio Server OnDemand app.
-
-If you're familiar with the module system, you might try to load the module right away with `module load`:
-
-```bash
-module load R/4.2.1
-```
-
-```output
-Lmod has detected the following error:  These module(s) or extension(s) exist
-but cannot be loaded as requested: "R/4.2.1"
-   Try: "module spider R/4.2.1" to see how to load the module(s).
-```
-
-But we get an error! Let's try the suggested fix to see what's going on:
-
-
-```bash
-module spider R/4.2.1
-```
-
-```output
 ----------------------------------------------------------------------------
-  R: R/4.2.1
+  R:
 ----------------------------------------------------------------------------
     Description:
       R is a free software environment for statistical computing and
       graphics.
 
-
-    You will need to load all module(s) on any one of the lines below before the
-    "R/4.2.1" module is available to load.
-
-      GCC/11.3.0  OpenMPI/4.1.4
- 
-    Help:
-      Description
-      ===========
-      R is a free software environment for statistical computing
-       and graphics.
-    ...
-
+     Versions:
+        R/3.6.3-foss-2022b
+        R/4.2.2-foss-2022b
+        R/4.3.2-gfbf-2023a-ICER
+        R/4.3.2-gfbf-2023a
+        R/4.3.3-gfbf-2023b
+        R/4.4.1-gfbf-2023b
+     Other possible modules matches:
+        ADMIXTURE  AOFlagger  APR  APR-util  Amber  Armadillo  Arrow  ...
+...
 ```
 
-Ah-ha! We see that we need to load some other modules first! These are dependencies that R needs to run. Without them, it won't work!
+We've abbreviated the output, but we can see that there are lots of different versions of R available! But note that none of these mention anything about extra packages like the versions in OnDemand do.
 
-Before we do that, it's good practice to purge any other modules that might be loaded that we won't need. This will ensure a clean environment and will reduce the possibility of any conflicts.
+These are the **base** versions of R. To get access to more R packages that build on these base versions, you need to look for *bundles*:
 
-```bash
+``` bash
+module spider R-bundle
+```
+
+``` output
+----------------------------------------------------------------------------
+  R-bundle-Bioconductor:
+----------------------------------------------------------------------------
+    Description:
+      Bioconductor provides tools for the analysis and coprehension of
+      high-throughput genomic data.
+
+     Versions:
+        R-bundle-Bioconductor/3.16-foss-2022b-R-4.2.2
+        R-bundle-Bioconductor/3.18-foss-2023a-R-4.3.2
+
+----------------------------------------------------------------------------
+
+...
+
+----------------------------------------------------------------------------
+  R-bundle-CRAN:
+----------------------------------------------------------------------------
+    Description:
+      Bundle of R packages from CRAN
+
+     Versions:
+        R-bundle-CRAN/2023.12-foss-2023a
+        R-bundle-CRAN/2024.06-foss-2023b
+
+----------------------------------------------------------------------------
+...
+```
+
+Note that the bundles are versioned differently (by year instead of R version). The best way to see which version of R is included version of R is to load one and run R.
+
+``` bash
 module purge
-module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
-```
-
-No error! Let's check that we can access R:
-
-```bash
+module load R-bundle-CRAN/2023.12-foss-2023a
 R
 ```
 
-```output
-R version 4.2.1 (2022-06-23) -- "Funny-Looking Kid"
-Copyright (C) 2022 The R Foundation for Statistical Computing
+``` output
+R version 4.3.2 (2023-10-31) -- "Eye Holes"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -148,6 +164,8 @@ Type 'license()' or 'licence()' for distribution details.
   Natural language support but running in an English locale
 
 R is a collaborative project with many contributors.
+
+
 Type 'contributors()' for more information and
 'citation()' on how to cite R or R packages in publications.
 
@@ -155,11 +173,12 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> 
-
+>
 ```
 
-Great! We now have an R console where we can run short lines of code, just like from RStudio. As the output from `R` shows, type `q()` to quit and return back to the command line. 
+Great! This matches the exact R module that RStudio was using in OnDemand.
+
+We now have an R console where we can run short lines of code, just like from RStudio. As the output from `R` shows, type `q()` to quit and return back to the command line. 
 
 If you're asked to save the workspace image, it's best practice to say no since this can lead to long load times and less reproducible sessions in the future.
 In fact, you can use the `--vanilla` option when starting R to ensure it ignores things like your `.Renviron` and `.Rprofile` changes.
@@ -178,10 +197,10 @@ After loading R and its dependencies with
 
 ```bash
 module purge
-module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
+module load R-bundle-CRAN/2023.12-foss-2023a
 ```
 
-you can try loading a compatible GDAL and UDUNITS without specifying a version:
+you can try loading a compatible JAGS module without specifying a version:
 
 ```bash
 module load JAGS
@@ -194,13 +213,11 @@ module list
 ```
 ```output
 Currently Loaded Modules:
-  1) GCCcore/11.3.0      34) zstd/1.5.2           67) ICU/71.1
-  2) zlib/1.2.12         35) libdrm/2.4.110       68) Szip/2.1.1
-  3) binutils/2.38       36) libglvnd/1.4.0       69) HDF5/1.12.2
- ...
- 31) X11/20220504        64) libopus/1.3.1        97) PROJ/9.0.0
- 32) gzip/1.12           65) LAME/3.100           98) JAGS/4.3.1
- 33) lz4/1.9.3           66) libsndfile/1.1.0
+  1) GCCcore/12.3.0
+  2) zlib/1.2.13-GCCcore-12.3.0
+  ...
+127) R-bundle-CRAN/2023.12-foss-2023a
+128) JAGS/4.3.2-foss-2023a
 ```
 
 If this version will work, then great! 
@@ -222,7 +239,7 @@ Rscript --vanilla -e 'date()'
 ```
 
 ```output
-[1] "Wed Jun 14 15:20:58 2023"
+[1] "Tue Jan  7 17:29:05 2025"
 ```
 
 We get the same output as if we had run `date()` in an R console or in a script! Note that we have to wrap the expression we want to run in single quotes.
@@ -403,7 +420,7 @@ Once you run the script and save the PDFs, the next challenge is to view them be
 You could
 
  - download the PDF to your computer from the terminal using OnDemand file browser (or the MobaXterm client's file browser)
- - open with the OneDemand Rstudio. 
+ - open with the OnDemand RStudio. 
  
  
 
@@ -442,7 +459,9 @@ dev.off()
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `module spider R/<version>` to learn how to load a version of R on the HPCC
+- Use `module spider R` to see the available versions of R on the HPCC
+- Use `module spider R-bundle` to see the available bundles (including extra R packages) on the HPCC
+- Use `module load ...` to get access to the desired version of R (or a bundle)
 - Run `R` from the command line to start an interactive R console
 - Use the `--vanilla` option to ignore extra configuration files
 - Run `Rscript` to run an R script
