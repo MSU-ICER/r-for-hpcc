@@ -28,11 +28,11 @@ However, if we want to have more control, we'll have to understand how to write 
 
 The basic structure of a SLURM script can be split into three parts:
 
-- The `#!/bin/bash` line
+- The `#!/bin/bash --login` line
 - Resources specifications
 - Code you want to run (as if you're inputting it on the command line)
 
-The `#!/bin/bash` line always needs to be there.
+The `#!/bin/bash --login` line always needs to be there.
 It just tells the system to run your code with `bash`, which is what you're using on the command line.
 
 The second section is where we specify resources.
@@ -47,7 +47,7 @@ The options let you specify things like
 - The time you need to run your code, e.g., `#SBATCH --time=01:05:30` for 1 hour, 5 minutes, and 30 seconds
 - The number of cores you want to run your code on, e.g., `#SBATCH --cpus-per-task=8` for 8 cores
 - The number of nodes you need to run your code on, e.g., `#SBATCH --nodes=2` for 2 nodes
-- The amount of memory your code will need, e.g., `#SBATCH --mem=10GB` for 10GB or ``--mem-per-cpu=750MB` for 750MB per core you ask for
+- The amount of memory your code will need, e.g., `#SBATCH --mem=10GB` for 10GB or `--mem-per-cpu=750MB` for 750MB per core you ask for
 - The SLURM account you want to use (if you have a buy-in node), e.g., `#SBATCH --account=my_buyin` to activate the buy-in nodes associated to the `my_buyin` account
 
 Finally, you will add your code below these `#SBATCH`.
@@ -56,7 +56,7 @@ This code is exactly what you would enter on the command line to run your R scri
 ## A SLURM script template
 
 ``` bash
-#!/bin/bash
+#!/bin/bash --login
 
 #SBATCH --time=00:05:00  # 5 minutes
 #SBATCH --cpus-per-task=1  # Use 1 core
@@ -65,7 +65,7 @@ This code is exactly what you would enter on the command line to run your R scri
 
 # Load the R module
 module purge
-module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
+module load R-bundle-CRAN/2023.12-foss-2023a
 
 # Get to our project directory
 cd ~/r_workshop
@@ -104,34 +104,34 @@ cat slurm-17815750.out
 ``` output
    user  system elapsed 
   0.027   0.010   5.042 
-JobId=17815750 JobName=single_core.sh
-   UserId=grosscra(919141) GroupId=helpdesk(2103) MCS_label=N/A
-   Priority=57661 Nice=0 Account=general QOS=grosscra
+JobId=48169646 JobName=single_core.R
+   UserId=k0068027(2238) GroupId=math(2011) MCS_label=N/A
+   Priority=59669 Nice=0 Account=general QOS=k0068027
    JobState=RUNNING Reason=None Dependency=(null)
    Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
-   RunTime=00:00:13 TimeLimit=00:05:00 TimeMin=N/A
-   SubmitTime=2023-06-28T18:18:09 EligibleTime=2023-06-28T18:18:09
-   AccrueTime=2023-06-28T18:18:09
-   StartTime=2023-06-28T18:19:42 EndTime=2023-06-28T18:24:42 Deadline=N/A
-   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2023-06-28T18:19:42 Scheduler=Backfill
-   Partition=general-long-bigmem AllocNode:Sid=dev-amd20:13341
+   RunTime=00:00:17 TimeLimit=00:05:00 TimeMin=N/A
+   SubmitTime=2025-01-07T17:33:34 EligibleTime=2025-01-07T17:33:34
+   AccrueTime=2025-01-07T17:33:34
+   StartTime=2025-01-07T17:33:50 EndTime=2025-01-07T17:38:50 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2025-01-07T17:33:50 Scheduler=Main
+   Partition=general-short AllocNode:Sid=dev-amd20:1882606
    ReqNodeList=(null) ExcNodeList=(null)
-   NodeList=vim-001
-   BatchHost=vim-001
+   NodeList=lac-335
+   BatchHost=lac-335
    NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
    ReqTRES=cpu=1,mem=500M,node=1,billing=76
    AllocTRES=cpu=1,mem=500M,node=1,billing=76
    Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
    MinCPUsNode=1 MinMemoryCPU=500M MinTmpDiskNode=0
-   Features=[intel14|intel16|intel18|(amr|acm)|nvf|nal|nif] DelayBoot=00:00:00
+   Features=[intel16|intel18|(amr|acm)|nvf|nal|nif|amd24] DelayBoot=00:00:00
    OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
-   Command=/mnt/ufs18/home-237/k0068027/r_workshop/slurm/single_core.sh
+   Command=/mnt/ufs18/home-237/k0068027/r_workshop/single_core.R
    WorkDir=/mnt/ufs18/home-237/k0068027/r_workshop
-   Comment=stdout=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out 
-   StdErr=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out
+   Comment=stdout=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-48169646.out 
+   StdErr=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-48169646.out
    StdIn=/dev/null
-   StdOut=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-17815750.out
-   Power=
+   StdOut=/mnt/ufs18/home-237/k0068027/r_workshop/slurm-48169646.out
+   TresPerTask=cpu=1
 ```
 
 Congratulations!
@@ -150,7 +150,7 @@ Submit the job and compare the time it took to run with the single core job.
 `slurm/multi_core.sh`:
 
 ``` bash
-#!/bin/bash
+#!/bin/bash --login
 
 #SBATCH --time=00:05:00  # 5 minutes
 #SBATCH --cpus-per-task=5  # Use 5 cores
@@ -159,7 +159,7 @@ Submit the job and compare the time it took to run with the single core job.
 
 # Load the R module
 module purge
-module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
+module load R-bundle-CRAN/2023.12-foss-2023a
 
 # Get to our project directory
 cd ~/r_workshop
@@ -208,7 +208,7 @@ For the steps below, you will need the [list of SLURM job specifications](https:
 `multi_core.sh`:
 
 ``` bash
-#!/bin/bash
+#!/bin/bash --login
 
 #SBATCH --time=00:05:00  # 5 minutes
 #SBATCH --cpus-per-task=5  # Use 5 cores
@@ -220,7 +220,7 @@ For the steps below, you will need the [list of SLURM job specifications](https:
 
 # Load the R module
 module purge
-module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
+module load R-bundle-CRAN/2023.12-foss-2023a
 
 # Get to our project directory
 cd ~/r_workshop
@@ -265,7 +265,7 @@ Practically, this means that you need to preface the `Rscript` command with `sru
 Here is an example script:
 
 ``` bash
-#!/bin/bash
+#!/bin/bash --login
 
 #SBATCH --time=00:10:00  # 10 minutes
 #SBATCH --tasks=6  # MPI will start 6 versions of the program
@@ -275,7 +275,7 @@ Here is an example script:
 
 # Load the R module
 module purge
-module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
+module load R-bundle-CRAN/2023.12-foss-2023a
 
 # Get to our project directory
 cd ~/r_workshop

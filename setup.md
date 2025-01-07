@@ -8,7 +8,7 @@ To participate in this workshop, we assume:
 
   - You have an account through ICER to access the HPCC.
   - You have some experience using R.
-  - You have some experience using the Linux, the HPCC, and SLURM (e.g., you have taken ICER's Introduction to the HPCC workshop)
+  - You have some experience using the Linux, the HPCC, and SLURM (e.g., you have taken ICER's Introduction to the HPCC workshop).
 
 ## Software Setup
 
