@@ -158,6 +158,22 @@ ICER](https://contact.icer.msu.edu) and we will do our best to help you out.
 
 ::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::: callout
+
+## A note about node type
+
+The HPCC consists of [many different node types](https://docs.icer.msu.edu/Cluster_Resources/).
+When we started our OnDemand job, we chose to use only inte1l6 nodes. 
+
+When R installs a package, it customizes it to the specific node type it was installed on. So if you use the same library on different node types, the packages are not guaranteed to work properly, often resulting in an "Illegal instruction error" or RStudio crashing.
+
+To get around this, we recommend using the same node type when you use R, either through OnDemand, in job scripts, or [on development nodes](r-command-line.Rmd#accessing-the-hpcc-through-the-terminal).
+
+We've already seen how to do this in OnDemand (using the dropdown in the Advanced Options section). You can do this in job scripts by adding the line `#SBATCH --constraint=<nodetype>` (which we will see [in a later episode](r-slurm-jobs.Rmd#a-slurm-script-template)).
+
+Alternatively, you can use the tools discussed in this section to manually manage different libraries for different node types, though it can be tricky to manage properly.
+
+::::::::::::::::::::::::::::::::::::::::::
 
 ## Managing your projects
 

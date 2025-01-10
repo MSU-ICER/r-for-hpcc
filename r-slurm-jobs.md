@@ -48,6 +48,7 @@ The options let you specify things like
 - The number of cores you want to run your code on, e.g., `#SBATCH --cpus-per-task=8` for 8 cores
 - The number of nodes you need to run your code on, e.g., `#SBATCH --nodes=2` for 2 nodes
 - The amount of memory your code will need, e.g., `#SBATCH --mem=10GB` for 10GB or `--mem-per-cpu=750MB` for 750MB per core you ask for
+- The node type, e.g., `#SBATCH --constraint=intel16` to run your code only on intel16 nodes
 - The SLURM account you want to use (if you have a buy-in node), e.g., `#SBATCH --account=my_buyin` to activate the buy-in nodes associated to the `my_buyin` account
 
 Finally, you will add your code below these `#SBATCH`.
@@ -62,6 +63,7 @@ This code is exactly what you would enter on the command line to run your R scri
 #SBATCH --cpus-per-task=1  # Use 1 core
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
+#SBATCH --constraint=intel16  # Use only intel16 nodes
 
 # Load the R module
 module purge
@@ -156,6 +158,7 @@ Submit the job and compare the time it took to run with the single core job.
 #SBATCH --cpus-per-task=5  # Use 5 cores
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
+#SBATCH --constraint=intel16  # Use only intel16 nodes
 
 # Load the R module
 module purge
@@ -214,6 +217,7 @@ For the steps below, you will need the [list of SLURM job specifications](https:
 #SBATCH --cpus-per-task=5  # Use 5 cores
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
+#SBATCH --constraint=intel16  # Use only intel16 nodes
 #SBATCH --job-name=multicore
 #SBATCH --output=~/r_workshop/results/%x-%j.out
 #SBATCH --error=~/r_workshop/results/%x-%j.err
@@ -272,6 +276,7 @@ Here is an example script:
 #SBATCH --cpus-per-task=8  # Use 8 cores per task (48 in total)
 #SBATCH --mem-per-cpu=1GB  # Use 1GB of memory per core requested
 #SBATCH --nodes=2  # Distribute the tasks across 2 nodes
+#SBATCH --constraint=intel16  # Use only intel16 nodes
 
 # Load the R module
 module purge
