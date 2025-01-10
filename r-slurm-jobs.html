@@ -253,7 +253,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Submitting R code to SLURM</h1>
-        <p> Last updated on 2025-01-07 |
+        <p> Last updated on 2025-01-10 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-slurm-jobs.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -324,6 +324,8 @@ seconds</li>
 <li>The amount of memory your code will need, e.g.,
 <code>#SBATCH --mem=10GB</code> for 10GB or
 <code>--mem-per-cpu=750MB</code> for 750MB per core you ask for</li>
+<li>The node type, e.g., <code>#SBATCH --constraint=intel16</code> to
+run your code only on intel16 nodes</li>
 <li>The SLURM account you want to use (if you have a buy-in node), e.g.,
 <code>#SBATCH --account=my_buyin</code> to activate the buy-in nodes
 associated to the <code>my_buyin</code> account</li>
@@ -340,19 +342,20 @@ your R scripts as we showed in the <a href="r-command-line.html">previous epsiod
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1  # Use 1 core</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co"># Load the R module</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="ex">module</span> load R-bundle-CRAN/2023.12-foss-2023a</span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co"># Run the script</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="ex">Rscript</span> src/test_sqrt.R</span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co"># Bonus: write information about our job in the output file</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="ex">scontrol</span> show job <span class="va">$SLURM_JOB_ID</span></span></code></pre>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co"># Load the R module</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="ex">module</span> load R-bundle-CRAN/2023.12-foss-2023a</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co"># Run the script</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="ex">Rscript</span> src/test_sqrt.R</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co"># Bonus: write information about our job in the output file</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="ex">scontrol</span> show job <span class="va">$SLURM_JOB_ID</span></span></code></pre>
 </div>
 <p>A template like this will work for you 90% of the time, where all you
 need to do is set your resources correctly, load the right version of R,
@@ -438,7 +441,7 @@ compare the time it took to run with the single core job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p><code>slurm/multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb7">
@@ -450,19 +453,20 @@ compare the time it took to run with the single core job.</p>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=5  # Use 5 cores</span></span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># Load the R module</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="ex">module</span> load R-bundle-CRAN/2023.12-foss-2023a</span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co"># Run the script</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="ex">Rscript</span> src/test_sqrt_multicore.R</span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co"># Bonus: write information about our job in the output file</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="ex">scontrol</span> show job <span class="va">$SLURM_JOB_ID</span></span></code></pre>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co"># Load the R module</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="ex">module</span> load R-bundle-CRAN/2023.12-foss-2023a</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co"># Run the script</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="ex">Rscript</span> src/test_sqrt_multicore.R</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co"># Bonus: write information about our job in the output file</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="ex">scontrol</span> show job <span class="va">$SLURM_JOB_ID</span></span></code></pre>
 </div>
 <p><code>src/test_sqrt_multicore.R</code>:</p>
 <div class="codewrapper sourceCode" id="cb8">
@@ -517,7 +521,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p><code>multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -529,19 +533,20 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=5  # Use 5 cores</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --job-name=multicore</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#SBATCH --output=~/r_workshop/results/%x-%j.out</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#SBATCH --error=~/r_workshop/results/%x-%j.err</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co"># Load the R module</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="ex">module</span> load R-bundle-CRAN/2023.12-foss-2023a</span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co"># Run the script</span></span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="ex">Rscript</span> src/test_sqrt_multicore.R</span></code></pre>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#SBATCH --job-name=multicore</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#SBATCH --output=~/r_workshop/results/%x-%j.out</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#SBATCH --error=~/r_workshop/results/%x-%j.err</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co"># Load the R module</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="ex">module</span> load R-bundle-CRAN/2023.12-foss-2023a</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="co"># Run the script</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="ex">Rscript</span> src/test_sqrt_multicore.R</span></code></pre>
 </div>
 </div>
 </div>
@@ -600,19 +605,20 @@ knows how many CPUs it can use per task.</p>
 <span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=8  # Use 8 cores per task (48 in total)</span></span>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=1GB  # Use 1GB of memory per core requested</span></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#SBATCH --nodes=2  # Distribute the tasks across 2 nodes</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># Load the R module</span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="ex">module</span> load R-bundle-CRAN/2023.12-foss-2023a</span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co"># Run the script</span></span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span><span class="va">$SLURM_CPUS_PER_TASK</span> Rscript src/some_MPI_script.R</span>
-<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a></span>
-<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="co"># Bonus: write information about our job in the output file</span></span>
-<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="ex">scontrol</span> show job <span class="va">$SLURM_JOB_ID</span></span></code></pre>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># Load the R module</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="ex">module</span> load R-bundle-CRAN/2023.12-foss-2023a</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co"># Get to our project directory</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="bu">cd</span> ~/r_workshop</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co"># Run the script</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span><span class="va">$SLURM_CPUS_PER_TASK</span> Rscript src/some_MPI_script.R</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co"># Bonus: write information about our job in the output file</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="ex">scontrol</span> show job <span class="va">$SLURM_JOB_ID</span></span></code></pre>
 </div>
 <p>Notice that we added an <code>#SBATCH</code> line for
 <code>tasks</code> and used the <code>$SLURM_CPUS_PER_TASK</code>
@@ -701,8 +707,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/r-slurm-jobs.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/r-slurm-jobs.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2025-01-07",
-  "datePublished": "2025-01-07"
+  "dateModified": "2025-01-10",
+  "datePublished": "2025-01-10"
 }
 
   </script><script>

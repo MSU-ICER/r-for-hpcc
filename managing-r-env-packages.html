@@ -255,7 +255,7 @@ rules)</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Managing R package installation and environment</h1>
-        <p> Last updated on 2025-01-07 |
+        <p> Last updated on 2025-01-10 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -452,6 +452,34 @@ consultants at ICER</a> and we will do our best to help you out.</li>
 </ol></div>
 </div>
 </div>
+<div id="a-note-about-node-type" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="a-note-about-node-type" class="callout-inner">
+<h3 class="callout-title">A note about node type</h3>
+<div class="callout-content">
+<p>The HPCC consists of <a href="https://docs.icer.msu.edu/Cluster_Resources/" class="external-link">many different node
+types</a>. When we started our OnDemand job, we chose to use only
+inte1l6 nodes.</p>
+<p>When R installs a package, it customizes it to the specific node type
+it was installed on. So if you use the same library on different node
+types, the packages are not guaranteed to work properly, often resulting
+in an “Illegal instruction error” or RStudio crashing.</p>
+<p>To get around this, we recommend using the same node type when you
+use R, either through OnDemand, in job scripts, or <a href="r-command-line.html#accessing-the-hpcc-through-the-terminal">on
+development nodes</a>.</p>
+<p>We’ve already seen how to do this in OnDemand (using the dropdown in
+the Advanced Options section). You can do this in job scripts by adding
+the line <code>#SBATCH --constraint=&lt;nodetype&gt;</code> (which we
+will see <a href="r-slurm-jobs.html#a-slurm-script-template">in a later
+episode</a>).</p>
+<p>Alternatively, you can use the tools discussed in this section to
+manually manage different libraries for different node types, though it
+can be tricky to manage properly.</p>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="managing-your-projects">Managing your projects<a class="anchor" aria-label="anchor" href="#managing-your-projects"></a></h2>
 <hr class="half-width"><p>Now that we know how to install and use external packages, let’s talk
 about managing your code. When you use R, it helps to organize your code
@@ -637,7 +665,7 @@ project library:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Double checking our library paths</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -706,7 +734,7 @@ environment variable to say hello and goodbye to whoever is using the
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Note that since we are setting variables that we want to keep in our
 session, the following lines should <em>not</em> be included in the
@@ -883,8 +911,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/managing-r-env-packages.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/managing-r-env-packages.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2025-01-07",
-  "datePublished": "2025-01-07"
+  "dateModified": "2025-01-10",
+  "datePublished": "2025-01-10"
 }
 
   </script><script>
