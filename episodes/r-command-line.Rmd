@@ -37,7 +37,7 @@ ssh <netid>@hpcc.msu.edu
 ssh <dev-node>
 ```
 
-For best results, choose a development node with low usage.
+Make sure to use `dev-intel16` since [it matches the node type we used in OnDemand](managing-r-env-packages.Rmd#a-note-about-node-type).
 
 ## Loading R
 

@@ -47,8 +47,9 @@ Go to the Interactive Apps tab and select RStudio Server (beta).
 
 In ICER's OnDemand interface, we use RStudio Server instead of just RStudio.
 This is a version of RStudio that runs on compute nodes and opens in your
-browser. Though it is possible to run plain RStudio on the HPCC, the Server
-version is as it displays more clearly and is easier to copy and paste into.
+browser. Though it is possible to run plain RStudio on the HPCC, we use the
+Server version is as it displays more clearly and is easier to copy and paste
+into.
 
 For the rest of this page, when we refer to "RStudio", we really mean "RStudio
 Server".
@@ -65,9 +66,14 @@ job. For this workshop, you should use the following options:
 
 ![](fig/rstudio-server-ondemand-options.png){alt='The RStudio OnDemand setup screen with text boxes for the four options listed above filled in using the values specified.'}
 
+Additionally, click the Advanced Options checkbox and under Node type,
+select "intel16" (we'll explain why later).
+
+![](fig/rstudio-node-selection.png){alt='The RStudio OnDemand setup screen with the Advanced Options box checked, and intel16 selected in the Node type dropdown.'}
+
 If you need to specify any other options (for example, if you want to run your
-session on a buy-in node and specify your SLURM account), you can click the
-Advanced Options checkbox and enter additional information.
+session on a buy-in node and specify your SLURM account), you enter additional
+information in the Advanced Options section.
 
 Select the Launch button and wait for your job to start. When your job is ready,
 you will see a card with all of the information for your job. The most important
@@ -75,7 +81,7 @@ fields for now are the Host which is the node on the HPCC where you job is
 running and the Time Remaining which counts down from the requested number of
 hours.
 
-![](fig/running-rstudio-server-job.png){alt="An OnDemand card with the information for a running RStudio job. The Host is amr-186, and the Time Remaining is 2 hours and 59 minutes."}
+![](fig/running-rstudio-server-job.png){alt="An OnDemand card with the information for a running RStudio job. The Host is lac-335, and the Time Remaining is 2 hours and 59 minutes."}
 
 When you're ready to access RStudio, you can click the Launch RStudio Server
 button. If you ever navigate away from this screen, you can always return to it
@@ -125,7 +131,7 @@ Handily, RStudio provides a terminal for you to use! Right next to the R
 console, is a Terminal tab. Clicking this tab will start a terminal on the same
 node that RStudio is running on.
 
-![](fig/rstudio-terminal.png){alt="The terminal tab in RStudio showing a terminal connected to the host amr-186."}
+![](fig/rstudio-terminal.png){alt="The terminal tab in RStudio showing a terminal connected to the host lac-335."}
 
 
 ### SSH
