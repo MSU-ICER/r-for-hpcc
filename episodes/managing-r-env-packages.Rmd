@@ -163,7 +163,7 @@ ICER](https://contact.icer.msu.edu) and we will do our best to help you out.
 ## A note about node type
 
 The HPCC consists of [many different node types](https://docs.icer.msu.edu/Cluster_Resources/).
-When we started our OnDemand job, we chose to use only inte1l6 nodes. 
+When we started our OnDemand job, we chose to use only intel16 nodes. 
 
 When R installs a package, it customizes it to the specific node type it was installed on. So if you use the same library on different node types, the packages are not guaranteed to work properly, often resulting in an "Illegal instruction error" or RStudio crashing.
 
@@ -224,10 +224,12 @@ What if we wanted to make some changes to the way that R operates? There are two
 files that we can create to help us do that: `.Rprofile` and `.Renviron`.
 
 First, let's suppose that we want to make sure we use the University of Michigan
-CRAN mirror install our packages. The R command 
+CRAN mirror install our packages. The R commands
 
 ```r
-utils::setRepositories(ind = 0, addURLs = c(CRAN = "https://repo.miserver.it.umich.edu/cran/"))
+r <- getOption("repos")
+r["CRAN"] <- "https://repo.miserver.it.umich.edu/cran/"
+options(repos = r)
 ```
 
 will take care of this for us. To make sure this runs every time we start R,
@@ -237,7 +239,9 @@ Use RStudio to open a new Text File and type
 
 ```r
 local({
-  utils::setRepositories(ind = 0, addURLs = c(CRAN = "https://repo.miserver.it.umich.edu/cran/"))
+  r <- getOption("repos")
+  r["CRAN"] <- "https://repo.miserver.it.umich.edu/cran/"
+  options(repos = r)
 })
 ```
 
