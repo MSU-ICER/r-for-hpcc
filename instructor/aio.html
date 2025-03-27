@@ -409,7 +409,7 @@ starts in your HPCC home directory.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Click the button that looks like a page with a plus sign right below
 the file menu and choose R Script.</p>
@@ -489,7 +489,7 @@ with your username) to see just your running processes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Running <code>top -u k0068027</code> (my username) from the RStudio
 terminal shows the <code>rsession</code> command in the
@@ -526,7 +526,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-managing-r-env-packages"><p>Content from <a href="managing-r-env-packages.html">Managing R package installation and environment</a></p>
 <hr>
-<p> Last updated on 2025-03-18 |
+<p> Last updated on 2025-03-27 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
@@ -741,7 +741,7 @@ consultants at ICER</a> and we will do our best to help you out.</li>
 <div class="callout-content">
 <p>The HPCC consists of <a href="https://docs.icer.msu.edu/Cluster_Resources/" class="external-link">many different node
 types</a>. When we started our OnDemand job, we chose to use only
-inte1l6 nodes.</p>
+intel16 nodes.</p>
 <p>When R installs a package, it customizes it to the specific node type
 it was installed on. So if you use the same library on different node
 types, the packages are not guaranteed to work properly, often resulting
@@ -811,12 +811,14 @@ this project or any other.</p>
 There are two files that we can create to help us do that:
 <code>.Rprofile</code> and <code>.Renviron</code>.</p>
 <p>First, let’s suppose that we want to make sure we use the University
-of Michigan CRAN mirror install our packages. The R command</p>
+of Michigan CRAN mirror install our packages. The R commands</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu">setRepositories</span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">0</span>, addURLs <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN <span class="op">=</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">getOption</span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span></span>
+<span><span class="va">r</span><span class="op">[</span><span class="st">"CRAN"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span></span>
+<span><span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="va">r</span><span class="op">)</span></span></code></pre>
 </div>
 <p>will take care of this for us. To make sure this runs every time we
 start R, we’ll put it in the <code>.Rprofile</code> file.</p>
@@ -826,7 +828,9 @@ start R, we’ll put it in the <code>.Rprofile</code> file.</p>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">local</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu">setRepositories</span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">0</span>, addURLs <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN <span class="op">=</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">getOption</span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span></span>
+<span>  <span class="va">r</span><span class="op">[</span><span class="st">"CRAN"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span></span>
+<span>  <span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="va">r</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre>
 </div>
 <p>The <code>local</code> part ensures that no output from code we write
@@ -2055,7 +2059,7 @@ check out <a href="https://cran.r-project.org/web/packages/optparse/" class="ext
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2083,7 +2087,7 @@ function <code>strtoi</code> (press “q” to exit).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2111,7 +2115,7 @@ prints the numbers from 1 to that integer.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2149,7 +2153,7 @@ the desired behavior).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2252,7 +2256,7 @@ line argument sent?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2509,7 +2513,7 @@ compare the time it took to run with the single core job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p><code>slurm/multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb7">
@@ -2591,7 +2595,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p><code>multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb9">

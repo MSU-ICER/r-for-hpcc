@@ -255,7 +255,7 @@ rules)</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Managing R package installation and environment</h1>
-        <p> Last updated on 2025-03-18 |
+        <p> Last updated on 2025-03-27 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -463,7 +463,7 @@ consultants at ICER</a> and we will do our best to help you out.</li>
 <div class="callout-content">
 <p>The HPCC consists of <a href="https://docs.icer.msu.edu/Cluster_Resources/" class="external-link">many different node
 types</a>. When we started our OnDemand job, we chose to use only
-inte1l6 nodes.</p>
+intel16 nodes.</p>
 <p>When R installs a package, it customizes it to the specific node type
 it was installed on. So if you use the same library on different node
 types, the packages are not guaranteed to work properly, often resulting
@@ -527,12 +527,14 @@ this project or any other.</p>
 There are two files that we can create to help us do that:
 <code>.Rprofile</code> and <code>.Renviron</code>.</p>
 <p>First, let’s suppose that we want to make sure we use the University
-of Michigan CRAN mirror install our packages. The R command</p>
+of Michigan CRAN mirror install our packages. The R commands</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu">setRepositories</span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">0</span>, addURLs <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN <span class="op">=</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">getOption</span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span></span>
+<span><span class="va">r</span><span class="op">[</span><span class="st">"CRAN"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span></span>
+<span><span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="va">r</span><span class="op">)</span></span></code></pre>
 </div>
 <p>will take care of this for us. To make sure this runs every time we
 start R, we’ll put it in the <code>.Rprofile</code> file.</p>
@@ -542,7 +544,9 @@ start R, we’ll put it in the <code>.Rprofile</code> file.</p>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">local</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu">setRepositories</span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">0</span>, addURLs <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>CRAN <span class="op">=</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">getOption</span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span></span>
+<span>  <span class="va">r</span><span class="op">[</span><span class="st">"CRAN"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"https://repo.miserver.it.umich.edu/cran/"</span></span>
+<span>  <span class="fu">options</span><span class="op">(</span>repos <span class="op">=</span> <span class="va">r</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre>
 </div>
 <p>The <code>local</code> part ensures that no output from code we write
@@ -913,7 +917,7 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/instructor/managing-r-env-packages.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/instructor/managing-r-env-packages.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2025-03-18",
+  "dateModified": "2025-03-27",
   "datePublished": "2025-03-27"
 }
 
