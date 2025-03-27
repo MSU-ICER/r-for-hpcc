@@ -37,7 +37,7 @@ prompted, choose Michigan State University as the Identity Provider, and log in
 using your MSU NetID and password. Before we get into any other OnDemand
 specifics, we'll submit an RStudio job to get you up and running.
 
-Go to the Interactive Apps tab and select RStudio Server (beta).
+Go to the Interactive Apps tab and select RStudio Server.
 
 ![](fig/select-r-studio.png){alt='The OnDemand home screen with the Interactive Apps tab expanded to show RStudio Server'}
 
