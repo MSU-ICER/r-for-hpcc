@@ -254,7 +254,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Using R on the command line</h1>
-        <p> Last updated on 2025-03-18 |
+        <p> Last updated on 2025-03-28 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-command-line.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -423,8 +423,8 @@ more R packages that build on these base versions, you need to look for
 ...</code></pre>
 </div>
 <p>Note that the bundles are versioned differently (by year instead of R
-version). The best way to see which version of R is included version of
-R is to load one and run R.</p>
+version). The best way to see which version of R is included is to load
+one and run R.</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -643,7 +643,7 @@ check out <a href="https://cran.r-project.org/web/packages/optparse/" class="ext
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -671,7 +671,7 @@ function <code>strtoi</code> (press “q” to exit).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -699,7 +699,7 @@ prints the numbers from 1 to that integer.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -737,7 +737,7 @@ the desired behavior).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -795,7 +795,7 @@ plots looks like this:</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">plotfile</span> <span class="op">=</span> <span class="st">'testplots.pdf'</span></span>
+<code class="sourceCode R"><span><span class="va">plotfile</span> <span class="op">=</span> <span class="fu">file.path</span><span class="op">(</span><span class="st">'results'</span>, <span class="st">'testplots.pdf'</span><span class="op">)</span></span>
 <span><span class="fu">pdf</span><span class="op">(</span><span class="va">plotfile</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span>, pch<span class="op">=</span><span class="fl">21</span>,</span>
@@ -804,7 +804,14 @@ plots looks like this:</p>
 <span></span>
 <span><span class="fu">dev.off</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<p>For much nore details about using this techinque, see <a href="https://r-graphics.org/chapter-output" class="external-link">Chapter 14 Output for
+<p>In order to run this code, we first have to create the results
+directory on the command line with</p>
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="fu">mkdir</span> results</span></code></pre>
+</div>
+<p>For much more details about using this techinque, see <a href="https://r-graphics.org/chapter-output" class="external-link">Chapter 14 Output for
 Presentation</a> of Winston Chang’s <strong>R Graphics
 Cookbook</strong></p>
 <p>Once you run the script and save the PDFs, the next challenge is to
@@ -834,29 +841,29 @@ line argument sent?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a><span class="co"># check if there was at least 1 arg</span></span>
-<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="cf">if</span> <span class="fu">length</span>(args) <span class="sc">&gt;=</span> <span class="dv">1</span> {</span>
-<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>   <span class="co">#assume the arg is a PDF file name, and use that to capture plots</span></span>
-<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>   plotfile <span class="ot">=</span> args[<span class="dv">1</span>]</span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>   <span class="fu">pdf</span>(plotfile)</span>
-<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>}</span>
-<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a><span class="co"># if not argument is sent, PDF capture is not enabled and the plot will display</span></span>
-<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a></span>
-<span id="cb29-14"><a href="#cb29-14" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Length, iris<span class="sc">$</span>Petal.Width, <span class="at">pch=</span><span class="dv">21</span>,</span>
-<span id="cb29-15"><a href="#cb29-15" tabindex="-1"></a>     <span class="at">bg=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"green3"</span>,<span class="st">"blue"</span>)[<span class="fu">unclass</span>(iris<span class="sc">$</span>Species)],</span>
-<span id="cb29-16"><a href="#cb29-16" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Edgar Anderson's Iris Data"</span>)</span>
-<span id="cb29-17"><a href="#cb29-17" tabindex="-1"></a>     </span>
-<span id="cb29-18"><a href="#cb29-18" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co"># check if there was at least 1 arg</span></span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="cf">if</span> <span class="fu">length</span>(args) <span class="sc">&gt;=</span> <span class="dv">1</span> {</span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>   <span class="co">#assume the arg is a PDF file name, and use that to capture plots</span></span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>   plotfile <span class="ot">=</span> args[<span class="dv">1</span>]</span>
+<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a>   <span class="fu">pdf</span>(plotfile)</span>
+<span id="cb30-9"><a href="#cb30-9" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" tabindex="-1"></a>}</span>
+<span id="cb30-11"><a href="#cb30-11" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" tabindex="-1"></a><span class="co"># if not argument is sent, PDF capture is not enabled and the plot will display</span></span>
+<span id="cb30-13"><a href="#cb30-13" tabindex="-1"></a></span>
+<span id="cb30-14"><a href="#cb30-14" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Length, iris<span class="sc">$</span>Petal.Width, <span class="at">pch=</span><span class="dv">21</span>,</span>
+<span id="cb30-15"><a href="#cb30-15" tabindex="-1"></a>     <span class="at">bg=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"green3"</span>,<span class="st">"blue"</span>)[<span class="fu">unclass</span>(iris<span class="sc">$</span>Species)],</span>
+<span id="cb30-16"><a href="#cb30-16" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Edgar Anderson's Iris Data"</span>)</span>
+<span id="cb30-17"><a href="#cb30-17" tabindex="-1"></a>     </span>
+<span id="cb30-18"><a href="#cb30-18" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre>
 </div>
 </div>
 </div>
@@ -950,7 +957,7 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/r-command-line.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/r-command-line.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2025-03-18",
+  "dateModified": "2025-03-28",
   "datePublished": "2025-03-28"
 }
 
