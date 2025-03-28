@@ -144,7 +144,7 @@ module spider R-bundle
 ...
 ```
 
-Note that the bundles are versioned differently (by year instead of R version). The best way to see which version of R is included version of R is to load one and run R.
+Note that the bundles are versioned differently (by year instead of R version). The best way to see which version of R is included is to load one and run R.
 
 ``` bash
 module purge
@@ -402,7 +402,7 @@ We'll describe the method to capture output into a PDF here.
 A sample script that uses the `pdf` function to capture plots looks like this: 
 
 ```r
-plotfile = 'testplots.pdf'
+plotfile = file.path('results', 'testplots.pdf')
 pdf(plotfile)
 
 plot(iris$Petal.Length, iris$Petal.Width, pch=21,
@@ -412,7 +412,13 @@ plot(iris$Petal.Length, iris$Petal.Width, pch=21,
 dev.off()
 ```
 
-For much nore details about using this techinque, see 
+In order to run this code, we first have to create the results directory on the command line with
+
+``` bash
+mkdir results
+```
+
+For much more details about using this techinque, see 
 [Chapter 14 Output for Presentation](https://r-graphics.org/chapter-output) of Winston Chang's **R Graphics Cookbook** 
 
 Once you run the script and save the PDFs, the next challenge is to view them because, again, the terminal does not have the GUI to view PDFs.  
