@@ -225,25 +225,45 @@ For now, we'll practice by using some development nodes.
 Copy `src/test_sqrt_multisession.R` to `src/test_sqrt_cluster.R`, and replace the `plan` line with the following:
 
 ```r
-hostnames <- c("dev-amd20", "dev-intel18")
+hostnames <- c("dev-intel16", "dev-intel16-k80")
 plan(cluster, workers = hostnames)
 ```
 
 When we run the code, we get:
 
 ```output
-Error: there is no package called 'doFuture'
+  # rscript_args = c("-l", "-c", shQuote("Rscript --default-packages=datasets,utils,grDevices,graphics,stats,methods -e 'options(socketOptions=\"no-delay\")' -e 'workRSOCK<-tryCatch(parallel:::.workRSOCK,error=function(e)parallel:::.slaveRSOCK);workRSOCK()' MASTER=localhost PORT=11000 OUT=/dev/null TIMEOUT=2592000 XDR=FALSE SETUPTIMEOUT=120 SETUPSTRATEGY=sequential")),
 ```
 
 Hmm, something went wrong.
-It turns out that `future` isn't always sure what's available on the hosts we pass it to build the cluster with.
-We have to tell it what library path to use, and that it should set the working directory on each node to our current working directory.
+It turns out that `future` isn't always sure how to set up R on the hosts we pass it to build the cluster with.
+We have to tell it how to start R, as well as some other details, like what library path to use, and that it should set the working directory on each node to our current working directory.
+
+Start by creating a new bash script with the following information:
+
+```bash
+#!/bin/bash --login
+
+module purge
+module load R/4.3.2-foss-2023a
+
+Rscript $@
+```
+
+and save it as `rscript.sh` in the `src` directory. This set of cryptic commands will become more clear in the following sections. Then, from a command line, make it executable with
+
+``` bash
+chmod u+x rscript.sh
+```
+Finally, we are ready to improve our `plan` setup:
 
 ```r
-hostnames <- c("dev-amd20", "dev-intel18")
+hostnames <- c("dev-intel16", "dev-intel16-k80")
 wd <- getwd()
-setwd_cmd <- cat("setwd('", wd, "')", sep = "")
+rscript_cmd <- file.path(wd, "src", "rscript.sh")
+setwd_cmd <- paste0("setwd('", wd, "')")
 plan(cluster, workers = hostnames,
+     rscript = rscript_cmd,
      rscript_libs = .libPaths(),
      rscript_startup = setwd_cmd)
 ```
@@ -251,11 +271,11 @@ plan(cluster, workers = hostnames,
 Now let's run again:
 
 ```output
-setwd('/mnt/ufs18/home-237/k0068027/r_workshop')   user  system elapsed 
+user  system elapsed 
   0.233   0.044   2.769 
 ```
 
-The output is a little wonky because it runs the `rscript_startup` command, but we were still able to save some time!
+There was much more time setting up, but we were still able to save some time in the part that we measured!
 
 ### The batchtools_slurm backend
 
