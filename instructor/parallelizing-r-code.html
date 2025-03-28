@@ -544,7 +544,7 @@ line with the following:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code><span>  <span class="co"># rscript_args = c("-l", "-c", shQuote("Rscript --default-packages=datasets,utils,grDevices,graphics,stats,methods -e 'options(socketOptions=\"no-delay\")' -e 'workRSOCK&lt;-tryCatch(parallel:::.workRSOCK,error=function(e)parallel:::.slaveRSOCK);workRSOCK()' MASTER=localhost PORT=11000 OUT=/dev/null TIMEOUT=2592000 XDR=FALSE SETUPTIMEOUT=120 SETUPSTRATEGY=sequential")),</span></span></code></pre>
+<pre class="output" tabindex="0"><code>/opt/software-current/2023.06/x86_64/intel/haswell/software/R/4.3.2-gfbf-2023a/lib64/R/bin/exec/R: error while loading shared libraries: libicuuc.so.73: cannot open shared object file: No such file or directory</code></pre>
 </div>
 <p>Hmm, something went wrong. It turns out that <code>future</code>
 isn’t always sure how to set up R on the hosts we pass it to build the
