@@ -232,7 +232,7 @@ plan(cluster, workers = hostnames)
 When we run the code, we get:
 
 ```output
-  # rscript_args = c("-l", "-c", shQuote("Rscript --default-packages=datasets,utils,grDevices,graphics,stats,methods -e 'options(socketOptions=\"no-delay\")' -e 'workRSOCK<-tryCatch(parallel:::.workRSOCK,error=function(e)parallel:::.slaveRSOCK);workRSOCK()' MASTER=localhost PORT=11000 OUT=/dev/null TIMEOUT=2592000 XDR=FALSE SETUPTIMEOUT=120 SETUPSTRATEGY=sequential")),
+/opt/software-current/2023.06/x86_64/intel/haswell/software/R/4.3.2-gfbf-2023a/lib64/R/bin/exec/R: error while loading shared libraries: libicuuc.so.73: cannot open shared object file: No such file or directory
 ```
 
 Hmm, something went wrong.
