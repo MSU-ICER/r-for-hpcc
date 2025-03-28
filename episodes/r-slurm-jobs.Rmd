@@ -251,9 +251,11 @@ You can then use these as the `workers` when specifying the plan like
 
 ``` r
 wd <- getwd()
-setwd_cmd <- cat("setwd('", wd, "')", sep = "")
+rscript_cmd <- file.path(wd, "src", "rscript.sh")
+setwd_cmd <- paste0("setwd('", wd, "')")
 plan(cluster,
      workers = parallelly::availableWorkers(methods = "Slurm")
+	 rscript = rscript_cmd,
      rscript_libs = .libPaths(),
      rscript_startup = setwd_cmd)
 ```
