@@ -1,0 +1,30 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: R for the HPCC
+message: >-
+  Please cite this lesson using the information in this file
+  when you refer to it in publications, and/or if you
+  re-use, adapt, or expand on the content in your own
+  training material.
+type: dataset
+authors:
+  - given-names: Craig
+    family-names: Grosch
+    email: grosscra@msu.edu
+    affiliation: Michigan State University
+    orcid: 'https://orcid.org/0000-0002-1696-6964'
+  - orcid: 'https://orcid.org/0000-0003-4235-255X'
+    given-names: Patrick
+    family-names: Bills
+    email: billspat@msu.edu
+    affiliation: Michigan State University
+repository-code: 'https://github.com/MSU-ICER/r-for-hpcc'
+url: 'https://msu-icer.github.io/r-for-hpcc/'
+abstract: >-
+  Workshop materials to introduce the basics of using R on
+  Michigan State University's High Performance Computing
+  Cluster (HPCC) managed by the Institute for Cyber-Enabled
+  Research (ICER).
+license: CC-BY-4.0
