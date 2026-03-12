@@ -62,14 +62,14 @@ job. For this workshop, you should use the following options:
 - R version: 4.3.2 (with additional CRAN packages, RECOMMENDED)
 - Number of hours: 3
 - Number of cores per task: 8
-- Amount of memory: 5GB
+- Amount of memory: 5
 
 ![](fig/rstudio-server-ondemand-options.png){alt='The RStudio OnDemand setup screen with text boxes for the four options listed above filled in using the values specified.'}
 
 Additionally, click the Advanced Options checkbox and under Node type,
-select "intel16" (we'll explain why later).
+select "amd20" (we'll explain why later).
 
-![](fig/rstudio-node-selection.png){alt='The RStudio OnDemand setup screen with the Advanced Options box checked, and intel16 selected in the Node type dropdown.'}
+![](fig/rstudio-node-selection.png){alt='The RStudio OnDemand setup screen with the Advanced Options box checked, and amd20 selected in the Node type dropdown.'}
 
 If you need to specify any other options (for example, if you want to run your
 session on a buy-in node and specify your SLURM account), you enter additional
@@ -81,7 +81,7 @@ fields for now are the Host which is the node on the HPCC where you job is
 running and the Time Remaining which counts down from the requested number of
 hours.
 
-![](fig/running-rstudio-server-job.png){alt="An OnDemand card with the information for a running RStudio job. The Host is lac-335, and the Time Remaining is 2 hours and 59 minutes."}
+![](fig/running-rstudio-server-job.png){alt="An OnDemand card with the information for a running RStudio job. The Host is amr-184, and the Time Remaining is 2 hours and 59 minutes."}
 
 When you're ready to access RStudio, you can click the Launch RStudio Server
 button. If you ever navigate away from this screen, you can always return to it
@@ -131,7 +131,7 @@ Handily, RStudio provides a terminal for you to use! Right next to the R
 console, is a Terminal tab. Clicking this tab will start a terminal on the same
 node that RStudio is running on.
 
-![](fig/rstudio-terminal.png){alt="The terminal tab in RStudio showing a terminal connected to the host lac-335."}
+![](fig/rstudio-terminal.png){alt="The terminal tab in RStudio showing a terminal connected to the host amr-184."}
 
 
 ### SSH
@@ -144,8 +144,7 @@ navigation bar.
 
 ![](fig/ondemand-dev-nodes-dropdown.png){alt="The Development Nodes dropdown from the OnDemand navigation bar showing the development nodes accessible on the HPCC. The dev-amd20 options is highlighted."}
 
-Choose any development node, and a new tab will open with a terminal on that
-node.
+Choose the `dev-amd20` development node, and a new tab will open with a terminal there.
 
 :::::::::::::::::::::::::: callout
 

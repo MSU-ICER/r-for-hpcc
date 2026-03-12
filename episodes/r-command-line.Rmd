@@ -37,7 +37,7 @@ ssh <netid>@hpcc.msu.edu
 ssh <dev-node>
 ```
 
-Make sure to use `dev-intel16` since [it matches the node type we used in OnDemand](managing-r-env-packages.Rmd#a-note-about-node-type).
+Make sure to use `dev-amd20` since [it matches the node type we used in OnDemand](managing-r-env-packages.Rmd#a-note-about-node-type).
 
 ## Loading R
 
@@ -101,6 +101,8 @@ module spider R
         R/4.3.2-gfbf-2023a
         R/4.3.3-gfbf-2023b
         R/4.4.1-gfbf-2023b
+        R/4.4.2-gfbf-2024a
+        R/4.5.1-gfbf-2025a
      Other possible modules matches:
         ADMIXTURE  AOFlagger  APR  APR-util  Amber  Armadillo  Arrow  ...
 ...
@@ -139,6 +141,8 @@ module spider R-bundle
      Versions:
         R-bundle-CRAN/2023.12-foss-2023a
         R-bundle-CRAN/2024.06-foss-2023b
+        R-bundle-CRAN/2024.11-foss-2024a
+        R-bundle-CRAN/2025.10-foss-2025a
 
 ----------------------------------------------------------------------------
 ...

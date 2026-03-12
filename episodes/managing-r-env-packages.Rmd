@@ -163,7 +163,7 @@ ICER](https://contact.icer.msu.edu) and we will do our best to help you out.
 ## A note about node type
 
 The HPCC consists of [many different node types](https://docs.icer.msu.edu/Cluster_Resources/).
-When we started our OnDemand job, we chose to use only intel16 nodes. 
+When we started our OnDemand job, we chose to use only amd20 nodes. 
 
 When R installs a package, it customizes it to the specific node type it was installed on. So if you use the same library on different node types, the packages are not guaranteed to work properly, often resulting in an "Illegal instruction error" or RStudio crashing.
 

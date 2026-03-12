@@ -48,7 +48,7 @@ The options let you specify things like
 - The number of cores you want to run your code on, e.g., `#SBATCH --cpus-per-task=8` for 8 cores
 - The number of nodes you need to run your code on, e.g., `#SBATCH --nodes=2` for 2 nodes
 - The amount of memory your code will need, e.g., `#SBATCH --mem=10GB` for 10GB or `--mem-per-cpu=750MB` for 750MB per core you ask for
-- The node type, e.g., `#SBATCH --constraint=intel16` to run your code only on intel16 nodes
+- The node type, e.g., `#SBATCH --constraint=amd20` to run your code only on amd20 nodes
 - The SLURM account you want to use (if you have a buy-in node), e.g., `#SBATCH --account=my_buyin` to activate the buy-in nodes associated to the `my_buyin` account
 
 Finally, you will add your code below these `#SBATCH`.
@@ -63,7 +63,7 @@ This code is exactly what you would enter on the command line to run your R scri
 #SBATCH --cpus-per-task=1  # Use 1 core
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
-#SBATCH --constraint=intel16  # Use only intel16 nodes
+#SBATCH --constraint=amd20  # Use only amd20 nodes
 
 # Load the R module
 module purge
@@ -118,14 +118,14 @@ JobId=48169646 JobName=single_core.R
    SuspendTime=None SecsPreSuspend=0 LastSchedEval=2025-01-07T17:33:50 Scheduler=Main
    Partition=general-short AllocNode:Sid=dev-amd20:1882606
    ReqNodeList=(null) ExcNodeList=(null)
-   NodeList=lac-335
-   BatchHost=lac-335
+   NodeList=amr-184
+   BatchHost=amr-184
    NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
    ReqTRES=cpu=1,mem=500M,node=1,billing=76
    AllocTRES=cpu=1,mem=500M,node=1,billing=76
    Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
    MinCPUsNode=1 MinMemoryCPU=500M MinTmpDiskNode=0
-   Features=[intel16|intel18|(amr|acm)|nvf|nal|nif|amd24] DelayBoot=00:00:00
+   Features=[intel18|(amr|acm)|nvf|nal|nif|amd24] DelayBoot=00:00:00
    OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
    Command=/mnt/ufs18/home-237/k0068027/r_workshop/single_core.R
    WorkDir=/mnt/ufs18/home-237/k0068027/r_workshop
@@ -158,7 +158,7 @@ Submit the job and compare the time it took to run with the single core job.
 #SBATCH --cpus-per-task=5  # Use 5 cores
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
-#SBATCH --constraint=intel16  # Use only intel16 nodes
+#SBATCH --constraint=amd20  # Use only amd20 nodes
 
 # Load the R module
 module purge
@@ -217,7 +217,7 @@ For the steps below, you will need the [list of SLURM job specifications](https:
 #SBATCH --cpus-per-task=5  # Use 5 cores
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
-#SBATCH --constraint=intel16  # Use only intel16 nodes
+#SBATCH --constraint=amd20  # Use only amd20 nodes
 #SBATCH --job-name=multicore
 #SBATCH --output=~/r_workshop/results/%x-%j.out
 #SBATCH --error=~/r_workshop/results/%x-%j.err
@@ -278,7 +278,7 @@ Here is an example script:
 #SBATCH --cpus-per-task=8  # Use 8 cores per task (48 in total)
 #SBATCH --mem-per-cpu=1GB  # Use 1GB of memory per core requested
 #SBATCH --nodes=2  # Distribute the tasks across 2 nodes
-#SBATCH --constraint=intel16  # Use only intel16 nodes
+#SBATCH --constraint=amd20  # Use only amd20 nodes
 
 # Load the R module
 module purge

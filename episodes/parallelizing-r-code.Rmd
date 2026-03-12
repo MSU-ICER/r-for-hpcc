@@ -21,7 +21,7 @@ exercises: 2
 ## Basics of parallelization
 
 The HPCC is made up of lots of computers that have processors with lots of cores.
-Your laptop probably has a processor with 4-8 cores while the largest nodes on the HPCC have 128 cores.
+Your laptop probably has a processor with 4-8 cores while the largest nodes on the HPCC have 192 cores.
 
 All this said though, HPCC nodes are *not* inherently faster than standard computers.
 In fact, having many cores in a processor usually comes at the cost of slightly slower processing speeds.
@@ -70,7 +70,7 @@ This is just to simulate a long running chunk of code that we might want to para
 
 Ignoring the `Sys.sleep(0.5)` part of our loop, if we just wanted the square root of all of the elements in `x`, we should never use a loop!
 R thrives with vectorization, meaning that we can apply a function to a whole vector at once.
-This will also trigger some of those linear algebra libraries that can auto-parallelize some of your code.
+This will also trigger some of those linear algebra libraries that can auto-parallelize parts of your code.
 
 For example, compare
 
@@ -225,14 +225,14 @@ For now, we'll practice by using some development nodes.
 Copy `src/test_sqrt_multisession.R` to `src/test_sqrt_cluster.R`, and replace the `plan` line with the following:
 
 ```r
-hostnames <- c("dev-intel16", "dev-intel16-k80")
+hostnames <- c("dev-amd20", "dev-amd20-v100")
 plan(cluster, workers = hostnames)
 ```
 
 When we run the code, we get:
 
 ```output
-/opt/software-current/2023.06/x86_64/intel/haswell/software/R/4.3.2-gfbf-2023a/lib64/R/bin/exec/R: error while loading shared libraries: libicuuc.so.73: cannot open shared object file: No such file or directory
+/opt/software-current/2023.06/x86_64/amd/zen2/software/R/4.3.2-gfbf-2023a/lib64/R/bin/exec/R: error while loading shared libraries: libicuuc.so.73: cannot open shared object file: No such file or directory
 ```
 
 Hmm, something went wrong.
@@ -258,7 +258,7 @@ chmod u+x rscript.sh
 Finally, we are ready to improve our `plan` setup:
 
 ```r
-hostnames <- c("dev-intel16", "dev-intel16-k80")
+hostnames <- c("dev-amd20", "dev-amd20-v100")
 wd <- getwd()
 rscript_cmd <- file.path(wd, "src", "rscript.sh")
 setwd_cmd <- paste0("setwd('", wd, "')")
