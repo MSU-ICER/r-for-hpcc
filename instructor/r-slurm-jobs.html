@@ -311,7 +311,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Submitting R code to SLURM</h1>
-        <p>Last updated on 2026-03-06 |
+        <p>Last updated on 2026-03-12 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-slurm-jobs.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -384,8 +384,8 @@ seconds</li>
 <li>The amount of memory your code will need, e.g.,
 <code>#SBATCH --mem=10GB</code> for 10GB or
 <code>--mem-per-cpu=750MB</code> for 750MB per core you ask for</li>
-<li>The node type, e.g., <code>#SBATCH --constraint=intel16</code> to
-run your code only on intel16 nodes</li>
+<li>The node type, e.g., <code>#SBATCH --constraint=amd20</code> to run
+your code only on amd20 nodes</li>
 <li>The SLURM account you want to use (if you have a buy-in node), e.g.,
 <code>#SBATCH --account=my_buyin</code> to activate the buy-in nodes
 associated to the <code>my_buyin</code> account</li>
@@ -402,7 +402,7 @@ your R scripts as we showed in the <a href="r-command-line.html">previous epsiod
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1  # Use 1 core</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=amd20  # Use only amd20 nodes</span></span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="ex">module</span> purge</span>
@@ -462,14 +462,14 @@ JobId=48169646 JobName=single_core.R
    SuspendTime=None SecsPreSuspend=0 LastSchedEval=2025-01-07T17:33:50 Scheduler=Main
    Partition=general-short AllocNode:Sid=dev-amd20:1882606
    ReqNodeList=(null) ExcNodeList=(null)
-   NodeList=lac-335
-   BatchHost=lac-335
+   NodeList=amr-184
+   BatchHost=amr-184
    NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
    ReqTRES=cpu=1,mem=500M,node=1,billing=76
    AllocTRES=cpu=1,mem=500M,node=1,billing=76
    Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
    MinCPUsNode=1 MinMemoryCPU=500M MinTmpDiskNode=0
-   Features=[intel16|intel18|(amr|acm)|nvf|nal|nif|amd24] DelayBoot=00:00:00
+   Features=[intel18|(amr|acm)|nvf|nal|nif|amd24] DelayBoot=00:00:00
    OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
    Command=/mnt/ufs18/home-237/k0068027/r_workshop/single_core.R
    WorkDir=/mnt/ufs18/home-237/k0068027/r_workshop
@@ -502,7 +502,7 @@ compare the time it took to run with the single core job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p><code>slurm/multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb7">
@@ -514,7 +514,7 @@ compare the time it took to run with the single core job.</p>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=5  # Use 5 cores</span></span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=amd20  # Use only amd20 nodes</span></span>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a></span>
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="ex">module</span> purge</span>
@@ -583,7 +583,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p><code>multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -595,7 +595,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=5  # Use 5 cores</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=amd20  # Use only amd20 nodes</span></span>
 <span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#SBATCH --job-name=multicore</span></span>
 <span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#SBATCH --output=~/r_workshop/results/%x-%j.out</span></span>
 <span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#SBATCH --error=~/r_workshop/results/%x-%j.err</span></span>
@@ -669,7 +669,7 @@ knows how many CPUs it can use per task.</p>
 <span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=8  # Use 8 cores per task (48 in total)</span></span>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=1GB  # Use 1GB of memory per core requested</span></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#SBATCH --nodes=2  # Distribute the tasks across 2 nodes</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#SBATCH --constraint=amd20  # Use only amd20 nodes</span></span>
 <span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
 <span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="ex">module</span> purge</span>
@@ -771,8 +771,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/instructor/r-slurm-jobs.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/instructor/r-slurm-jobs.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2026-03-06",
-  "datePublished": "2026-03-10"
+  "dateModified": "2026-03-12",
+  "datePublished": "2026-03-12"
 }
 
   </script><script>

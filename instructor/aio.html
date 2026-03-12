@@ -350,7 +350,7 @@
         
 <section id="aio-rstudio-server-ondemand"><p>Content from <a href="rstudio-server-ondemand.html">Accessing RStudio Server through OnDemand</a></p>
 <hr>
-<p>Last updated on 2026-03-06 |
+<p>Last updated on 2026-03-12 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/rstudio-server-ondemand.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -429,11 +429,11 @@ options:</p>
 <li>R version: 4.3.2 (with additional CRAN packages, RECOMMENDED)</li>
 <li>Number of hours: 3</li>
 <li>Number of cores per task: 8</li>
-<li>Amount of memory: 5GB</li>
+<li>Amount of memory: 5</li>
 </ul>
 <figure><img src="../fig/rstudio-server-ondemand-options.png" alt="The RStudio OnDemand setup screen with text boxes for the four options listed above filled in using the values specified." class="figure mx-auto d-block"></figure><p>Additionally, click the Advanced Options checkbox and under Node
-type, select “intel16” (we’ll explain why later).</p>
-<figure><img src="../fig/rstudio-node-selection.png" alt="The RStudio OnDemand setup screen with the Advanced Options box checked, and intel16 selected in the Node type dropdown." class="figure mx-auto d-block"></figure><p>If you need to specify any other options (for example, if you want to
+type, select “amd20” (we’ll explain why later).</p>
+<figure><img src="../fig/rstudio-node-selection.png" alt="The RStudio OnDemand setup screen with the Advanced Options box checked, and amd20 selected in the Node type dropdown." class="figure mx-auto d-block"></figure><p>If you need to specify any other options (for example, if you want to
 run your session on a buy-in node and specify your SLURM account), you
 enter additional information in the Advanced Options section.</p>
 <p>Select the Launch button and wait for your job to start. When your
@@ -441,7 +441,7 @@ job is ready, you will see a card with all of the information for your
 job. The most important fields for now are the Host which is the node on
 the HPCC where you job is running and the Time Remaining which counts
 down from the requested number of hours.</p>
-<figure><img src="../fig/running-rstudio-server-job.png" alt="An OnDemand card with the information for a running RStudio job. The Host is lac-335, and the Time Remaining is 2 hours and 59 minutes." class="figure mx-auto d-block"></figure><p>When you’re ready to access RStudio, you can click the Launch RStudio
+<figure><img src="../fig/running-rstudio-server-job.png" alt="An OnDemand card with the information for a running RStudio job. The Host is amr-184, and the Time Remaining is 2 hours and 59 minutes." class="figure mx-auto d-block"></figure><p>When you’re ready to access RStudio, you can click the Launch RStudio
 Server button. If you ever navigate away from this screen, you can
 always return to it by clicking the My Interactive Sessions button in
 the OnDemand navigation bar. On narrower screens, this button shrinks
@@ -472,7 +472,7 @@ starts in your HPCC home directory.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Click the button that looks like a page with a plus sign right below
 the file menu and choose R Script.</p>
@@ -494,7 +494,7 @@ this host from a command line. You have two options.</p>
 <p>Handily, RStudio provides a terminal for you to use! Right next to
 the R console, is a Terminal tab. Clicking this tab will start a
 terminal on the same node that RStudio is running on.</p>
-<figure><img src="../fig/rstudio-terminal.png" alt="The terminal tab in RStudio showing a terminal connected to the host lac-335." class="figure mx-auto d-block"></figure>
+<figure><img src="../fig/rstudio-terminal.png" alt="The terminal tab in RStudio showing a terminal connected to the host amr-184." class="figure mx-auto d-block"></figure>
 </div>
 <div class="section level3">
 <h3 id="ssh">SSH<a class="anchor" aria-label="anchor" href="#ssh"></a>
@@ -504,8 +504,8 @@ HPCC on. Since we’re already using OnDemand, we’ll use the built-in
 terminal.</p>
 <p>Returning to the OnDemand window, open the Development Nodes dropdown
 from the navigation bar.</p>
-<figure><img src="../fig/ondemand-dev-nodes-dropdown.png" alt="The Development Nodes dropdown from the OnDemand navigation bar showing the development nodes accessible on the HPCC. The dev-amd20 options is highlighted." class="figure mx-auto d-block"></figure><p>Choose any development node, and a new tab will open with a terminal
-on that node.</p>
+<figure><img src="../fig/ondemand-dev-nodes-dropdown.png" alt="The Development Nodes dropdown from the OnDemand navigation bar showing the development nodes accessible on the HPCC. The dev-amd20 options is highlighted." class="figure mx-auto d-block"></figure><p>Choose the <code>dev-amd20</code> development node, and a new tab
+will open with a terminal there.</p>
 <div id="ssh-outside-of-ondemand" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -554,7 +554,7 @@ with your username) to see just your running processes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Running <code>top -u k0068027</code> (my username) from the RStudio
 terminal shows the <code>rsession</code> command in the
@@ -591,7 +591,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-managing-r-env-packages"><p>Content from <a href="managing-r-env-packages.html">Managing R package installation and environment</a></p>
 <hr>
-<p>Last updated on 2026-03-06 |
+<p>Last updated on 2026-03-12 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -812,8 +812,8 @@ consultants at ICER</a> and we will do our best to help you out.</li>
 <h3 class="callout-title">A note about node type</h3>
 <div class="callout-content">
 <p>The HPCC consists of <a href="https://docs.icer.msu.edu/Cluster_Resources/" class="external-link">many different node
-types</a>. When we started our OnDemand job, we chose to use only
-intel16 nodes.</p>
+types</a>. When we started our OnDemand job, we chose to use only amd20
+nodes.</p>
 <p>When R installs a package, it customizes it to the specific node type
 it was installed on. So if you use the same library on different node
 types, the packages are not guaranteed to work properly, often resulting
@@ -1033,7 +1033,7 @@ project library:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Double checking our library paths</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -1103,7 +1103,7 @@ environment variable to say hello and goodbye to whoever is using the
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Note that since we are setting variables that we want to keep in our
 session, the following lines should <em>not</em> be included in the
@@ -1230,7 +1230,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-parallelizing-r-code"><p>Content from <a href="parallelizing-r-code.html">Parallelizing your R code with future</a></p>
 <hr>
-<p>Last updated on 2026-03-06 |
+<p>Last updated on 2026-03-12 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/parallelizing-r-code.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -1272,7 +1272,7 @@ any links that you are not going to use.
 <hr class="half-width">
 <p>The HPCC is made up of lots of computers that have processors with
 lots of cores. Your laptop probably has a processor with 4-8 cores while
-the largest nodes on the HPCC have 128 cores.</p>
+the largest nodes on the HPCC have 192 cores.</p>
 <p>All this said though, HPCC nodes are <em>not</em> inherently faster
 than standard computers. In fact, having many cores in a processor
 usually comes at the cost of slightly slower processing speeds. One of
@@ -1333,8 +1333,8 @@ code that we might want to parallelize.</p>
 wanted the square root of all of the elements in <code>x</code>, we
 should never use a loop! R thrives with vectorization, meaning that we
 can apply a function to a whole vector at once. This will also trigger
-some of those linear algebra libraries that can auto-parallelize some of
-your code.</p>
+some of those linear algebra libraries that can auto-parallelize parts
+of your code.</p>
 <p>For example, compare</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1525,14 +1525,14 @@ line with the following:</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hostnames</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span><span class="st">"dev-intel16"</span>, <span class="st">"dev-intel16-k80"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hostnames</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span><span class="st">"dev-amd20"</span>, <span class="st">"dev-amd20-v100"</span><span class="op">)</span></span>
 <span><span class="fu">plan</span><span class="op">(</span><span class="va">cluster</span>, workers <span class="op">=</span> <span class="va">hostnames</span><span class="op">)</span></span></code></pre>
 </div>
 <p>When we run the code, we get:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>/opt/software-current/2023.06/x86_64/intel/haswell/software/R/4.3.2-gfbf-2023a/lib64/R/bin/exec/R: error while loading shared libraries: libicuuc.so.73: cannot open shared object file: No such file or directory</code></pre>
+<pre class="output" tabindex="0"><code>/opt/software-current/2023.06/x86_64/amd/zen2/software/R/4.3.2-gfbf-2023a/lib64/R/bin/exec/R: error while loading shared libraries: libicuuc.so.73: cannot open shared object file: No such file or directory</code></pre>
 </div>
 <p>Hmm, something went wrong. It turns out that <code>future</code>
 isn’t always sure how to set up R on the hosts we pass it to build the
@@ -1565,7 +1565,7 @@ with</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hostnames</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span><span class="st">"dev-intel16"</span>, <span class="st">"dev-intel16-k80"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hostnames</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span><span class="st">"dev-amd20"</span>, <span class="st">"dev-amd20-v100"</span><span class="op">)</span></span>
 <span><span class="va">wd</span> <span class="op">&lt;-</span> <span class="fu">getwd</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">rscript_cmd</span> <span class="op">&lt;-</span> <span class="fu">file.path</span><span class="op">(</span><span class="va">wd</span>, <span class="st">"src"</span>, <span class="st">"rscript.sh"</span><span class="op">)</span></span>
 <span><span class="va">setwd_cmd</span> <span class="op">&lt;-</span> <span class="fu">paste0</span><span class="op">(</span><span class="st">"setwd('"</span>, <span class="va">wd</span>, <span class="st">"')"</span><span class="op">)</span></span>
@@ -1762,7 +1762,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-r-command-line"><p>Content from <a href="r-command-line.html">Using R on the command line</a></p>
 <hr>
-<p>Last updated on 2026-03-06 |
+<p>Last updated on 2026-03-12 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-command-line.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -1818,7 +1818,7 @@ something like</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>netid<span class="op">&gt;</span>@hpcc.msu.edu</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>dev-node<span class="op">&gt;</span></span></code></pre>
 </div>
-<p>Make sure to use <code>dev-intel16</code> since <a href="managing-r-env-packages.html#a-note-about-node-type">it matches
+<p>Make sure to use <code>dev-amd20</code> since <a href="managing-r-env-packages.html#a-note-about-node-type">it matches
 the node type we used in OnDemand</a>.</p>
 </section><section><h2 class="section-heading" id="loading-r">Loading R<a class="anchor" aria-label="anchor" href="#loading-r"></a>
 </h2>
@@ -1887,6 +1887,8 @@ the modules for the ones we want:</p>
         R/4.3.2-gfbf-2023a
         R/4.3.3-gfbf-2023b
         R/4.4.1-gfbf-2023b
+        R/4.4.2-gfbf-2024a
+        R/4.5.1-gfbf-2025a
      Other possible modules matches:
         ADMIXTURE  AOFlagger  APR  APR-util  Amber  Armadillo  Arrow  ...
 ...</code></pre>
@@ -1929,6 +1931,8 @@ more R packages that build on these base versions, you need to look for
      Versions:
         R-bundle-CRAN/2023.12-foss-2023a
         R-bundle-CRAN/2024.06-foss-2023b
+        R-bundle-CRAN/2024.11-foss-2024a
+        R-bundle-CRAN/2025.10-foss-2025a
 
 ----------------------------------------------------------------------------
 ...</code></pre>
@@ -2428,7 +2432,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-r-slurm-jobs"><p>Content from <a href="r-slurm-jobs.html">Submitting R code to SLURM</a></p>
 <hr>
-<p>Last updated on 2026-03-06 |
+<p>Last updated on 2026-03-12 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/r-slurm-jobs.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -2503,8 +2507,8 @@ seconds</li>
 <li>The amount of memory your code will need, e.g.,
 <code>#SBATCH --mem=10GB</code> for 10GB or
 <code>--mem-per-cpu=750MB</code> for 750MB per core you ask for</li>
-<li>The node type, e.g., <code>#SBATCH --constraint=intel16</code> to
-run your code only on intel16 nodes</li>
+<li>The node type, e.g., <code>#SBATCH --constraint=amd20</code> to run
+your code only on amd20 nodes</li>
 <li>The SLURM account you want to use (if you have a buy-in node), e.g.,
 <code>#SBATCH --account=my_buyin</code> to activate the buy-in nodes
 associated to the <code>my_buyin</code> account</li>
@@ -2524,7 +2528,7 @@ your R scripts as we showed in the <a href="r-command-line.html">previous epsiod
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1  # Use 1 core</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=amd20  # Use only amd20 nodes</span></span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="ex">module</span> purge</span>
@@ -2586,14 +2590,14 @@ JobId=48169646 JobName=single_core.R
    SuspendTime=None SecsPreSuspend=0 LastSchedEval=2025-01-07T17:33:50 Scheduler=Main
    Partition=general-short AllocNode:Sid=dev-amd20:1882606
    ReqNodeList=(null) ExcNodeList=(null)
-   NodeList=lac-335
-   BatchHost=lac-335
+   NodeList=amr-184
+   BatchHost=amr-184
    NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
    ReqTRES=cpu=1,mem=500M,node=1,billing=76
    AllocTRES=cpu=1,mem=500M,node=1,billing=76
    Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
    MinCPUsNode=1 MinMemoryCPU=500M MinTmpDiskNode=0
-   Features=[intel16|intel18|(amr|acm)|nvf|nal|nif|amd24] DelayBoot=00:00:00
+   Features=[intel18|(amr|acm)|nvf|nal|nif|amd24] DelayBoot=00:00:00
    OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
    Command=/mnt/ufs18/home-237/k0068027/r_workshop/single_core.R
    WorkDir=/mnt/ufs18/home-237/k0068027/r_workshop
@@ -2626,7 +2630,7 @@ compare the time it took to run with the single core job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p><code>slurm/multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb7">
@@ -2638,7 +2642,7 @@ compare the time it took to run with the single core job.</p>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=5  # Use 5 cores</span></span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=amd20  # Use only amd20 nodes</span></span>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a></span>
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="ex">module</span> purge</span>
@@ -2709,7 +2713,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p><code>multi_core.sh</code>:</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -2721,7 +2725,7 @@ lines with <code>%j</code> and the job name with <code>%x</code>.</p>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=5  # Use 5 cores</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested</span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1  # Use 1 node</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --constraint=amd20  # Use only amd20 nodes</span></span>
 <span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#SBATCH --job-name=multicore</span></span>
 <span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#SBATCH --output=~/r_workshop/results/%x-%j.out</span></span>
 <span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#SBATCH --error=~/r_workshop/results/%x-%j.err</span></span>
@@ -2799,7 +2803,7 @@ knows how many CPUs it can use per task.</p>
 <span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=8  # Use 8 cores per task (48 in total)</span></span>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=1GB  # Use 1GB of memory per core requested</span></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#SBATCH --nodes=2  # Distribute the tasks across 2 nodes</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#SBATCH --constraint=intel16  # Use only intel16 nodes</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#SBATCH --constraint=amd20  # Use only amd20 nodes</span></span>
 <span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
 <span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># Load the R module</span></span>
 <span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="ex">module</span> purge</span>
@@ -2893,8 +2897,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/instructor/aio.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/instructor/aio.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2026-03-10",
-  "datePublished": "2026-03-10"
+  "dateModified": "2026-03-12",
+  "datePublished": "2026-03-12"
 }
 
   </script><script>
