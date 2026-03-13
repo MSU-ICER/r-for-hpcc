@@ -1,7 +1,7 @@
 ---
 title: 'Submitting R code to SLURM'
-teaching: 10
-exercises: 2
+teaching: 13
+exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 

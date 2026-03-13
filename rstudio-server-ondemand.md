@@ -1,7 +1,7 @@
 ---
 title: 'Accessing RStudio Server through OnDemand'
-teaching: 10
-exercises: 2
+teaching: 15
+exercises: 3
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 

@@ -1,7 +1,7 @@
 ---
 title: 'Parallelizing your R code with `future`'
-teaching: 10
-exercises: 2
+teaching: 32
+exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
