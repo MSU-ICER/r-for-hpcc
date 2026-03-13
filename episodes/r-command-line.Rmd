@@ -397,24 +397,28 @@ You may wonder how you might run a plot using the terminal interface?   For most
 
 There are the following techniques for handling plots when using R on the command line on HPCC
 
-- split your code into computation and presentation sections:  run computation section using CLI/Batch on HPC, and after the computation is complete, save the output to be read into visualization code that you run on a machine with a graphic user interface (OnDemand Rstudio, or even your laptop)
-- capture all output to a file using commands like PDF()
+- split your code into computation and presentation sections:  run computation section using CLI/Batch on HPC, and after the computation is complete, save the output to be read into visualization code that you run on a machine with a graphic user interface (like OnDemand's RStudio or even your laptop)
+- capture all output to a file using commands like `pdf()`
 - as part of your script, create an RMarkdown file that includes plotting (or other output), and use the [render](https://rmarkdown.rstudio.com/docs/reference/render.html) command in Rmarkdown to PDF or other format to be review later
 
 We'll describe the method to capture output into a PDF here.   
 
-A sample script that uses the `pdf` function to capture plots looks like this: 
+A sample script that uses popular `ggplot2` plotting library and the `pdf` function to capture plots looks like this: 
 
 ```r
+library(ggplot2)
+
 plotfile = file.path('results', 'testplots.pdf')
 pdf(plotfile)
 
-plot(iris$Petal.Length, iris$Petal.Width, pch=21,
-     bg=c("red","green3","blue")[unclass(iris$Species)],
-     main="Edgar Anderson's Iris Data")
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
+  geom_point() +
+  labs(title = "Edgar Anderson's Iris Data")
 
 dev.off()
 ```
+
+Save this into a file called `src/plot.R`.
 
 In order to run this code, we first have to create the results directory on the command line with
 
@@ -422,7 +426,13 @@ In order to run this code, we first have to create the results directory on the 
 mkdir results
 ```
 
-For much more details about using this techinque, see 
+Then we can run the script with
+
+``` bash
+Rscript --vanilla src/plot.R
+```
+
+For much more details about using this technique, see 
 [Chapter 14 Output for Presentation](https://r-graphics.org/chapter-output) of Winston Chang's **R Graphics Cookbook** 
 
 Once you run the script and save the PDFs, the next challenge is to view them because, again, the terminal does not have the GUI to view PDFs.  
@@ -430,7 +440,7 @@ Once you run the script and save the PDFs, the next challenge is to view them be
 You could
 
  - download the PDF to your computer from the terminal using OnDemand file browser (or the MobaXterm client's file browser)
- - open with the OnDemand RStudio. 
+ - open with the OnDemand's RStudio. 
  
  
 
@@ -441,23 +451,25 @@ One of the challenges with running scripts repeatedly is that it will overwrite 
 :::::::::::::::::::::::: solution
 
 ```r
+library(ggplot2)
+
 args <- commandArgs(trailingOnly = TRUE)
 
 # check if there was at least 1 arg
 if length(args) >= 1 {
 
-   #assume the arg is a PDF file name, and use that to capture plots
+   # assume the arg is a PDF file name, and use that to capture plots
    plotfile = args[1]
    pdf(plotfile)
 
 }
 
-# if not argument is sent, PDF capture is not enabled and the plot will display
+# if no argument is sent, PDF capture is not enabled and the plot will display
 
-plot(iris$Petal.Length, iris$Petal.Width, pch=21,
-     bg=c("red","green3","blue")[unclass(iris$Species)],
-     main="Edgar Anderson's Iris Data")
-     
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
+  geom_point() +
+  labs(title = "Edgar Anderson's Iris Data")
+
 dev.off()
 
 ```
