@@ -851,28 +851,34 @@ the command line on HPCC</p>
 <ul><li>split your code into computation and presentation sections: run
 computation section using CLI/Batch on HPC, and after the computation is
 complete, save the output to be read into visualization code that you
-run on a machine with a graphic user interface (OnDemand Rstudio, or
-even your laptop)</li>
-<li>capture all output to a file using commands like PDF()</li>
+run on a machine with a graphic user interface (like OnDemand’s RStudio
+or even your laptop)</li>
+<li>capture all output to a file using commands like
+<code>pdf()</code>
+</li>
 <li>as part of your script, create an RMarkdown file that includes
 plotting (or other output), and use the <a href="https://rmarkdown.rstudio.com/docs/reference/render.html" class="external-link">render</a>
 command in Rmarkdown to PDF or other format to be review later</li>
 </ul><p>We’ll describe the method to capture output into a PDF here.</p>
-<p>A sample script that uses the <code>pdf</code> function to capture
-plots looks like this:</p>
+<p>A sample script that uses popular <code>ggplot2</code> plotting
+library and the <code>pdf</code> function to capture plots looks like
+this:</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">plotfile</span> <span class="op">=</span> <span class="fu">file.path</span><span class="op">(</span><span class="st">'results'</span>, <span class="st">'testplots.pdf'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plotfile</span> <span class="op">=</span> <span class="fu">file.path</span><span class="op">(</span><span class="st">'results'</span>, <span class="st">'testplots.pdf'</span><span class="op">)</span></span>
 <span><span class="fu">pdf</span><span class="op">(</span><span class="va">plotfile</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span>, pch<span class="op">=</span><span class="fl">21</span>,</span>
-<span>     bg<span class="op">=</span><span class="fu">c</span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"green3"</span>,<span class="st">"blue"</span><span class="op">)</span><span class="op">[</span><span class="fu">unclass</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">]</span>,</span>
-<span>     main<span class="op">=</span><span class="st">"Edgar Anderson's Iris Data"</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">iris</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Petal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Width</span>, color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Edgar Anderson's Iris Data"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">dev.off</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
+<p>Save this into a file called <code>src/plot.R</code>.</p>
 <p>In order to run this code, we first have to create the results
 directory on the command line with</p>
 <div class="codewrapper sourceCode" id="cb29">
@@ -880,7 +886,13 @@ directory on the command line with</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="fu">mkdir</span> results</span></code></pre>
 </div>
-<p>For much more details about using this techinque, see <a href="https://r-graphics.org/chapter-output" class="external-link">Chapter 14 Output for
+<p>Then we can run the script with</p>
+<div class="codewrapper sourceCode" id="cb30">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> src/plot.R</span></code></pre>
+</div>
+<p>For much more details about using this technique, see <a href="https://r-graphics.org/chapter-output" class="external-link">Chapter 14 Output for
 Presentation</a> of Winston Chang’s <strong>R Graphics
 Cookbook</strong></p>
 <p>Once you run the script and save the PDFs, the next challenge is to
@@ -889,7 +901,7 @@ PDFs.</p>
 <p>You could</p>
 <ul><li>download the PDF to your computer from the terminal using OnDemand
 file browser (or the MobaXterm client’s file browser)</li>
-<li>open with the OnDemand RStudio.</li>
+<li>open with the OnDemand’s RStudio.</li>
 </ul><div id="challenge5" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -913,27 +925,29 @@ line argument sent?</p>
 </button>
 <div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co"># check if there was at least 1 arg</span></span>
-<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="cf">if</span> <span class="fu">length</span>(args) <span class="sc">&gt;=</span> <span class="dv">1</span> {</span>
-<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a></span>
-<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>   <span class="co">#assume the arg is a PDF file name, and use that to capture plots</span></span>
-<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>   plotfile <span class="ot">=</span> args[<span class="dv">1</span>]</span>
-<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a>   <span class="fu">pdf</span>(plotfile)</span>
-<span id="cb30-9"><a href="#cb30-9" tabindex="-1"></a></span>
-<span id="cb30-10"><a href="#cb30-10" tabindex="-1"></a>}</span>
-<span id="cb30-11"><a href="#cb30-11" tabindex="-1"></a></span>
-<span id="cb30-12"><a href="#cb30-12" tabindex="-1"></a><span class="co"># if not argument is sent, PDF capture is not enabled and the plot will display</span></span>
-<span id="cb30-13"><a href="#cb30-13" tabindex="-1"></a></span>
-<span id="cb30-14"><a href="#cb30-14" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Length, iris<span class="sc">$</span>Petal.Width, <span class="at">pch=</span><span class="dv">21</span>,</span>
-<span id="cb30-15"><a href="#cb30-15" tabindex="-1"></a>     <span class="at">bg=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"green3"</span>,<span class="st">"blue"</span>)[<span class="fu">unclass</span>(iris<span class="sc">$</span>Species)],</span>
-<span id="cb30-16"><a href="#cb30-16" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Edgar Anderson's Iris Data"</span>)</span>
-<span id="cb30-17"><a href="#cb30-17" tabindex="-1"></a>     </span>
-<span id="cb30-18"><a href="#cb30-18" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a><span class="co"># check if there was at least 1 arg</span></span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a><span class="cf">if</span> <span class="fu">length</span>(args) <span class="sc">&gt;=</span> <span class="dv">1</span> {</span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>   <span class="co"># assume the arg is a PDF file name, and use that to capture plots</span></span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a>   plotfile <span class="ot">=</span> args[<span class="dv">1</span>]</span>
+<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a>   <span class="fu">pdf</span>(plotfile)</span>
+<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" tabindex="-1"></a>}</span>
+<span id="cb31-13"><a href="#cb31-13" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" tabindex="-1"></a><span class="co"># if no argument is sent, PDF capture is not enabled and the plot will display</span></span>
+<span id="cb31-15"><a href="#cb31-15" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="#cb31-16" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Petal.Width, <span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb31-17"><a href="#cb31-17" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb31-18"><a href="#cb31-18" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Edgar Anderson's Iris Data"</span>)</span>
+<span id="cb31-19"><a href="#cb31-19" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre>
 </div>
 </div>
 </div>
