@@ -1,7 +1,7 @@
 ---
 title: 'Using R on the command line'
-teaching: 10
-exercises: 2
+teaching: 22
+exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 

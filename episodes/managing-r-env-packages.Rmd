@@ -1,7 +1,7 @@
 ---
 title: 'Managing R package installation and environment'
-teaching: 10
-exercises: 2
+teaching: 32
+exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
