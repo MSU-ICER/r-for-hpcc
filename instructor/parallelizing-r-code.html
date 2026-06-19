@@ -223,7 +223,7 @@
       </button>
     </div><!--/div.accordion-header-->
 
-    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#basics-of-parallelization">Basics of parallelization</a></li>
 <li><a href="#writing-code-that-runs-on-multiple-cores">Writing code that runs on multiple cores</a></li>
@@ -311,7 +311,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parallelizing your R code with <code>future</code></h1>
-        <p>Last updated on 2026-03-13 |
+        <p>Last updated on 2026-06-19 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/parallelizing-r-code.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -615,12 +615,12 @@ information:</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co">#!/bin/bash --login</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="ex">module</span> load R/4.3.2-foss-2023a</span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="ex">Rscript</span> <span class="va">$@</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a><span class="co">#!/bin/bash --login</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1" aria-label="code-block-16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1" aria-label="code-block-16-3"></a><span class="ex">module</span> purge</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1" aria-label="code-block-16-4"></a><span class="ex">module</span> load R/4.3.2-foss-2023a</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1" aria-label="code-block-16-5"></a></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1" aria-label="code-block-16-6"></a><span class="ex">Rscript</span> <span class="va">$@</span></span></code></pre>
 </div>
 <p>and save it as <code>rscript.sh</code> in the <code>src</code>
 directory. This set of cryptic commands will become more clear in the
@@ -629,7 +629,7 @@ with</p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">chmod</span> u+x rscript.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1" aria-label="code-block-17-1"></a><span class="fu">chmod</span> u+x rscript.sh</span></code></pre>
 </div>
 <p>Finally, we are ready to improve our <code>plan</code> setup:</p>
 <div class="codewrapper sourceCode" id="cb18">
@@ -703,28 +703,28 @@ project directory:</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co">######################################################################</span></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co"># A batchtools launch script template for Slurm</span></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co"># Author: Henrik Bengtsson </span></span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="co">######################################################################</span></span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="co">#SBATCH --job-name=&lt;%= job.name %&gt;</span></span>
-<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="co">#SBATCH --output=&lt;%= log.file %&gt;</span></span>
-<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
-<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a><span class="co">#SBATCH --time=00:05:00</span></span>
-<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a><span class="co">## Resources needed:</span></span>
-<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a><span class="op">&lt;</span>% <span class="cf">if</span> <span class="kw">(</span><span class="ex">length</span><span class="er">(</span><span class="ex">resources</span><span class="kw">)</span> <span class="op">&gt;</span> 0<span class="kw">)</span> <span class="kw">{</span></span>
-<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a>  <span class="ex">opts</span> <span class="op">&lt;</span>- unlist<span class="er">(</span><span class="ex">resources,</span> use.names = TRUE<span class="kw">)</span></span>
-<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>  <span class="ex">opts</span> <span class="op">&lt;</span>- sprintf<span class="er">(</span><span class="st">"--%s=%s"</span><span class="ex">,</span> names<span class="er">(</span><span class="ex">opts</span><span class="kw">)</span><span class="ex">,</span> opts<span class="kw">)</span></span>
-<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>  <span class="ex">opts</span> <span class="op">&lt;</span>- paste<span class="er">(</span><span class="ex">opts,</span> collapse = <span class="st">" "</span><span class="kw">)</span> <span class="ex">%</span><span class="op">&gt;</span></span>
-<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a><span class="co">#SBATCH &lt;%= opts %&gt;</span></span>
-<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a><span class="op">&lt;</span>% <span class="kw">}</span> <span class="ex">%</span><span class="op">&gt;</span></span>
-<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a></span>
-<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a><span class="co">## Launch R and evaluated the batchtools R job</span></span>
-<span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'batchtools::doJobCollection("&lt;%= uri %&gt;")'</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1" aria-label="code-block-22-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1" aria-label="code-block-22-2"></a><span class="co">######################################################################</span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1" aria-label="code-block-22-3"></a><span class="co"># A batchtools launch script template for Slurm</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1" aria-label="code-block-22-4"></a><span class="co">#</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1" aria-label="code-block-22-5"></a><span class="co"># Author: Henrik Bengtsson </span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1" aria-label="code-block-22-6"></a><span class="co">######################################################################</span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1" aria-label="code-block-22-7"></a></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1" aria-label="code-block-22-8"></a><span class="co">#SBATCH --job-name=&lt;%= job.name %&gt;</span></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1" aria-label="code-block-22-9"></a><span class="co">#SBATCH --output=&lt;%= log.file %&gt;</span></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1" aria-label="code-block-22-10"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1" aria-label="code-block-22-11"></a><span class="co">#SBATCH --time=00:05:00</span></span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1" aria-label="code-block-22-12"></a></span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1" aria-label="code-block-22-13"></a><span class="co">## Resources needed:</span></span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1" aria-label="code-block-22-14"></a><span class="op">&lt;</span>% <span class="cf">if</span> <span class="kw">(</span><span class="ex">length</span><span class="er">(</span><span class="ex">resources</span><span class="kw">)</span> <span class="op">&gt;</span> 0<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1" aria-label="code-block-22-15"></a>  <span class="ex">opts</span> <span class="op">&lt;</span>- unlist<span class="er">(</span><span class="ex">resources,</span> use.names = TRUE<span class="kw">)</span></span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1" aria-label="code-block-22-16"></a>  <span class="ex">opts</span> <span class="op">&lt;</span>- sprintf<span class="er">(</span><span class="st">"--%s=%s"</span><span class="ex">,</span> names<span class="er">(</span><span class="ex">opts</span><span class="kw">)</span><span class="ex">,</span> opts<span class="kw">)</span></span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1" aria-label="code-block-22-17"></a>  <span class="ex">opts</span> <span class="op">&lt;</span>- paste<span class="er">(</span><span class="ex">opts,</span> collapse = <span class="st">" "</span><span class="kw">)</span> <span class="ex">%</span><span class="op">&gt;</span></span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1" aria-label="code-block-22-18"></a><span class="co">#SBATCH &lt;%= opts %&gt;</span></span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1" aria-label="code-block-22-19"></a><span class="op">&lt;</span>% <span class="kw">}</span> <span class="ex">%</span><span class="op">&gt;</span></span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1" aria-label="code-block-22-20"></a></span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1" aria-label="code-block-22-21"></a><span class="co">## Launch R and evaluated the batchtools R job</span></span>
+<span id="cb22-22"><a href="#cb22-22" tabindex="-1" aria-label="code-block-22-22"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'batchtools::doJobCollection("&lt;%= uri %&gt;")'</span></span></code></pre>
 </div>
 <p>Now, there are some parts that don’t look like like a normal SLURM
 script, but we see that each SLURM job automatically requests one node
@@ -864,7 +864,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.20.0)</a>, <a href="https://github.com/carpentries/pegboard/tree/" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/MSU-ICER/varnish/tree/icer" class="external-link">varnish (1.0.9)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/MSU-ICER/varnish/tree/icer" class="external-link">varnish (1.0.9)</a></p>
 		</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -886,8 +886,8 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/instructor/parallelizing-r-code.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/instructor/parallelizing-r-code.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2026-03-13",
-  "datePublished": "2026-04-14"
+  "dateModified": "2026-06-19",
+  "datePublished": "2026-06-19"
 }
 
   </script><script>
