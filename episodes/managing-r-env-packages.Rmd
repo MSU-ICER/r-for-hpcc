@@ -163,15 +163,24 @@ ICER](https://contact.icer.msu.edu) and we will do our best to help you out.
 ## A note about node type
 
 The HPCC consists of [many different node types](https://docs.icer.msu.edu/Cluster_Resources/).
-When we started our OnDemand job, we chose to use only amd20 nodes. 
+When R installs a package by default, it customizs it to the specific node type it was installed on.
+If one of these customized packages gets used on a different node type, often, you will get an "Illegal instruction error" and RStudio will crash.
 
-When R installs a package, it customizes it to the specific node type it was installed on. So if you use the same library on different node types, the packages are not guaranteed to work properly, often resulting in an "Illegal instruction error" or RStudio crashing.
+To fix this, the ICER has changed the default setting so that packages are **not** customized to node type on installation.
+However, if you installed packages before this setting was changed you may still see the issue.
+Usually reinstalling will fix the issue.
 
-To get around this, we recommend using the same node type when you use R, either through OnDemand, in job scripts, or [on development nodes](r-command-line.Rmd#accessing-the-hpcc-through-the-terminal).
+To increase the speed of your code, you can choose to make R ignore the changed setting by unsetting an environment variable before you start R.
+The best way to do this is before using [R on the command line](r-command-line.Rmd), run the command:
 
-We've already seen how to do this in OnDemand (using the dropdown in the Advanced Options section). You can do this in job scripts by adding the line `#SBATCH --constraint=<nodetype>` (which we will see [in a later episode](r-slurm-jobs.Rmd#a-slurm-script-template)).
+```bash
+unset R_MAKEVARS_SITE
+```
 
-Alternatively, you can use the tools discussed in this section to manually manage different libraries for different node types, though it can be tricky to manage properly.
+You only need to do this before installing the package.
+
+However, take special care to only use this package on the same node type you installed it on.
+You can specify this in the OnDemand Advanced Options, and you can do this in job scripts by adding the line `#SBATCH --constraint=<nodetype>` (which we will see [in a later episode](r-slurm-jobs.Rmd#a-slurm-script-template)).
 
 ::::::::::::::::::::::::::::::::::::::::::
 
