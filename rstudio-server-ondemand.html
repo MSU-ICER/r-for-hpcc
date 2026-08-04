@@ -247,7 +247,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="r-slurm-jobs.html">5. Submitting R code to SLURM</a>
+        <a href="r-slurm-jobs.html">5. Submitting R code to Slurm</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -311,7 +311,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Accessing RStudio Server through OnDemand</h1>
-        <p>Last updated on 2026-07-29 |
+        <p>Last updated on 2026-08-04 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/rstudio-server-ondemand.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -387,10 +387,8 @@ options:</p>
 <li>Number of hours: 3</li>
 <li>Number of cores per task: 8</li>
 <li>Amount of memory: 5</li>
-</ul><figure><img src="fig/rstudio-server-ondemand-options.png" alt="The RStudio OnDemand setup screen with text boxes for the four options listed above filled in using the values specified." class="figure mx-auto d-block"></figure><p>Additionally, click the Advanced Options checkbox and under Node
-type, select “amd20” (we’ll explain why later).</p>
-<figure><img src="fig/rstudio-node-selection.png" alt="The RStudio OnDemand setup screen with the Advanced Options box checked, and amd20 selected in the Node type dropdown." class="figure mx-auto d-block"></figure><p>If you need to specify any other options (for example, if you want to
-run your session on a buy-in node and specify your SLURM account), you
+</ul><figure><img src="fig/rstudio-server-ondemand-options.png" alt="The RStudio OnDemand setup screen with text boxes for the four options listed above filled in using the values specified." class="figure mx-auto d-block"></figure><p>If you need to specify any other options (for example, if you want to
+run your session on a buy-in node and specify your Slurm account), you
 enter additional information in the Advanced Options section.</p>
 <p>Select the Launch button and wait for your job to start. When your
 job is ready, you will see a card with all of the information for your
@@ -426,7 +424,7 @@ starts in your HPCC home directory.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Click the button that looks like a page with a plus sign right below
 the file menu and choose R Script.</p>
@@ -503,7 +501,7 @@ with your username) to see just your running processes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Running <code>top -u k0068027</code> (my username) from the RStudio
 terminal shows the <code>rsession</code> command in the
@@ -596,7 +594,7 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/rstudio-server-ondemand.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/rstudio-server-ondemand.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2026-07-29",
+  "dateModified": "2026-08-04",
   "datePublished": "2026-08-04"
 }
 

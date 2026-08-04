@@ -249,7 +249,7 @@ rules)</a></li>
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="r-slurm-jobs.html">5. Submitting R code to SLURM</a>
+        <a href="r-slurm-jobs.html">5. Submitting R code to Slurm</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -313,7 +313,7 @@ rules)</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Managing R package installation and environment</h1>
-        <p>Last updated on 2026-07-29 |
+        <p>Last updated on 2026-08-04 |
 
         <a href="https://github.com/MSU-ICER/r-for-hpcc/edit/main/episodes/managing-r-env-packages.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -527,23 +527,30 @@ consultants at ICER</a> and we will do our best to help you out.</li>
 <h3 class="callout-title">A note about node type</h3>
 <div class="callout-content">
 <p>The HPCC consists of <a href="https://docs.icer.msu.edu/Cluster_Resources/" class="external-link">many different node
-types</a>. When we started our OnDemand job, we chose to use only amd20
-nodes.</p>
-<p>When R installs a package, it customizes it to the specific node type
-it was installed on. So if you use the same library on different node
-types, the packages are not guaranteed to work properly, often resulting
-in an “Illegal instruction error” or RStudio crashing.</p>
-<p>To get around this, we recommend using the same node type when you
-use R, either through OnDemand, in job scripts, or <a href="r-command-line.html#accessing-the-hpcc-through-the-terminal">on
-development nodes</a>.</p>
-<p>We’ve already seen how to do this in OnDemand (using the dropdown in
-the Advanced Options section). You can do this in job scripts by adding
-the line <code>#SBATCH --constraint=&lt;nodetype&gt;</code> (which we
-will see <a href="r-slurm-jobs.html#a-slurm-script-template">in a later
+types</a>. When R installs a package by default, it customizs it to the
+specific node type it was installed on. If one of these customized
+packages gets used on a different node type, often, you will get an
+“Illegal instruction error” and RStudio will crash.</p>
+<p>To fix this, the ICER has changed the default setting so that
+packages are <strong>not</strong> customized to node type on
+installation. However, if you installed packages before this setting was
+changed you may still see the issue. Usually reinstalling will fix the
+issue.</p>
+<p>To increase the speed of your code, you can choose to make R ignore
+the changed setting by unsetting an environment variable before you
+start R. The best way to do this is before using <a href="r-command-line.html">R on the command line</a>, run the
+command:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="bu">unset</span> <span class="va">R_MAKEVARS_SITE</span></span></code></pre>
+</div>
+<p>You only need to do this before installing the package.</p>
+<p>However, take special care to only use this package on the same node
+type you installed it on. You can specify this in the OnDemand Advanced
+Options, and you can do this in job scripts by adding the line
+<code>#SBATCH --constraint=&lt;nodetype&gt;</code> (which we will see <a href="r-slurm-jobs.html#a-slurm-script-template">in a later
 episode</a>).</p>
-<p>Alternatively, you can use the tools discussed in this section to
-manually manage different libraries for different node types, though it
-can be tricky to manage properly.</p>
 </div>
 </div>
 </div>
@@ -555,7 +562,7 @@ see later, running R out of this project directory can make your life a
 lot easier!</p>
 <p>But when RStudio starts, your working directory is always set to your
 home directory.</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -593,7 +600,7 @@ There are two files that we can create to help us do that:
 <code>.Rprofile</code> and <code>.Renviron</code>.</p>
 <p>First, let’s suppose that we want to make sure we use the University
 of Michigan CRAN mirror install our packages. The R commands</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -604,7 +611,7 @@ of Michigan CRAN mirror install our packages. The R commands</p>
 <p>will take care of this for us. To make sure this runs every time we
 start R, we’ll put it in the <code>.Rprofile</code> file.</p>
 <p>Use RStudio to open a new Text File and type</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -625,7 +632,7 @@ time R starts, it will look for a <code>.Rprofile</code> file in the
 current directory, and execute all of the code before doing anything
 else. To make this take effect in RStudio, you can restart R by going to
 the Session menu, and select Restart R. To check our work, run</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -649,11 +656,11 @@ we saw before in your home directory. If we’re running R from the
 command line (which we’ll <a href="r-command-line.html">talk about
 later</a>), we could export this variable in the command line before you
 start R:</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="bu">export</span> <span class="va">R_LIBS_USER</span><span class="op">=</span><span class="st">"./library"</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a><span class="ex">R</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="bu">export</span> <span class="va">R_LIBS_USER</span><span class="op">=</span><span class="st">"./library"</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a><span class="ex">R</span></span></code></pre>
 </div>
 <p>But not only would we have to do this every time we run R, this
 process is also hidden away behind the scenes when we use RStudio from
@@ -666,7 +673,7 @@ them.</p>
 <p>Then save this file in your <code>r_workshop</code> directory with
 the name <code>.Renviron</code>. Now, restart R using the Session menu,
 and check your <code>.libPaths()</code> in the R console:</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -682,7 +689,7 @@ and check your <code>.libPaths()</code> in the R console:</p>
 <p>Great! We can even check that we’ve isolated ourselves from the
 default home directory library by trying to load
 <code>cowsay</code>:</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -741,7 +748,7 @@ project library:</p>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Double checking our library paths</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -757,7 +764,7 @@ project library:</p>
 <p>we see that our <code>r_workshop/library</code> directory is
 first.</p>
 <p>If we install <code>future</code>, it goes into this directory:</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -771,7 +778,7 @@ first.</p>
 </div>
 <p>A quick way to see which packages are installed in which library is
 to run</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -813,7 +820,7 @@ environment variable to say hello and goodbye to whoever is using the
 <p>Note that since we are setting variables that we want to keep in our
 session, the following lines should <em>not</em> be included in the
 <code>local</code> block in the <code>.Rprofile</code> file.</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -885,14 +892,14 @@ time! This is a great use for the <code>.Renviron</code> file. Instead
 of directly typing <code>/mnt/research/my_lab/big_experiment/</code>
 into your code, set this as an environment variable in your
 <code>.Renviron</code>:</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a><span class="va">DATA_DIR</span><span class="op">=</span><span class="st">"/mnt/research/my_lab/big_experiment"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a><span class="va">DATA_DIR</span><span class="op">=</span><span class="st">"/mnt/research/my_lab/big_experiment"</span></span></code></pre>
 </div>
 <p>When you need to access this directory from R, use
 <code>Sys.getenv()</code>:</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -985,7 +992,7 @@ any links that you are not going to use.
   "url": "https://MSU-ICER.github.io/r-for-hpcc/instructor/managing-r-env-packages.html",
   "identifier": "https://MSU-ICER.github.io/r-for-hpcc/instructor/managing-r-env-packages.html",
   "dateCreated": "2023-06-30",
-  "dateModified": "2026-07-29",
+  "dateModified": "2026-08-04",
   "datePublished": "2026-08-04"
 }
 
