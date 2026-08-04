@@ -23,7 +23,7 @@ exercises: 15
 
 Up to now, we've been using RStudio through OnDemand to write and run R code on
 the HPCC. Now, we'll do the same things we've been doing, but solely through the
-command line. This will allow us to eventually [submit SLURM batch
+command line. This will allow us to eventually [submit Slurm batch
 scripts](r-slurm-jobs.Rmd) to run our code on compute nodes.
 
 For now, we'll start by running everything on a development node. Using our
