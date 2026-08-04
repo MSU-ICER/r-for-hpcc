@@ -23,7 +23,7 @@ exercises: 15
 
 Up to now, we've been using RStudio through OnDemand to write and run R code on
 the HPCC. Now, we'll do the same things we've been doing, but solely through the
-command line. This will allow us to eventually [submit SLURM batch
+command line. This will allow us to eventually [submit Slurm batch
 scripts](r-slurm-jobs.Rmd) to run our code on compute nodes.
 
 For now, we'll start by running everything on a development node. Using our
@@ -37,7 +37,7 @@ ssh <netid>@hpcc.msu.edu
 ssh <dev-node>
 ```
 
-Make sure to use `dev-amd20` since [it matches the node type we used in OnDemand](managing-r-env-packages.Rmd#a-note-about-node-type).
+You can choose any development node you like, though if you often use a certain type of compute node (e.g., you have priority access to certain resources through a buy-in account), you may wish to use the same type of development node to get a more accurate representation of what to expect when you either use RStudio in OnDemand or [submit jobs using Slurm](r-slurm-jobs.Rmd).
 
 ## Loading R
 

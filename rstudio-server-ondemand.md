@@ -66,13 +66,8 @@ job. For this workshop, you should use the following options:
 
 ![](fig/rstudio-server-ondemand-options.png){alt='The RStudio OnDemand setup screen with text boxes for the four options listed above filled in using the values specified.'}
 
-Additionally, click the Advanced Options checkbox and under Node type,
-select "amd20" (we'll explain why later).
-
-![](fig/rstudio-node-selection.png){alt='The RStudio OnDemand setup screen with the Advanced Options box checked, and amd20 selected in the Node type dropdown.'}
-
 If you need to specify any other options (for example, if you want to run your
-session on a buy-in node and specify your SLURM account), you enter additional
+session on a buy-in node and specify your Slurm account), you enter additional
 information in the Advanced Options section.
 
 Select the Launch button and wait for your job to start. When your job is ready,

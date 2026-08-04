@@ -218,7 +218,7 @@ With just a few changes to the `future` setup, we can transition from a "multico
 ### The cluster backend
 
 To use the `cluster` backend, you need a list of nodes you can access through SSH.
-Usually, you would submit a SLURM job requesting multiple nodes and use these, but we will save that for [a future section](r-slurm-jobs.Rmd).
+Usually, you would submit a Slurm job requesting multiple nodes and use these, but we will save that for [a future section](r-slurm-jobs.Rmd).
 
 For now, we'll practice by using some development nodes.
 
@@ -281,7 +281,7 @@ There was much more time setting up, but we were still able to save some time in
 
 As we saw, using `cluster` plan can be tricky to get right.
 A much easier way to advantage of multiple nodes is to use the `batchtools.slurm` backend.
-This allows us to submit SLURM jobs for each iteration of our for loop.
+This allows us to submit Slurm jobs for each iteration of our for loop.
 The HPCC scheduler will then control where and when these jobs run, rather than you needing to provide that information ahead of time.
 
 The simplest way to do this, is to use the `future.batchtools` package.
@@ -303,7 +303,7 @@ Running the code gives us
 
 So we experience a much longer wait...
 But this make sense!
-We just sent off ten SLURM jobs to sit in the HPCC queue, get started, do a tiny computation, shut down, and send back the result.
+We just sent off ten Slurm jobs to sit in the HPCC queue, get started, do a tiny computation, shut down, and send back the result.
 
 This is definitely *not* the kind of setting where we should use the `batchtools_slurm` backend, but imagine if the inside of the for loop was extremely resource intensive.
 In this case, it might make sense to send each iteration off into its own job with its own reserved resources.
@@ -338,11 +338,11 @@ Here's the `slurm.tmpl` file in the `library/future.batchtools/templates` direct
 Rscript -e 'batchtools::doJobCollection("<%= uri %>")'
 ```
 
-Now, there are some parts that don't look like like a normal SLURM script, but we see that each SLURM job automatically requests one node and five minutes.
+Now, there are some parts that don't look like like a normal Slurm script, but we see that each Slurm job automatically requests one node and five minutes.
 The remaining resources are set to the default values (usually 1 CPU and 750MB of memory).
 
 What if you want to change these values?
-The strange lines in the template SLURM script allow us to pass in extra resources when we set the `plan`.
+The strange lines in the template Slurm script allow us to pass in extra resources when we set the `plan`.
 For example, if you need each loop iteration to have 1GB of memory and 10 minutes of runtime, we can replace the `batchtools_slurm` line with
 
 ``` r
@@ -350,7 +350,7 @@ plan(batchtools_slurm, resources = list(mem = "1GB",
                                         time="00:10:00"))
 ```
 
-The `resources` argument is a list where each entry's name is the SLURM constraint and the value is a string with the desired value.
+The `resources` argument is a list where each entry's name is the Slurm constraint and the value is a string with the desired value.
 See the [list of job specifications in the ICER documentation](https://docs.icer.msu.edu/List_of_Job_Specifications/) for more details.
 
 Unfortunately, this method of specifying resources is not very flexible.
@@ -406,7 +406,7 @@ The upshot is that if you have code that's setup (or can be setup) in the style 
 
 - Setup code you want to parallelize as "mapping" a function over an array
 - Setup a `future` backend to distribute each of these function applications over cores, nodes, or both
-- Use the `batchtools_slurm` backend to have `future` submit SLURM jobs for you
+- Use the `batchtools_slurm` backend to have `future` submit Slurm jobs for you
 - Use a `future` adapter to link your code to the backend
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
