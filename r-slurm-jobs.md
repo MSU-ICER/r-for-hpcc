@@ -1,32 +1,32 @@
 ---
-title: 'Submitting R code to SLURM'
+title: 'Submitting R code to Slurm'
 teaching: 13
 exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How do you write a SLURM submission script?
+- How do you write a Slurm submission script?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain the general structure of a SLURM script
-- Explain how and why to request different resources with SLURM 
-- Give sample template SLURM scripts for submitting R code
+- Explain the general structure of a Slurm script
+- Explain how and why to request different resources with Slurm 
+- Give sample template Slurm scripts for submitting R code
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## SLURM scripts
+## Slurm scripts
 
 Now that we understand how to parallelize R code and run it on the command line, let's put it all together.
-We'll write a SLURM script to submit our code to run on compute nodes on the HPCC.
+We'll write a Slurm script to submit our code to run on compute nodes on the HPCC.
 
-We've already seen an [example of a SLURM script in the parallelization section](parallelizing-r-code.Rmd#the-batchtools_slurm-backend), where `future` was submitting SLURM jobs for us.
+We've already seen an [example of a Slurm script in the parallelization section](parallelizing-r-code.Rmd#the-batchtools_slurm-backend), where `future` was submitting Slurm jobs for us.
 However, if we want to have more control, we'll have to understand how to write these ourselves.
 
-The basic structure of a SLURM script can be split into three parts:
+The basic structure of a Slurm script can be split into three parts:
 
 - The `#!/bin/bash --login` line
 - Resources specifications
@@ -49,12 +49,12 @@ The options let you specify things like
 - The number of nodes you need to run your code on, e.g., `#SBATCH --nodes=2` for 2 nodes
 - The amount of memory your code will need, e.g., `#SBATCH --mem=10GB` for 10GB or `--mem-per-cpu=750MB` for 750MB per core you ask for
 - The node type, e.g., `#SBATCH --constraint=amd20` to run your code only on amd20 nodes
-- The SLURM account you want to use (if you have a buy-in node), e.g., `#SBATCH --account=my_buyin` to activate the buy-in nodes associated to the `my_buyin` account
+- The Slurm account you want to use (if you have a buy-in node), e.g., `#SBATCH --account=my_buyin` to activate the buy-in nodes associated to the `my_buyin` account
 
 Finally, you will add your code below these `#SBATCH`.
 This code is exactly what you would enter on the command line to run your R scripts as we showed in the [previous epsiode](r-command-line.Rmd).
 
-## A SLURM script template
+## A Slurm script template
 
 ``` bash
 #!/bin/bash --login
@@ -63,7 +63,6 @@ This code is exactly what you would enter on the command line to run your R scri
 #SBATCH --cpus-per-task=1  # Use 1 core
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
-#SBATCH --constraint=amd20  # Use only amd20 nodes
 
 # Load the R module
 module purge
@@ -81,7 +80,7 @@ scontrol show job $SLURM_JOB_ID
 
 A template like this will work for you 90% of the time, where all you need to do is set your resources correctly, load the right version of R, set the directory you want to work in, and choose your script.
 
-## SLURM script submission
+## Slurm script submission
 
 Create a new directory in our R project directory called `slurm`, and save the above file there as `single_core.sh`.
 Then submit the script with `sbatch`:
@@ -158,7 +157,6 @@ Submit the job and compare the time it took to run with the single core job.
 #SBATCH --cpus-per-task=5  # Use 5 cores
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
-#SBATCH --constraint=amd20  # Use only amd20 nodes
 
 # Load the R module
 module purge
@@ -198,11 +196,11 @@ print(proc.time() - t)
 ## Cleaning up the output
 
 Leaving the output in the directory we run the script in will get messy.
-For the steps below, you will need the [list of SLURM job specifications](https://docs.icer.msu.edu/List_of_Job_Specifications/).
+For the steps below, you will need the [list of Slurm job specifications](https://docs.icer.msu.edu/List_of_Job_Specifications/).
 
 1. Create the directory `results` in your project directory.
 2. For the previous job script, change the name for the job allocation to `multicore-sqrt`.
-3. Change it so the output and error files are stored in your project directory under `results/<jobname>-<jobid>.out` and `results/<jobname>-<jobid>.err` where `<jobname>` is the name you set in the previous step and `<jobid>` is the number that SLURM assigns your job.
+3. Change it so the output and error files are stored in your project directory under `results/<jobname>-<jobid>.out` and `results/<jobname>-<jobid>.err` where `<jobname>` is the name you set in the previous step and `<jobid>` is the number that Slurm assigns your job.
 
 *Hint*: you can reference the job ID in `#SBATCH` lines with `%j` and the job name with `%x`.
 
@@ -217,7 +215,6 @@ For the steps below, you will need the [list of SLURM job specifications](https:
 #SBATCH --cpus-per-task=5  # Use 5 cores
 #SBATCH --mem-per-cpu=500MB  # Use 500MB of memory per core requested
 #SBATCH --nodes=1  # Use 1 node
-#SBATCH --constraint=amd20  # Use only amd20 nodes
 #SBATCH --job-name=multicore
 #SBATCH --output=~/r_workshop/results/%x-%j.out
 #SBATCH --error=~/r_workshop/results/%x-%j.err
@@ -237,16 +234,16 @@ Rscript src/test_sqrt_multicore.R
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Submitting SLURM scripts for code that runs on multiple nodes
+## Submitting Slurm scripts for code that runs on multiple nodes
 
 ### Using the `future` package
 
-In the section on writing parallel code across multiple nodes using the `future` package, we discussed two approaches: using the `cluster` backend, and having `future` submit SLURM jobs for you.
-In the latter case, you would only need to submit your controller script to SLURM using a simple submission script like the one above.
-The `batchtools_slurm` backend will submit SLURM jobs for the hard work that you want parallelized (though, as discussed, you may need to write a template script).
+In the section on writing parallel code across multiple nodes using the `future` package, we discussed two approaches: using the `cluster` backend, and having `future` submit Slurm jobs for you.
+In the latter case, you would only need to submit your controller script to Slurm using a simple submission script like the one above.
+The `batchtools_slurm` backend will submit Slurm jobs for the hard work that you want parallelized (though, as discussed, you may need to write a template script).
 
 In the former case of using the `cluster` backend, we had to tell `future` which nodes we want it to run on.
-Luckily `future` has SLURM in mind and can query the nodes available in your SLURM job with `parallelly:availableWorkers(methods = "Slurm")`.
+Luckily `future` has Slurm in mind and can query the nodes available in your Slurm job with `parallelly:availableWorkers(methods = "Slurm")`.
 You can then use these as the `workers` when specifying the plan like
 
 ``` r
@@ -278,7 +275,6 @@ Here is an example script:
 #SBATCH --cpus-per-task=8  # Use 8 cores per task (48 in total)
 #SBATCH --mem-per-cpu=1GB  # Use 1GB of memory per core requested
 #SBATCH --nodes=2  # Distribute the tasks across 2 nodes
-#SBATCH --constraint=amd20  # Use only amd20 nodes
 
 # Load the R module
 module purge
@@ -299,8 +295,8 @@ This ensures that whatever we set in the `#SBATCH --cpus-per-task` line will be 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- A SLURM script requests resources
-- Generally, the only code you need in a SLURM script is loading the R module, changing to the right directory and running your R code with `Rscript`
+- A Slurm script requests resources
+- Generally, the only code you need in a Slurm script is loading the R module, changing to the right directory and running your R code with `Rscript`
 - Check the status of your jobs with `squeue --me`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
